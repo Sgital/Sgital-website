@@ -34,15 +34,14 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Transform Your
-              <span className="block text-amber-400">Enterprise Workflows</span>
-              with AI
+              Put AI to Work
+              <span className="block text-amber-400">for Your Enterprise</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-lg text-neutral-400 max-w-xl leading-relaxed">
-              Pure-play ServiceNow partner delivering digital transformation through AI-powered 
-              automation. 70+ successful projects. 500+ digital workflows. Perfect CSAT scores.
+              Premier ServiceNow Partner connecting any workflow, any AI, and any data source. 
+              70+ successful projects. 500+ digital workflows delivered. Perfect CSAT scores.
             </p>
 
             {/* CTA Buttons */}
