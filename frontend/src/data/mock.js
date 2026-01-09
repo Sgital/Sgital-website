@@ -21,51 +21,99 @@ export const stats = [
 export const services = [
   {
     id: 1,
+    category: "Technology Workflows",
     title: "IT Service Management",
-    description: "Incident, Problem, Change, Service Request, Knowledge Base, Integrations, Service Portal, Virtual Agent, Performance Analytics.",
-    icon: "Server"
+    description: "Transform IT operations with AI-powered service delivery. Incident, Problem, Change, Service Request, Knowledge Base, Virtual Agent, and Performance Analytics.",
+    icon: "Server",
+    color: "amber"
   },
   {
     id: 2,
-    title: "HR Service Delivery",
-    description: "Onboarding, Termination Workflows, Lifecycle events, Employee Service Center, Integration to Workday & SuccessFactors.",
-    icon: "Users"
+    category: "Technology Workflows",
+    title: "IT Operations Management",
+    description: "Proactive IT operations with Discovery, Service Mapping, Event Management, Certificate Management, and Cloud Provisioning & Governance.",
+    icon: "Settings",
+    color: "amber"
   },
   {
     id: 3,
-    title: "Customer Service Management",
-    description: "Case Management, Multi-channel support, Product Entitlements, 3rd party integrations, Performance Analytics.",
-    icon: "HeadphonesIcon"
+    category: "Technology Workflows",
+    title: "IT Asset Management",
+    description: "Complete visibility into your IT assets with CMDB, Hardware Asset Management, Software Asset Management, and lifecycle workflows.",
+    icon: "Database",
+    color: "amber"
   },
   {
     id: 4,
-    title: "IT Operations Management",
-    description: "Discovery, Service Mapping, Certificate Management, Event Management, Cloud Provisioning and Governance.",
-    icon: "Settings"
+    category: "Technology Workflows",
+    title: "Strategic Portfolio Management",
+    description: "Align IT investments with business strategy. Demand Management, Portfolio Management, Project Management, Resource Management, and Jira/Azure integrations.",
+    icon: "BarChart3",
+    color: "amber"
   },
   {
     id: 5,
-    title: "Security & Risk Management",
-    description: "Integrated Risk Management, Policy & Compliance, Audit Management, Third Party Risk, SecOps, Vulnerability Response.",
-    icon: "Shield"
+    category: "Employee Workflows",
+    title: "HR Service Delivery",
+    description: "Empower employees with AI-driven self-service. Onboarding, Lifecycle Events, Employee Service Center, and integrations with Workday & SuccessFactors.",
+    icon: "Users",
+    color: "cyan"
   },
   {
     id: 6,
-    title: "Strategic Portfolio Management",
-    description: "Demand Management, Portfolio Management, Project Management, Resource Management, Azure & Jira Integrations.",
-    icon: "BarChart3"
+    category: "Employee Workflows",
+    title: "Workplace Service Delivery",
+    description: "Unified workplace services for facilities, safety, and workplace management to create exceptional employee experiences.",
+    icon: "Building2",
+    color: "cyan"
   },
   {
     id: 7,
-    title: "App Engine & Custom Workflows",
-    description: "Custom applications for Travel, Projects, Admin, Sales, Operations, HR, Document Management, Quality, Procurement.",
-    icon: "Layers"
+    category: "Customer Workflows",
+    title: "Customer Service Management",
+    description: "Transform customer experiences with AI. Case Management, Multi-channel support, Product Entitlements, Self-Service Portal, and Performance Analytics.",
+    icon: "Headphones",
+    color: "emerald"
   },
   {
     id: 8,
+    category: "Customer Workflows",
+    title: "Field Service Management",
+    description: "Optimize field operations with intelligent scheduling, mobile workforce management, work order automation, and real-time visibility.",
+    icon: "MapPin",
+    color: "emerald"
+  },
+  {
+    id: 9,
+    category: "Security & Risk",
+    title: "Security Operations",
+    description: "Accelerate threat response with Security Incident Response, Vulnerability Response, Threat Intelligence, and automated remediation workflows.",
+    icon: "Shield",
+    color: "rose"
+  },
+  {
+    id: 10,
+    category: "Security & Risk",
+    title: "Integrated Risk Management",
+    description: "Comprehensive GRC with Policy & Compliance, Audit Management, Third Party Risk Management, Vendor Risk, and Business Continuity.",
+    icon: "ShieldCheck",
+    color: "rose"
+  },
+  {
+    id: 11,
+    category: "Creator Workflows",
+    title: "App Engine",
+    description: "Build intelligent apps with low-code development. Custom workflows, integrations, and AI-powered automation for any business process.",
+    icon: "Layers",
+    color: "violet"
+  },
+  {
+    id: 12,
+    category: "Creator Workflows",
     title: "ServiceNow Training",
-    description: "Certified training programs for Fundamentals, ITSM, Application Development, IRM, Scripting, Portal Development.",
-    icon: "GraduationCap"
+    description: "Certified training programs for Fundamentals, ITSM, HRSD, CSM, IRM, Application Development, Scripting, and Portal Development.",
+    icon: "GraduationCap",
+    color: "violet"
   }
 ];
 
