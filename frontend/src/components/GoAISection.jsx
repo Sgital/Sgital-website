@@ -34,13 +34,13 @@ const GoAISection = () => {
             
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               GoAI 2.0
-              <span className="block text-amber-400 mt-2">Automate • Accelerate • Amplify</span>
+              <span className="block text-amber-400 mt-2">AI Agents That Work For You</span>
             </h2>
             
             <p className="text-lg text-neutral-400 mb-8 leading-relaxed">
-              Revolutionize your IT experience with our AI service packages. GoAI brings together 
-              employee requests with machine data and uses AI to find answers that significantly 
-              transform work.
+              ServiceNow AI Agents act autonomously on your behalf so you can focus on the work that matters. 
+              GoAI brings together employee requests with machine data and uses AI to find answers that 
+              significantly transform work.
             </p>
 
             {/* Benefits */}
