@@ -42,13 +42,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <div className="flex items-center">
-              <div className="bg-amber-400 w-10 h-12 flex items-center justify-center rounded-sm">
-                <span className="text-neutral-950 font-black text-2xl">S</span>
-              </div>
-              <span className="text-white font-bold text-2xl tracking-tight ml-1">GITAL</span>
-            </div>
+          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_sgital-modern/artifacts/fh13z0a0_18_NEW_AI_workflows-Yellow.png" 
+              alt="Sgital - AI Workflows" 
+              className="h-12 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}

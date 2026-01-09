@@ -20,19 +20,17 @@ const Footer = () => {
         <div className="py-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="bg-amber-400 w-10 h-12 flex items-center justify-center rounded-sm">
-                <span className="text-neutral-950 font-black text-2xl">S</span>
-              </div>
-              <span className="text-white font-bold text-2xl tracking-tight">GITAL</span>
+            <div className="mb-6">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_sgital-modern/artifacts/fh13z0a0_18_NEW_AI_workflows-Yellow.png" 
+                alt="Sgital - AI Workflows" 
+                className="h-14 w-auto"
+              />
             </div>
             <p className="text-neutral-400 mb-6 max-w-sm leading-relaxed">
               Premier ServiceNow Partner delivering digital transformation through 
               AI-powered workflows. 100% focused on ServiceNow excellence.
             </p>
-            <div className="text-amber-400 text-sm font-medium">
-              AI Workflows
-            </div>
           </div>
 
           {/* Solutions */}
