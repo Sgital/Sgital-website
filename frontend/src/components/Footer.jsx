@@ -30,9 +30,12 @@ const Footer = () => {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <span className="text-amber-400 font-black text-2xl">S</span>
-              <span className="text-white font-bold text-xl">GITAL</span>
+            <Link to="/" className="flex flex-col mb-6">
+              <div className="flex items-center">
+                <span className="text-amber-400 font-bold text-2xl tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>S</span>
+                <span className="text-neutral-300 font-semibold text-2xl tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>GITAL</span>
+              </div>
+              <span className="text-neutral-500 text-[10px] font-medium tracking-[0.2em] uppercase" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>AI WORKFLOWS</span>
             </Link>
             <p className="text-neutral-400 text-sm leading-relaxed mb-6">
               {companyInfo.description}
