@@ -128,8 +128,50 @@ const GoAIPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Measurable Outcomes Section */}
       <section className="bg-neutral-900 py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Measurable Outcomes, <span className="text-amber-400">Delivered Fast</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: 'Reduce manual effort by 40–70%',
+                icon: '📉'
+              },
+              {
+                title: 'Accelerate process turnaround by 2–5x',
+                icon: '⚡'
+              },
+              {
+                title: 'Improve compliance and audit readiness',
+                icon: '✓'
+              },
+              {
+                title: 'Deliver ROI in 4–8 weeks',
+                icon: '📈'
+              }
+            ].map((outcome, index) => (
+              <div
+                key={index}
+                className="bg-neutral-950 border border-neutral-800 rounded-2xl p-8 hover:border-amber-400/30 transition-all group text-center"
+              >
+                <div className="w-14 h-14 bg-amber-400/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-amber-400/20 transition-colors">
+                  <span className="text-2xl">{outcome.icon}</span>
+                </div>
+                <h3 className="text-lg font-semibold text-white leading-relaxed">{outcome.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-neutral-950 py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
