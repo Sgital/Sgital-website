@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import { Server, Settings, Database, BarChart3, Users, Building2, Headphones, MapPin, Shield, ShieldCheck, Layers, GraduationCap, ArrowRight, Cpu, Bot, Eye, LayoutDashboard } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
@@ -12,13 +13,13 @@ const iconMap = {
 };
 
 const categories = [
-  { id: 'all', name: 'All Solutions', description: 'Complete portfolio of ServiceNow solutions' },
-  { id: 'AI Workflows', name: 'AI Workflows', description: 'AI-Powered Workflow Capabilities' },
-  { id: 'Technology Workflows', name: 'Technology Workflows', description: 'Run your enterprise IT on the ServiceNow AI Platform' },
-  { id: 'Employee Workflows', name: 'Employee Workflows', description: 'Create seamless employee experiences across the organization' },
-  { id: 'Customer Workflows', name: 'Customer Workflows', description: 'Transform customer service with AI-powered support' },
-  { id: 'Security & Risk', name: 'Security & Risk', description: 'Protect your enterprise with intelligent security operations' },
-  { id: 'Creator Workflows', name: 'Creator Workflows', description: 'Build and extend with low-code development' }
+  { id: 'all', name: 'All Solutions', description: 'Complete portfolio of ServiceNow solutions', urlParam: null },
+  { id: 'AI Workflows', name: 'AI Workflows', description: 'AI-Powered Workflow Capabilities', urlParam: 'ai' },
+  { id: 'Technology Workflows', name: 'Technology Workflows', description: 'Run your enterprise IT on the ServiceNow AI Platform', urlParam: 'technology' },
+  { id: 'Employee Workflows', name: 'Employee Workflows', description: 'Create seamless employee experiences across the organization', urlParam: 'employee' },
+  { id: 'Customer Workflows', name: 'Customer Workflows', description: 'Transform customer service with AI-powered support', urlParam: 'customer' },
+  { id: 'Security & Risk', name: 'Security & Risk', description: 'Protect your enterprise with intelligent security operations', urlParam: 'security' },
+  { id: 'Creator Workflows', name: 'Creator Workflows', description: 'Build and extend with low-code development', urlParam: 'creator' }
 ];
 
 const aiWorkflowServices = [
@@ -29,7 +30,7 @@ const aiWorkflowServices = [
     description: 'Digitize and automate structured enterprise processes across functions',
     icon: 'Cpu',
     color: 'amber',
-    isNew: false
+    isHighlighted: false
   },
   {
     id: 'ai-2',
@@ -38,7 +39,7 @@ const aiWorkflowServices = [
     description: 'Deploy autonomous agents to execute multi-step workflows with minimal human intervention',
     icon: 'Bot',
     color: 'amber',
-    isNew: true
+    isHighlighted: false
   },
   {
     id: 'ai-3',
@@ -47,7 +48,7 @@ const aiWorkflowServices = [
     description: 'Monitor, control, and audit AI decisions to ensure compliance and reduce risk',
     icon: 'Eye',
     color: 'amber',
-    isNew: true
+    isHighlighted: false
   },
   {
     id: 'ai-4',
@@ -56,7 +57,7 @@ const aiWorkflowServices = [
     description: 'Gain centralized visibility and control across all AI-driven workflows',
     icon: 'LayoutDashboard',
     color: 'amber',
-    isNew: true
+    isHighlighted: true
   }
 ];
 
@@ -69,7 +70,23 @@ const colorMap = {
 };
 
 const SolutionsPage = () => {
+  const location = useLocation();
   const [activeCategory, setActiveCategory] = useState('all');
+
+  // Handle URL parameters for category selection
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    
+    if (categoryParam) {
+      const matchedCategory = categories.find(c => c.urlParam === categoryParam);
+      if (matchedCategory) {
+        setActiveCategory(matchedCategory.id);
+      }
+    } else {
+      setActiveCategory('all');
+    }
+  }, [location.search]);
 
   // Combine all services including AI Workflows
   const allServices = [...aiWorkflowServices, ...services];
@@ -85,7 +102,7 @@ const SolutionsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Solutions | ServiceNow Services - Sgital</title>
+        <title>{activeCategory === 'AI Workflows' ? 'AI Workflows | AI-Powered Workflow Capabilities' : 'Solutions | ServiceNow Services'} - Sgital</title>
         <meta name="description" content="Comprehensive ServiceNow solutions including ITSM, ITOM, HRSD, CSM, IRM, and custom application development. Transform your enterprise workflows with AI." />
         <meta name="keywords" content="ServiceNow ITSM, ITOM, HR Service Delivery, Customer Service Management, Security Operations, App Engine, AI Workflows" />
         <link rel="canonical" href="https://sgital.com/solutions" />
@@ -149,23 +166,33 @@ const SolutionsPage = () => {
             {filteredServices.map((service) => {
               const IconComponent = iconMap[service.icon] || Server;
               const colors = colorMap[service.color] || colorMap.amber;
+              const isHighlighted = service.isHighlighted;
 
               return (
                 <div
                   key={service.id}
-                  className={`bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 ${colors.hover} transition-all group`}
+                  className={`relative bg-neutral-900/50 border rounded-xl p-6 transition-all group ${
+                    isHighlighted 
+                      ? 'border-amber-400/50 hover:border-amber-400 shadow-lg shadow-amber-400/10' 
+                      : `border-neutral-800 ${colors.hover}`
+                  }`}
                 >
+                  {/* Key Differentiator Badge */}
+                  {isHighlighted && (
+                    <div className="absolute -top-3 left-6 px-3 py-1 bg-amber-400 text-neutral-950 text-xs font-bold rounded-full">
+                      Key Differentiator
+                    </div>
+                  )}
+                  
                   <div className={`inline-flex items-center gap-2 px-3 py-1 ${colors.bg} ${colors.text} text-xs font-medium rounded-full mb-4`}>
                     {service.category}
-                    {service.isNew && <span>⭐</span>}
                   </div>
-                  <div className={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center mb-4`}>
+                  <div className={`w-12 h-12 ${isHighlighted ? 'bg-amber-400/20' : colors.bg} rounded-lg flex items-center justify-center mb-4`}>
                     <IconComponent className={`w-6 h-6 ${colors.text}`} />
                   </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <h3 className="text-xl font-semibold text-white">{service.title}</h3>
-                    {service.isNew && <span className="text-amber-400">⭐</span>}
-                  </div>
+                  <h3 className={`text-xl font-semibold mb-3 ${isHighlighted ? 'text-amber-400' : 'text-white'}`}>
+                    {service.title}
+                  </h3>
                   <p className="text-neutral-400 text-sm leading-relaxed">{service.description}</p>
                 </div>
               );

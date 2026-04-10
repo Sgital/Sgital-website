@@ -29,6 +29,7 @@ const Header = () => {
       hasDropdown: true,
       dropdownItems: [
         { name: 'All Solutions', href: '/solutions' },
+        { name: 'AI Workflows', href: '/solutions?category=ai' },
         { name: 'Technology Workflows', href: '/solutions?category=technology' },
         { name: 'Employee Workflows', href: '/solutions?category=employee' },
         { name: 'Customer Workflows', href: '/solutions?category=customer' },
