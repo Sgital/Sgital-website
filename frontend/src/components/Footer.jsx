@@ -1,50 +1,72 @@
 import React from 'react';
-import { Linkedin, Mail, ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { contactInfo, companyInfo } from '../data/mock';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const currentYear = new Date().getFullYear();
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const footerLinks = {
+    solutions: [
+      { name: 'Technology Workflows', href: '/solutions' },
+      { name: 'Employee Workflows', href: '/solutions' },
+      { name: 'Customer Workflows', href: '/solutions' },
+      { name: 'Security & Risk', href: '/solutions' },
+      { name: 'Creator Workflows', href: '/solutions' },
+    ],
+    company: [
+      { name: 'About Us', href: '/about' },
+      { name: 'Case Studies', href: '/case-studies' },
+      { name: 'Industries', href: '/industries' },
+      { name: 'GoAI 2.0', href: '/goai' },
+      { name: 'Contact', href: '/contact' },
+    ],
   };
 
   return (
-    <footer className="bg-neutral-950 border-t border-neutral-800">
+    <footer className="bg-neutral-900 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="py-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
-          <div className="col-span-2 lg:col-span-2">
-            <div className="mb-6">
-              <img 
-                src="https://customer-assets.emergentagent.com/job_sgital-modern/artifacts/fh13z0a0_18_NEW_AI_workflows-Yellow.png" 
-                alt="Sgital - AI Workflows" 
-                className="h-14 w-auto"
-              />
-            </div>
-            <p className="text-neutral-400 mb-6 max-w-sm leading-relaxed">
-              Premier ServiceNow Partner delivering digital transformation through 
-              AI-powered workflows. 100% focused on ServiceNow excellence.
+          <div className="lg:col-span-1">
+            <Link to="/" className="flex items-center gap-2 mb-6">
+              <span className="text-amber-400 font-black text-2xl">S</span>
+              <span className="text-white font-bold text-xl">GITAL</span>
+            </Link>
+            <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+              {companyInfo.description}
             </p>
+            <div className="flex items-center gap-4">
+              <a
+                href={contactInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href={`mailto:${contactInfo.email}`}
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
           {/* Solutions */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Solutions</h4>
+            <h3 className="text-white font-semibold mb-6">Solutions</h3>
             <ul className="space-y-3">
-              {['ITSM', 'HR Service Delivery', 'Customer Service', 'IT Operations', 'Risk & Compliance', 'App Engine'].map((item) => (
-                <li key={item}>
-                  <button
-                    onClick={() => scrollToSection('services')}
-                    className="text-neutral-400 hover:text-amber-400 transition-colors text-sm"
+              {footerLinks.solutions.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-neutral-400 text-sm hover:text-amber-400 transition-colors"
                   >
-                    {item}
-                  </button>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -52,83 +74,62 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <h3 className="text-white font-semibold mb-6">Company</h3>
             <ul className="space-y-3">
-              <li>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className="text-neutral-400 hover:text-amber-400 transition-colors text-sm"
-                >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('case-studies')}
-                  className="text-neutral-400 hover:text-amber-400 transition-colors text-sm"
-                >
-                  Case Studies
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('goai')}
-                  className="text-neutral-400 hover:text-amber-400 transition-colors text-sm"
-                >
-                  GoAI 2.0
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="text-neutral-400 hover:text-amber-400 transition-colors text-sm"
-                >
-                  Contact
-                </button>
-              </li>
+              {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-neutral-400 text-sm hover:text-amber-400 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Regions */}
+          {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Global Presence</h4>
-            <ul className="space-y-3">
-              {['Singapore', 'India', 'Malaysia', 'Australia', 'New Zealand', 'United Kingdom'].map((region) => (
-                <li key={region} className="text-neutral-400 text-sm">
-                  {region}
-                </li>
-              ))}
+            <h3 className="text-white font-semibold mb-6">Contact Us</h3>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="flex items-center gap-3 text-neutral-400 text-sm hover:text-amber-400 transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  {contactInfo.email}
+                </a>
+              </li>
+              <li>
+                <span className="flex items-center gap-3 text-neutral-400 text-sm">
+                  <Phone className="w-4 h-4" />
+                  {contactInfo.phone}
+                </span>
+              </li>
+              <li>
+                <span className="flex items-center gap-3 text-neutral-400 text-sm">
+                  <MapPin className="w-4 h-4" />
+                  {contactInfo.address}
+                </span>
+              </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-neutral-500 text-sm">
-            &copy; {new Date().getFullYear()} Sgital. All rights reserved.
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <a
-              href="https://linkedin.com/company/sgital"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 bg-neutral-900 border border-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:border-amber-400/50 transition-all"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:contact@sgital.com"
-              className="w-10 h-10 bg-neutral-900 border border-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:border-amber-400/50 transition-all"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-            <button
-              onClick={scrollToTop}
-              className="w-10 h-10 bg-amber-400 rounded-lg flex items-center justify-center text-neutral-950 hover:bg-amber-500 transition-colors"
-            >
-              <ArrowUp className="w-5 h-5" />
-            </button>
+        <div className="py-6 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-neutral-500 text-sm">
+            &copy; {currentYear} {companyInfo.name}. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <Link to="/privacy" className="text-neutral-500 text-sm hover:text-neutral-300 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="text-neutral-500 text-sm hover:text-neutral-300 transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

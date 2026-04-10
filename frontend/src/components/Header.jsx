@@ -1,184 +1,176 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from './ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from './ui/navigation-menu';
-import { services } from '../data/mock';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  // Close mobile menu on route change
+  useEffect(() => {
     setIsMobileMenuOpen(false);
+  }, [location]);
+
+  const navLinks = [
+    { 
+      name: 'Solutions', 
+      href: '/solutions',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'All Solutions', href: '/solutions' },
+        { name: 'Technology Workflows', href: '/solutions?category=technology' },
+        { name: 'Employee Workflows', href: '/solutions?category=employee' },
+        { name: 'Customer Workflows', href: '/solutions?category=customer' },
+        { name: 'Security & Risk', href: '/solutions?category=security' },
+      ]
+    },
+    { name: 'GoAI 2.0', href: '/goai' },
+    { name: 'Industries', href: '/industries' },
+    { name: 'Case Studies', href: '/case-studies' },
+    { name: 'About', href: '/about' },
+  ];
+
+  const isActive = (href) => {
+    if (href === '/') return location.pathname === '/';
+    return location.pathname.startsWith(href);
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-neutral-950/95 backdrop-blur-md shadow-lg shadow-black/20'
+          ? 'bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <img 
-              src="https://customer-assets.emergentagent.com/job_sgital-modern/artifacts/fh13z0a0_18_NEW_AI_workflows-Yellow.png" 
-              alt="Sgital - AI Workflows" 
-              className="h-12 w-auto"
-            />
-          </div>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="flex items-center">
+              <span className="text-amber-400 font-black text-2xl tracking-tight">S</span>
+              <span className="text-white font-bold text-xl tracking-tight">GITAL</span>
+            </div>
+            <span className="text-neutral-500 text-xs font-medium hidden sm:block">AI WORKFLOWS</span>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            <NavigationMenu>
-              <NavigationMenuList className="gap-1">
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-neutral-300 hover:text-white hover:bg-neutral-800/50 data-[state=open]:bg-neutral-800/50">
-                    Solutions
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[500px] p-4 bg-neutral-900 border border-neutral-800">
-                      <div className="grid grid-cols-2 gap-3">
-                        {services.slice(0, 6).map((service) => (
-                          <NavigationMenuLink
-                            key={service.id}
-                            className="block p-3 rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer"
-                            onClick={() => scrollToSection('services')}
-                          >
-                            <div className="font-medium text-white text-sm">{service.title}</div>
-                            <p className="text-xs text-neutral-400 mt-1 line-clamp-2">{service.description}</p>
-                          </NavigationMenuLink>
-                        ))}
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
+            {navLinks.map((link) => (
+              <div key={link.name} className="relative group">
+                {link.hasDropdown ? (
                   <button
-                    onClick={() => scrollToSection('goai')}
-                    className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-md transition-colors"
+                    onMouseEnter={() => setIsSolutionsOpen(true)}
+                    onMouseLeave={() => setIsSolutionsOpen(false)}
+                    className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors ${
+                      isActive(link.href)
+                        ? 'text-amber-400'
+                        : 'text-neutral-300 hover:text-white'
+                    }`}
                   >
-                    GoAI 2.0
+                    {link.name}
+                    <ChevronDown className="w-4 h-4" />
                   </button>
-                </NavigationMenuItem>
+                ) : (
+                  <Link
+                    to={link.href}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      isActive(link.href)
+                        ? 'text-amber-400'
+                        : 'text-neutral-300 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
 
-                <NavigationMenuItem>
-                  <button
-                    onClick={() => scrollToSection('industries')}
-                    className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-md transition-colors"
+                {/* Dropdown Menu */}
+                {link.hasDropdown && (
+                  <div
+                    onMouseEnter={() => setIsSolutionsOpen(true)}
+                    onMouseLeave={() => setIsSolutionsOpen(false)}
+                    className={`absolute top-full left-0 mt-1 w-56 bg-neutral-900 border border-neutral-800 rounded-lg shadow-xl py-2 transition-all duration-200 ${
+                      isSolutionsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                    }`}
                   >
-                    Industries
-                  </button>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <button
-                    onClick={() => scrollToSection('case-studies')}
-                    className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-md transition-colors"
-                  >
-                    Case Studies
-                  </button>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <button
-                    onClick={() => scrollToSection('about')}
-                    className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-md transition-colors"
-                  >
-                    About
-                  </button>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+                    {link.dropdownItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className="block px-4 py-2 text-sm text-neutral-300 hover:text-white hover:bg-neutral-800 transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:block">
             <Button
-              onClick={() => scrollToSection('contact')}
-              className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-6 transition-all duration-200"
+              asChild
+              className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold"
             >
-              Book a Meeting
+              <Link to="/contact">Book a Meeting</Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-neutral-300 hover:text-white"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden bg-neutral-950/98 backdrop-blur-md border-t border-neutral-800 py-6">
-            <nav className="flex flex-col gap-2">
-              <button
-                onClick={() => scrollToSection('services')}
-                className="px-4 py-3 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-lg transition-colors"
-              >
-                Solutions
-              </button>
-              <button
-                onClick={() => scrollToSection('goai')}
-                className="px-4 py-3 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-lg transition-colors"
-              >
-                GoAI 2.0
-              </button>
-              <button
-                onClick={() => scrollToSection('industries')}
-                className="px-4 py-3 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-lg transition-colors"
-              >
-                Industries
-              </button>
-              <button
-                onClick={() => scrollToSection('case-studies')}
-                className="px-4 py-3 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-lg transition-colors"
-              >
-                Case Studies
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="px-4 py-3 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/50 rounded-lg transition-colors"
-              >
-                About
-              </button>
-              <div className="mt-4 px-4">
-                <Button
-                  onClick={() => scrollToSection('contact')}
-                  className="w-full bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold"
+      {/* Mobile Menu */}
+      <div
+        className={`lg:hidden absolute top-full left-0 right-0 bg-neutral-950/98 backdrop-blur-md border-b border-neutral-800 transition-all duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto px-6 py-6">
+          <div className="space-y-1">
+            {navLinks.map((link) => (
+              <div key={link.name}>
+                <Link
+                  to={link.href}
+                  className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                    isActive(link.href)
+                      ? 'text-amber-400 bg-amber-400/10'
+                      : 'text-neutral-300 hover:text-white hover:bg-neutral-800'
+                  }`}
                 >
-                  Book a Meeting
-                </Button>
+                  {link.name}
+                </Link>
               </div>
-            </nav>
+            ))}
           </div>
-        )}
+          <div className="mt-6 pt-6 border-t border-neutral-800">
+            <Button
+              asChild
+              className="w-full bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold py-6"
+            >
+              <Link to="/contact">Book a Meeting</Link>
+            </Button>
+          </div>
+        </nav>
       </div>
     </header>
   );

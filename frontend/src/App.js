@@ -1,34 +1,26 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "./components/ui/sonner";
 import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import ServicesSection from "./components/ServicesSection";
-import GoAISection from "./components/GoAISection";
-import IndustriesSection from "./components/IndustriesSection";
-import CaseStudiesSection from "./components/CaseStudiesSection";
-import ProcessSection from "./components/ProcessSection";
-import TestimonialsSection from "./components/TestimonialsSection";
-import AboutSection from "./components/AboutSection";
-import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 
-const Home = () => {
+// Pages
+import HomePage from "./pages/HomePage";
+import SolutionsPage from "./pages/SolutionsPage";
+import GoAIPage from "./pages/GoAIPage";
+import IndustriesPage from "./pages/IndustriesPage";
+import CaseStudiesPage from "./pages/CaseStudiesPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+
+// Layout Component
+const Layout = ({ children }) => {
   return (
     <div className="bg-neutral-950 min-h-screen">
       <Header />
-      <main>
-        <HeroSection />
-        <ServicesSection />
-        <GoAISection />
-        <IndustriesSection />
-        <ProcessSection />
-        <CaseStudiesSection />
-        <TestimonialsSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
+      <main>{children}</main>
       <Footer />
     </div>
   );
@@ -36,14 +28,24 @@ const Home = () => {
 
 function App() {
   return (
-    <div className="App">
-      <Toaster position="top-right" richColors />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <HelmetProvider>
+      <div className="App">
+        <Toaster position="top-right" richColors />
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/solutions" element={<SolutionsPage />} />
+              <Route path="/goai" element={<GoAIPage />} />
+              <Route path="/industries" element={<IndustriesPage />} />
+              <Route path="/case-studies" element={<CaseStudiesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </div>
+    </HelmetProvider>
   );
 }
 
