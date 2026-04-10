@@ -124,8 +124,57 @@ const SolutionsPage = () => {
         </div>
       </section>
 
+      {/* Core Capabilities Section */}
+      <section className="bg-neutral-900 py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              AI-Powered Workflow <span className="text-amber-400">Capabilities</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                title: 'AI Workflow Automation',
+                description: 'Digitize and automate structured enterprise processes across functions',
+                isNew: false
+              },
+              {
+                title: 'Agentic AI',
+                description: 'Deploy autonomous agents to execute multi-step workflows with minimal human intervention',
+                isNew: true
+              },
+              {
+                title: 'AI Governance',
+                description: 'Monitor, control, and audit AI decisions to ensure compliance and reduce risk',
+                isNew: true
+              },
+              {
+                title: 'AI Control Tower',
+                description: 'Gain centralized visibility and control across all AI-driven workflows',
+                isNew: true
+              }
+            ].map((capability, index) => (
+              <div
+                key={index}
+                className="bg-neutral-950 border border-neutral-800 rounded-2xl p-8 hover:border-amber-400/30 transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <h3 className="text-xl font-semibold text-white">{capability.title}</h3>
+                  {capability.isNew && (
+                    <span className="text-amber-400 text-lg">⭐</span>
+                  )}
+                </div>
+                <p className="text-neutral-400 leading-relaxed">{capability.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="bg-neutral-900 py-16">
+      <section className="bg-neutral-950 py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Transform Your Workflows?</h2>
           <p className="text-neutral-400 mb-8 max-w-2xl mx-auto">
