@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Play, AlertTriangle, CheckCircle2, Workflow, Shield, BarChart3, Layers } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-import { clientLogos } from '../data/mock';
 
 const HomePage = () => {
   return (
@@ -94,19 +93,31 @@ const HeroSection = () => {
 
 // Trust Bar Component
 const TrustBar = () => {
+  const clientLogosData = [
+    { name: 'TotalEnergies', src: '/logos/total-energies.svg', alt: 'TotalEnergies' },
+    { name: 'Air Liquide', src: '/logos/air-liquide.svg', alt: 'Air Liquide' },
+    { name: 'Panasonic', src: '/logos/panasonic.png', alt: 'Panasonic' },
+    { name: 'SPH Media', src: '/logos/sph.png', alt: 'SPH Media' },
+    { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu' }
+  ];
+
   return (
-    <section className="bg-neutral-900 border-y border-neutral-800 py-12">
+    <section className="bg-neutral-900 border-y border-neutral-800 py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-center text-neutral-400 text-sm uppercase tracking-wider mb-8">
+        <p className="text-center text-neutral-400 text-sm uppercase tracking-wider mb-12">
           Trusted by enterprise teams to digitize, automate, and scale operations
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-          {clientLogos.map((logo, index) => (
+        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-14 lg:gap-20">
+          {clientLogosData.map((logo, index) => (
             <div
               key={index}
-              className="flex items-center justify-center px-6 py-3 bg-neutral-800/50 rounded-lg border border-neutral-700/50 hover:border-amber-400/30 transition-colors"
+              className="flex items-center justify-center p-4 opacity-80 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer group"
             >
-              <span className="text-neutral-300 font-semibold text-sm md:text-base">{logo}</span>
+              <img 
+                src={logo.src} 
+                alt={logo.alt}
+                className="h-12 md:h-14 w-auto max-w-[150px] object-contain invert brightness-100 group-hover:drop-shadow-[0_0_15px_rgba(251,191,36,0.4)] transition-all duration-300"
+              />
             </div>
           ))}
         </div>
