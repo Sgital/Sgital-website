@@ -98,7 +98,9 @@ const TrustBar = () => {
     { name: 'Air Liquide', src: '/logos/air-liquide.svg', alt: 'Air Liquide' },
     { name: 'Panasonic', src: '/logos/panasonic.png', alt: 'Panasonic' },
     { name: 'SPH Media', src: '/logos/sph.png', alt: 'SPH Media' },
-    { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu' }
+    { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu' },
+    { name: 'Razer', src: '/logos/razer.png', alt: 'Razer' },
+    { name: 'Keppel', src: '/logos/keppel.png', alt: 'Keppel Corporation' }
   ];
 
   return (
@@ -107,16 +109,16 @@ const TrustBar = () => {
         <p className="text-center text-neutral-400 text-sm uppercase tracking-wider mb-12">
           Trusted by enterprise teams to digitize, automate, and scale operations
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-14 lg:gap-20">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
           {clientLogosData.map((logo, index) => (
             <div
               key={index}
-              className="flex items-center justify-center p-4 opacity-80 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer group"
+              className="flex items-center justify-center p-4 bg-white/5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer group"
             >
               <img 
                 src={logo.src} 
                 alt={logo.alt}
-                className="h-12 md:h-14 w-auto max-w-[150px] object-contain invert brightness-100 group-hover:drop-shadow-[0_0_15px_rgba(251,191,36,0.4)] transition-all duration-300"
+                className="h-10 md:h-12 w-auto max-w-[140px] object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
               />
             </div>
           ))}
