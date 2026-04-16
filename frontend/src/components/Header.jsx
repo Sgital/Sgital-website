@@ -58,12 +58,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex flex-col">
-            <div className="flex items-center">
-              <span className="text-amber-400 font-bold text-2xl tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>S</span>
-              <span className="text-neutral-300 font-semibold text-2xl tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>GITAL</span>
-            </div>
-            <span className="text-neutral-500 text-[10px] font-medium tracking-[0.2em] uppercase" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>AI WORKFLOWS</span>
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/sgital-logo.png" 
+              alt="Sgital AI Workflows" 
+              className="h-12 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}

@@ -30,12 +30,12 @@ const Footer = () => {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex flex-col mb-6">
-              <div className="flex items-center">
-                <span className="text-amber-400 font-bold text-2xl tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>S</span>
-                <span className="text-neutral-300 font-semibold text-2xl tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>GITAL</span>
-              </div>
-              <span className="text-neutral-500 text-[10px] font-medium tracking-[0.2em] uppercase" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>AI WORKFLOWS</span>
+            <Link to="/" className="inline-block mb-6">
+              <img 
+                src="/sgital-logo.png" 
+                alt="Sgital AI Workflows" 
+                className="h-12 w-auto object-contain"
+              />
             </Link>
             <p className="text-neutral-400 text-sm leading-relaxed mb-6">
               {companyInfo.description}
