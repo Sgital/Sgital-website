@@ -91,7 +91,7 @@ const HeroSection = () => {
   );
 };
 
-// Trust Bar Component
+// Trust Bar Component with Infinite Carousel
 const TrustBar = () => {
   const clientLogosData = [
     { name: 'TotalEnergies', src: '/logos/total-energies.svg', alt: 'TotalEnergies' },
@@ -103,27 +103,74 @@ const TrustBar = () => {
     { name: 'Keppel', src: '/logos/keppel.png', alt: 'Keppel Corporation' }
   ];
 
+  // Duplicate logos for seamless infinite scroll
+  const duplicatedLogos = [...clientLogosData, ...clientLogosData, ...clientLogosData];
+
   return (
-    <section className="bg-neutral-900 border-y border-neutral-800 py-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-center text-neutral-400 text-sm uppercase tracking-wider mb-12">
+    <section className="relative py-20 overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.05)_0%,transparent_70%)]" />
+      
+      {/* Top and bottom borders with gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
+
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <p className="text-center text-neutral-400 text-sm uppercase tracking-[0.2em] mb-12 font-medium">
           Trusted by enterprise teams to digitize, automate, and scale operations
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
-          {clientLogosData.map((logo, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-center p-4 bg-white/5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer group"
-            >
-              <img 
-                src={logo.src} 
-                alt={logo.alt}
-                className="h-10 md:h-12 w-auto max-w-[140px] object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
-              />
-            </div>
-          ))}
+      </div>
+
+      {/* Carousel Container */}
+      <div className="relative group">
+        {/* Left Fade Gradient */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-neutral-950 via-neutral-950/80 to-transparent z-10 pointer-events-none" />
+        
+        {/* Right Fade Gradient */}
+        <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-neutral-950 via-neutral-950/80 to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling Track */}
+        <div className="flex overflow-hidden">
+          <div 
+            className="flex gap-8 md:gap-12 animate-scroll group-hover:[animation-play-state:paused]"
+            style={{
+              animation: 'scroll 30s linear infinite',
+            }}
+          >
+            {duplicatedLogos.map((logo, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 flex items-center justify-center px-6 py-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 shadow-lg shadow-black/20 hover:bg-white/10 hover:border-amber-400/30 hover:shadow-amber-400/10 transition-all duration-300 cursor-pointer group/card"
+              >
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className="h-10 md:h-12 w-auto min-w-[100px] max-w-[140px] object-contain transition-all duration-300 group-hover/card:scale-105 group-hover/card:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* CSS Animation */}
+      <style>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-100% / 3));
+          }
+        }
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+        .group:hover .animate-scroll {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };
