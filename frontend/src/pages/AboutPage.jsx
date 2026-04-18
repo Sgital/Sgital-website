@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote } from 'lucide-react';
+import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
 import { values, certifications, specializations, testimonials, stats, companyInfo } from '../data/mock';
@@ -186,6 +186,109 @@ const AboutPage = () => {
                 {region}
               </span>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="bg-neutral-950 py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-6">
+              <BookOpen className="w-4 h-4 text-amber-400" />
+              <span className="text-amber-400 text-sm font-medium">Our Blog</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Insights & <span className="text-amber-400">Updates</span>
+            </h2>
+            <p className="text-neutral-400 max-w-2xl mx-auto">
+              Explore our latest insights and updates from SGITAL.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'SGITAL Marks 8 Years of Powering Singapore\'s AI Workflows',
+                description: 'Founder Sachin Khatri\'s Bold Bet on Digital Transformation Now Drives Enterprise Productivity Across ASEAN.',
+                date: 'October 11, 2025',
+                image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop',
+                link: 'https://www.sgital.com/sgital-marks-8-years-of-powering-singapores-ai-workflows/'
+              },
+              {
+                title: 'The Future of Customer Service: How ServiceNow\'s Xanadu Release is Transforming Business',
+                description: 'In today\'s rapidly evolving digital landscape, the gap between customer expectations and service delivery capabilities continues to grow.',
+                date: 'November 22, 2024',
+                image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=450&fit=crop',
+                link: 'https://www.sgital.com/the-the-future-of-customer-service-how-servicenows-xanadu-release-is-transforming-business-operations-%f0%9f%9a%80/'
+              },
+              {
+                title: '7 Best ESG Updates in ServiceNow Xanadu',
+                description: 'Discover the Top ServiceNow Xanadu Release Updates that are transforming enterprise sustainability reporting and ESG compliance.',
+                date: 'October 7, 2024',
+                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
+                link: 'https://www.sgital.com/7-best-esg-updates-in-servicenow-xanadu/'
+              }
+            ].map((blog, index) => (
+              <article
+                key={index}
+                className="bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all group"
+              >
+                {/* Blog Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 to-transparent" />
+                </div>
+
+                {/* Blog Content */}
+                <div className="p-6">
+                  {/* Date */}
+                  <div className="flex items-center gap-2 text-neutral-500 text-sm mb-3">
+                    <Calendar className="w-4 h-4" />
+                    <span>{blog.date}</span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold text-white mb-3 line-clamp-2 group-hover:text-amber-400 transition-colors">
+                    {blog.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-3">
+                    {blog.description}
+                  </p>
+
+                  {/* Read More Button */}
+                  <a
+                    href={blog.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-amber-400 text-sm font-medium hover:text-amber-300 transition-colors group/btn"
+                  >
+                    Read More
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* View All Blogs Button */}
+          <div className="text-center mt-12">
+            <Button
+              asChild
+              variant="outline"
+              className="border-neutral-700 text-white hover:bg-neutral-800 px-8 py-5 group"
+            >
+              <a href="https://www.sgital.com/blog/" target="_blank" rel="noopener noreferrer">
+                View All Posts
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
           </div>
         </div>
       </section>
