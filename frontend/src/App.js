@@ -14,6 +14,7 @@ import IndustriesPage from "./pages/IndustriesPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import BlogPage from "./pages/BlogPage";
 
 // Layout Component
 const Layout = ({ children }) => {
@@ -40,6 +41,7 @@ function App() {
               <Route path="/industries" element={<IndustriesPage />} />
               <Route path="/case-studies" element={<CaseStudiesPage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/blog" element={<BlogPage />} />
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </Layout>

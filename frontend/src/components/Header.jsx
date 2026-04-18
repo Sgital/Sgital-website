@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Header = () => {
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
   }, [location]);
 
   const navLinks = [
@@ -27,6 +28,7 @@ const Header = () => {
       name: 'Solutions', 
       href: '/solutions',
       hasDropdown: true,
+      dropdownKey: 'solutions',
       dropdownItems: [
         { name: 'All Solutions', href: '/solutions' },
         { name: 'AI Workflows', href: '/solutions?category=ai' },
@@ -39,12 +41,29 @@ const Header = () => {
     { name: 'GoAI 2.0', href: '/goai' },
     { name: 'Industries', href: '/industries' },
     { name: 'Case Studies', href: '/case-studies' },
-    { name: 'About', href: '/about' },
+    { 
+      name: 'About', 
+      href: '/about',
+      hasDropdown: true,
+      dropdownKey: 'about',
+      dropdownItems: [
+        { name: 'About Us', href: '/about' },
+        { name: 'Our Blog', href: '/blog' },
+      ]
+    },
   ];
 
   const isActive = (href) => {
     if (href === '/') return location.pathname === '/';
     return location.pathname.startsWith(href);
+  };
+
+  const handleDropdownEnter = (key) => {
+    setActiveDropdown(key);
+  };
+
+  const handleDropdownLeave = () => {
+    setActiveDropdown(null);
   };
 
   return (
@@ -72,10 +91,10 @@ const Header = () => {
               <div key={link.name} className="relative group">
                 {link.hasDropdown ? (
                   <button
-                    onMouseEnter={() => setIsSolutionsOpen(true)}
-                    onMouseLeave={() => setIsSolutionsOpen(false)}
+                    onMouseEnter={() => handleDropdownEnter(link.dropdownKey)}
+                    onMouseLeave={handleDropdownLeave}
                     className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors ${
-                      isActive(link.href)
+                      isActive(link.href) || (link.dropdownKey === 'about' && location.pathname === '/blog')
                         ? 'text-amber-400'
                         : 'text-neutral-300 hover:text-white'
                     }`}
@@ -99,10 +118,10 @@ const Header = () => {
                 {/* Dropdown Menu */}
                 {link.hasDropdown && (
                   <div
-                    onMouseEnter={() => setIsSolutionsOpen(true)}
-                    onMouseLeave={() => setIsSolutionsOpen(false)}
+                    onMouseEnter={() => handleDropdownEnter(link.dropdownKey)}
+                    onMouseLeave={handleDropdownLeave}
                     className={`absolute top-full left-0 mt-1 w-56 bg-neutral-900 border border-neutral-800 rounded-lg shadow-xl py-2 transition-all duration-200 ${
-                      isSolutionsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                      activeDropdown === link.dropdownKey ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                     }`}
                   >
                     {link.dropdownItems.map((item) => (
@@ -150,16 +169,37 @@ const Header = () => {
           <div className="space-y-1">
             {navLinks.map((link) => (
               <div key={link.name}>
-                <Link
-                  to={link.href}
-                  className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
-                    isActive(link.href)
-                      ? 'text-amber-400 bg-amber-400/10'
-                      : 'text-neutral-300 hover:text-white hover:bg-neutral-800'
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                {link.hasDropdown ? (
+                  <>
+                    <div className="px-4 py-2 text-neutral-500 text-xs font-medium uppercase tracking-wider">
+                      {link.name}
+                    </div>
+                    {link.dropdownItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ml-2 ${
+                          location.pathname === item.href
+                            ? 'text-amber-400 bg-amber-400/10'
+                            : 'text-neutral-300 hover:text-white hover:bg-neutral-800'
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </>
+                ) : (
+                  <Link
+                    to={link.href}
+                    className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                      isActive(link.href)
+                        ? 'text-amber-400 bg-amber-400/10'
+                        : 'text-neutral-300 hover:text-white hover:bg-neutral-800'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </div>
             ))}
           </div>
