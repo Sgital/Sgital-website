@@ -48,7 +48,7 @@ const Header = () => {
       dropdownKey: 'about',
       dropdownItems: [
         { name: 'About Us', href: '/about' },
-        { name: 'Our Blog', href: '/blog' },
+        { name: 'Our Blog', href: '/our-blog' },
       ]
     },
   ];
