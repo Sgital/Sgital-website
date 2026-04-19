@@ -74,6 +74,7 @@ const Header = () => {
       dropdownKey: 'about',
       dropdownItems: [
         { name: 'About Us', href: '/about' },
+        { name: 'Life at Sgital', href: '/life-at-sgital' },
         { name: 'Our Blog', href: '/our-blog' },
       ]
     },

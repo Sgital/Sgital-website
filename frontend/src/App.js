@@ -17,6 +17,7 @@ import ContactPage from "./pages/ContactPage";
 import BlogPage from "./pages/BlogPage";
 import OurBlogPage from "./pages/OurBlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
+import LifeAtSgitalPage from "./pages/LifeAtSgitalPage";
 
 // Layout Component
 const Layout = ({ children }) => {
@@ -43,6 +44,7 @@ function App() {
               <Route path="/industries" element={<IndustriesPage />} />
               <Route path="/case-studies" element={<CaseStudiesPage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/life-at-sgital" element={<LifeAtSgitalPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/our-blog" element={<OurBlogPage />} />
               <Route path="/our-blog/:slug" element={<BlogDetailPage />} />
