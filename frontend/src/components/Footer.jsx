@@ -27,51 +27,51 @@ const Footer = () => {
     <footer className="bg-neutral-900 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-6">
+            <Link to="/" className="inline-block mb-4">
               <img 
                 src="/sgital-logo.png" 
                 alt="Sgital AI Workflows" 
-                className="h-12 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </Link>
-            <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
               {companyInfo.description}
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 mb-3">
               <a
                 href={contactInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+                className="w-9 h-9 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href={contactInfo.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+                className="w-9 h-9 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
                 aria-label="YouTube"
               >
-                <Youtube className="w-5 h-5" />
+                <Youtube className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+                className="w-9 h-9 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
                 aria-label="Email"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-4 h-4" />
               </a>
             </div>
             <a
               href={contactInfo.partnerFinder}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-neutral-400 hover:text-amber-400 text-xs mt-4 transition-colors group"
+              className="inline-flex items-center gap-1.5 text-neutral-400 hover:text-amber-400 text-xs transition-colors group"
             >
               <ExternalLink className="w-3 h-3" />
               <span>ServiceNow Partner Profile</span>
@@ -80,8 +80,8 @@ const Footer = () => {
 
           {/* Solutions */}
           <div>
-            <h3 className="text-white font-semibold mb-6">Solutions</h3>
-            <ul className="space-y-3">
+            <h3 className="text-white font-semibold mb-4 text-sm">Solutions</h3>
+            <ul className="space-y-2">
               {footerLinks.solutions.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -97,8 +97,8 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-white font-semibold mb-6">Company</h3>
-            <ul className="space-y-3">
+            <h3 className="text-white font-semibold mb-4 text-sm">Company</h3>
+            <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -114,31 +114,31 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold mb-6">Contact Us</h3>
-            <ul className="space-y-4">
+            <h3 className="text-white font-semibold mb-4 text-sm">Contact Us</h3>
+            <ul className="space-y-3">
               <li>
                 <a
                   href={`mailto:${contactInfo.email}`}
-                  className="flex items-center gap-3 text-neutral-400 text-sm hover:text-amber-400 transition-colors"
+                  className="flex items-center gap-2 text-neutral-400 text-sm hover:text-amber-400 transition-colors"
                 >
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-3.5 h-3.5" />
                   {contactInfo.email}
                 </a>
               </li>
               <li>
-                <span className="flex items-center gap-3 text-neutral-400 text-sm">
-                  <Phone className="w-4 h-4" />
+                <span className="flex items-center gap-2 text-neutral-400 text-sm">
+                  <Phone className="w-3.5 h-3.5" />
                   {contactInfo.phone}
                 </span>
               </li>
               <li>
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {officeLocations.map((office, index) => (
-                    <div key={index} className="flex items-start gap-3 text-neutral-400 text-sm">
-                      <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                    <div key={index} className="flex items-start gap-2 text-neutral-400 text-sm">
+                      <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                       <div>
-                        <div className="text-white font-medium">{office.city}, {office.country}</div>
-                        <div className="text-neutral-500 text-xs mt-0.5">{office.address}</div>
+                        <div className="text-white font-medium text-xs">{office.city}, {office.country}</div>
+                        <div className="text-neutral-500 text-xs">{office.address}</div>
                       </div>
                     </div>
                   ))}
@@ -149,15 +149,13 @@ const Footer = () => {
         </div>
 
         {/* ServiceNow Partnership Badges - Integrated */}
-        <div className="pt-12 pb-8">
-          <div className="text-center mb-6">
-            <p className="text-neutral-500 text-xs uppercase tracking-wider mb-3">ServiceNow Partner</p>
-          </div>
+        <div className="py-6">
+          <p className="text-neutral-500 text-xs uppercase tracking-wider text-center mb-3">ServiceNow Partner</p>
           <div className="flex flex-wrap items-center justify-center gap-4 opacity-60 hover:opacity-100 transition-opacity">
             {partnershipBadges.map((badge, index) => (
               <div
                 key={index}
-                className="w-16 md:w-20 grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-14 md:w-16 grayscale hover:grayscale-0 transition-all duration-300"
                 title={badge.name}
               >
                 <img
@@ -171,15 +169,15 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-neutral-500 text-sm">
+        <div className="py-4 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-3">
+          <p className="text-neutral-500 text-xs">
             &copy; {currentYear} {companyInfo.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy" className="text-neutral-500 text-sm hover:text-neutral-300 transition-colors">
+            <Link to="/privacy" className="text-neutral-500 text-xs hover:text-neutral-300 transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-neutral-500 text-sm hover:text-neutral-300 transition-colors">
+            <Link to="/terms" className="text-neutral-500 text-xs hover:text-neutral-300 transition-colors">
               Terms of Service
             </Link>
           </div>
