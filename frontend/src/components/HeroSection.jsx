@@ -41,7 +41,7 @@ const HeroSection = () => {
             {/* Subheadline */}
             <p className="text-lg text-neutral-400 max-w-xl leading-relaxed">
               Premier ServiceNow Partner connecting any workflow, any AI, and any data source. 
-              70+ successful projects. 500+ digital workflows delivered. Perfect CSAT scores.
+              80+ successful projects. 1500+ workflows delivered. 60+ certified consultants.
             </p>
 
             {/* CTA Buttons */}

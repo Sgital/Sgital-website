@@ -13,8 +13,8 @@ const aboutSgitalSection = `
         AI-powered workflow automation.
       </p>
       <p class="text-neutral-300 leading-relaxed mb-4">
-        As a trusted <strong>ServiceNow implementation partner</strong> with 96+ certifications and 70+ successful 
-        enterprise deployments, we specialize in <strong>ITSM</strong>, <strong>ITOM</strong>, <strong>HRSD</strong>, 
+        As a trusted <strong>ServiceNow implementation partner</strong> with <strong>60+ certified consultants</strong> and <strong>80+ successful 
+        projects</strong>, we have delivered <strong>1500+ workflows</strong> across <strong>3 global regions</strong>. We specialize in <strong>ITSM</strong>, <strong>ITOM</strong>, <strong>HRSD</strong>, 
         <strong>CSM</strong>, <strong>IRM</strong>, and custom <strong>ServiceNow solutions</strong> for businesses 
         seeking digital transformation in <strong>Asia</strong>.
       </p>
@@ -54,20 +54,20 @@ export const blogPosts = [
       <h2>📊 Key Achievements</h2>
       <div class="grid grid-cols-2 gap-4 my-8">
         <div class="bg-neutral-800/50 p-6 rounded-xl text-center border border-neutral-700">
-          <div class="text-3xl font-bold text-amber-400 mb-2">70+</div>
-          <div class="text-neutral-400 text-sm">Enterprise Implementations</div>
+          <div class="text-3xl font-bold text-amber-400 mb-2">80+</div>
+          <div class="text-neutral-400 text-sm">Successful Projects</div>
         </div>
         <div class="bg-neutral-800/50 p-6 rounded-xl text-center border border-neutral-700">
-          <div class="text-3xl font-bold text-amber-400 mb-2">500+</div>
-          <div class="text-neutral-400 text-sm">Workflows Automated</div>
+          <div class="text-3xl font-bold text-amber-400 mb-2">1500+</div>
+          <div class="text-neutral-400 text-sm">Workflows Delivered</div>
         </div>
         <div class="bg-neutral-800/50 p-6 rounded-xl text-center border border-neutral-700">
-          <div class="text-3xl font-bold text-amber-400 mb-2">30+</div>
-          <div class="text-neutral-400 text-sm">Enterprise Clients</div>
+          <div class="text-3xl font-bold text-amber-400 mb-2">60+</div>
+          <div class="text-neutral-400 text-sm">Certified Consultants</div>
         </div>
         <div class="bg-neutral-800/50 p-6 rounded-xl text-center border border-neutral-700">
-          <div class="text-3xl font-bold text-amber-400 mb-2">96</div>
-          <div class="text-neutral-400 text-sm">ServiceNow Certifications</div>
+          <div class="text-3xl font-bold text-amber-400 mb-2">3</div>
+          <div class="text-neutral-400 text-sm">Global Regions</div>
         </div>
       </div>
       
@@ -337,7 +337,7 @@ export const blogPosts = [
             <span class="text-amber-400 text-xl">✓</span>
             <h4 class="text-white font-semibold">Highest Certifications</h4>
           </div>
-          <p class="text-neutral-400 text-sm">Maintaining the highest certification standards with 96+ ServiceNow certifications.</p>
+          <p class="text-neutral-400 text-sm">Maintaining the highest certification standards with 60+ certified consultants.</p>
         </div>
       </div>
       

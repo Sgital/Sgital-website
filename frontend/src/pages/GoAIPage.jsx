@@ -94,7 +94,7 @@ const GoAIPage = () => {
               
               <div className="space-y-4">
                 {[
-                  'Proven methodology with 70+ successful implementations',
+                  'Proven methodology with 80+ successful projects',
                   'Measurable ROI at every phase',
                   'Built on ServiceNow NowAssist capabilities',
                   'Governance and compliance built-in',

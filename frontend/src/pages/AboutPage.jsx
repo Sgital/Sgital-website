@@ -12,7 +12,7 @@ const AboutPage = () => {
     <>
       <Helmet>
         <title>About Us | Premier ServiceNow Partner - Sgital</title>
-        <meta name="description" content="Sgital is a premier ServiceNow partner with 7+ years of expertise, 96 certifications, and presence across 6 global regions. Learn about our values and team." />
+        <meta name="description" content="Sgital is a premier ServiceNow partner with 7+ years of expertise, 60+ certified consultants, and presence across 3 global regions. Learn about our values and team." />
         <meta name="keywords" content="Sgital about, ServiceNow partner Singapore, digital transformation company, workflow automation experts" />
         <link rel="canonical" href="https://sgital.com/about" />
       </Helmet>
@@ -300,7 +300,7 @@ const AboutPage = () => {
             Ready to Partner with Us?
           </h2>
           <p className="text-lg text-neutral-400 mb-8 max-w-2xl mx-auto">
-            Join 30+ enterprises who trust Sgital for their ServiceNow journey.
+            Join enterprises across 3 global regions who trust Sgital for their ServiceNow journey.
           </p>
           <Button
             asChild

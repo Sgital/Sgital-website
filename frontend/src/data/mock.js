@@ -6,16 +6,14 @@ export const companyInfo = {
   description: "Premier ServiceNow Partner delivering digital transformation through AI-powered workflows",
   founded: "2018",
   headquarters: "Singapore",
-  globalPresence: ["Singapore", "India", "Malaysia", "Australia", "New Zealand", "UK"]
+  globalPresence: ["APAC", "ANZ", "EMEA"]
 };
 
 export const stats = [
-  { value: "70+", label: "Successful Projects", suffix: "" },
-  { value: "500+", label: "Digital Workflows", suffix: "" },
-  { value: "30+", label: "Happy Customers", suffix: "" },
-  { value: "50+", label: "Expert Team Members", suffix: "" },
-  { value: "400+", label: "Years Combined Experience", suffix: "" },
-  { value: "96", label: "ServiceNow Certifications", suffix: "" }
+  { value: "80+", label: "Successful Projects", suffix: "" },
+  { value: "1500+", label: "Workflows Delivered", suffix: "" },
+  { value: "60+", label: "Certified Consultants", suffix: "" },
+  { value: "3", label: "Global Regions", suffix: "" }
 ];
 
 export const services = [
