@@ -354,8 +354,10 @@ export const officeLocations = [
 ];
 
 export const contactInfo = {
-  email: "contact@sgital.com",
-  phone: "+65 8940 3476",
+  email: "info@sgital.com",
+  phone: "+65 9810 7986",
   address: "68 Chestnut Ave, Treehouse, Singapore 679521",
-  linkedin: "https://linkedin.com/company/sgital"
+  linkedin: "https://www.linkedin.com/company/sgital",
+  youtube: "https://www.youtube.com/@Sgital",
+  partnerFinder: "https://www.servicenow.com/partners/partner-finder/sgital-pte-ltd.html"
 };

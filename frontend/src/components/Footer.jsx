@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Linkedin, Mail, Phone, MapPin, Youtube, ExternalLink } from 'lucide-react';
 import { contactInfo, companyInfo, officeLocations } from '../data/mock';
 
 const Footer = () => {
@@ -40,22 +40,42 @@ const Footer = () => {
             <p className="text-neutral-400 text-sm leading-relaxed mb-6">
               {companyInfo.description}
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <a
                 href={contactInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+                aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
+                href={contactInfo.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-5 h-5" />
+              </a>
+              <a
                 href={`mailto:${contactInfo.email}`}
                 className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-400 hover:text-amber-400 hover:bg-neutral-700 transition-colors"
+                aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
               </a>
             </div>
+            <a
+              href={contactInfo.partnerFinder}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-neutral-400 hover:text-amber-400 text-xs mt-4 transition-colors group"
+            >
+              <ExternalLink className="w-3 h-3" />
+              <span>ServiceNow Partner Profile</span>
+            </a>
           </div>
 
           {/* Solutions */}

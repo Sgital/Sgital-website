@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Send, MapPin, Mail, Phone, Linkedin, CheckCircle2, Building2, ExternalLink } from 'lucide-react';
+import { Send, MapPin, Mail, Phone, Linkedin, CheckCircle2, Building2, ExternalLink, Youtube } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { contactInfo, officeLocations } from '../data/mock';
 
@@ -98,6 +98,30 @@ const ContactPage = () => {
                     <div className="text-white font-medium mb-1">LinkedIn</div>
                     <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-amber-400 transition-colors">
                       Follow us on LinkedIn
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-amber-400/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Youtube className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-white font-medium mb-1">YouTube</div>
+                    <a href={contactInfo.youtube} target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-amber-400 transition-colors">
+                      Watch our channel
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-amber-400/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-white font-medium mb-1">ServiceNow Partner</div>
+                    <a href={contactInfo.partnerFinder} target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-amber-400 transition-colors">
+                      View our partner profile
                     </a>
                   </div>
                 </div>
