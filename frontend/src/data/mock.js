@@ -326,9 +326,36 @@ export const clientLogos = [
   "Core Group"
 ];
 
+export const officeLocations = [
+  {
+    city: "Singapore",
+    country: "Singapore",
+    isHQ: true,
+    address: "68 Chestnut Ave, Treehouse, Singapore 679521",
+    mapUrl: "https://maps.app.goo.gl/H9CoEdfnZenUtYbZ8",
+    region: "APAC"
+  },
+  {
+    city: "Bengaluru",
+    country: "India",
+    isHQ: false,
+    address: "7th Floor, Summit A, Brigade Metropolis, Mahadevapura, Bengaluru, Karnataka 560048, India",
+    mapUrl: "https://maps.app.goo.gl/CsF29FJPEk7noizPA",
+    region: "APAC"
+  },
+  {
+    city: "Jodhpur",
+    country: "India",
+    isHQ: false,
+    address: "A-59, Sector-A, Shastri Nagar, Jodhpur, Rajasthan 342003, India",
+    mapUrl: "https://maps.app.goo.gl/RXsATMiHRbqsBK8b6",
+    region: "APAC"
+  }
+];
+
 export const contactInfo = {
   email: "contact@sgital.com",
-  phone: "+65 XXXX XXXX",
-  address: "Singapore",
+  phone: "+65 8940 3476",
+  address: "68 Chestnut Ave, Treehouse, Singapore 679521",
   linkedin: "https://linkedin.com/company/sgital"
 };

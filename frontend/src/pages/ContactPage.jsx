@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Send, MapPin, Mail, Phone, Linkedin, CheckCircle2 } from 'lucide-react';
+import { Send, MapPin, Mail, Phone, Linkedin, CheckCircle2, Building2, ExternalLink } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { contactInfo } from '../data/mock';
+import { contactInfo, officeLocations } from '../data/mock';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -33,8 +33,8 @@ const ContactPage = () => {
     <>
       <Helmet>
         <title>Contact Us | Get in Touch - Sgital</title>
-        <meta name="description" content="Contact Sgital for ServiceNow consulting, implementation, and support services. Book a free consultation or get a workflow assessment." />
-        <meta name="keywords" content="contact Sgital, ServiceNow consultation, workflow assessment, digital transformation inquiry" />
+        <meta name="description" content="Contact Sgital for ServiceNow consulting, implementation, and support services. Offices in Singapore, Bengaluru, and Jodhpur. Book a free consultation." />
+        <meta name="keywords" content="contact Sgital, ServiceNow Singapore, ServiceNow India, ServiceNow Bengaluru, workflow assessment" />
         <link rel="canonical" href="https://sgital.com/contact" />
       </Helmet>
 
@@ -84,17 +84,9 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <div className="text-white font-medium mb-1">Phone</div>
-                    <span className="text-neutral-400">{contactInfo.phone}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-amber-400/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <div>
-                    <div className="text-white font-medium mb-1">Location</div>
-                    <span className="text-neutral-400">{contactInfo.address}</span>
+                    <a href={`tel:${contactInfo.phone}`} className="text-neutral-400 hover:text-amber-400 transition-colors">
+                      {contactInfo.phone}
+                    </a>
                   </div>
                 </div>
 
@@ -208,6 +200,7 @@ const ContactPage = () => {
                       <option value="goai">GoAI 2.0 Demo</option>
                       <option value="partnership">Partnership Inquiry</option>
                       <option value="support">Support Request</option>
+                      <option value="careers">Career Opportunities</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
@@ -235,6 +228,66 @@ const ContactPage = () => {
                 </form>
               )}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Office Locations Section */}
+      <section className="bg-neutral-900 py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our <span className="text-amber-400">Offices</span>
+            </h2>
+            <p className="text-neutral-400 max-w-2xl mx-auto">
+              With offices across Asia-Pacific, we're always close to our clients
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {officeLocations.map((office, index) => (
+              <div
+                key={index}
+                className={`relative bg-neutral-950 border rounded-2xl p-8 transition-all hover:border-amber-400/50 group ${
+                  office.isHQ ? 'border-amber-400/30' : 'border-neutral-800'
+                }`}
+              >
+                {office.isHQ && (
+                  <div className="absolute -top-3 left-6 px-3 py-1 bg-amber-400 text-neutral-950 text-xs font-bold rounded-full">
+                    Headquarters
+                  </div>
+                )}
+                
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    office.isHQ ? 'bg-amber-400/20' : 'bg-neutral-800'
+                  }`}>
+                    <Building2 className={`w-6 h-6 ${office.isHQ ? 'text-amber-400' : 'text-neutral-400'}`} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{office.city}</h3>
+                    <p className="text-neutral-500 text-sm">{office.country}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 mb-4">
+                  <MapPin className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-neutral-400 text-sm leading-relaxed">
+                    {office.address}
+                  </p>
+                </div>
+
+                <a
+                  href={office.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-amber-400 text-sm font-medium hover:text-amber-300 transition-colors group/link"
+                >
+                  View on Google Maps
+                  <ExternalLink className="w-4 h-4 group-hover/link:translate-x-0.5 transition-transform" />
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </section>

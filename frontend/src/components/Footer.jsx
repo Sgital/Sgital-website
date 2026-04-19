@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, Mail, Phone, MapPin } from 'lucide-react';
-import { contactInfo, companyInfo } from '../data/mock';
+import { contactInfo, companyInfo, officeLocations } from '../data/mock';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -112,10 +112,17 @@ const Footer = () => {
                 </span>
               </li>
               <li>
-                <span className="flex items-center gap-3 text-neutral-400 text-sm">
-                  <MapPin className="w-4 h-4" />
-                  {contactInfo.address}
-                </span>
+                <div className="space-y-3">
+                  {officeLocations.map((office, index) => (
+                    <div key={index} className="flex items-start gap-3 text-neutral-400 text-sm">
+                      <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-white font-medium">{office.city}, {office.country}</div>
+                        <div className="text-neutral-500 text-xs mt-0.5">{office.address}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </li>
             </ul>
           </div>
