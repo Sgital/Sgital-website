@@ -247,6 +247,23 @@ export const specializations = [
   "NowAssist AI Agents"
 ];
 
+export const productCertifications = [
+  { category: "ITSM & ITOM", items: ["ITSM Professional", "CMDB Health", "Service Portal", "DevOps Change Velocity"] },
+  { category: "Customer & Employee Experience", items: ["CSM Professional", "HR Professional", "Workplace Service Delivery"] },
+  { category: "AI & Automation", items: ["Now Assist for ITSM Pro Plus", "Now Assist for CSM Pro Plus", "Now Assist for Creator"] },
+  { category: "Risk & Compliance", items: ["Risk and Compliance (CIS-RC)", "Third-party Risk Management (CIS-TPRM)", "IRM Suite"] },
+  { category: "Industry Solutions", items: ["Healthcare & Life Sciences Management", "Financial Services Operations - Banking", "Public Sector Digital Services"] },
+  { category: "Development & Integration", items: ["Application Developer (CAD)", "App Engine", "Workflow Data Fabric"] },
+  { category: "Enterprise Management", items: ["Strategic Portfolio Management (CIS-SPM)", "Agile and Test Management", "Enterprise Architecture"] },
+  { category: "Specialized Services", items: ["Technology Provider Service Management", "Telecom Service Management"] }
+];
+
+export const accreditations = [
+  { type: "Presales Accreditation", count: 28, description: "Certified ServiceNow staff who determine the appropriate products to introduce as a solution" },
+  { type: "Sales Accreditation", count: 30, description: "Sales staff who understand the value of the Now Platform and are certified ServiceNow experts" },
+  { type: "Delivery Accreditation", count: 25, description: "Internal implementation specialists with industry experience and proven knowledge on the Now Platform" }
+];
+
 export const values = [
   {
     title: "Customer Centricity",

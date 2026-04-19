@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle } from 'lucide-react';
+import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle, Shield } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-import { values, certifications, specializations, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails, contactInfo } from '../data/mock';
+import { values, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails, contactInfo, productCertifications, accreditations } from '../data/mock';
 
 const iconMap = { Heart, MessageCircle, Lightbulb, Globe };
 
@@ -94,54 +94,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Certifications & Specializations */}
-      <section className="bg-neutral-950 py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Partner Status */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Award className="w-6 h-6 text-amber-400" />
-                <h2 className="text-2xl font-bold text-white">ServiceNow Partner Status</h2>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {certifications.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 flex items-center gap-3"
-                  >
-                    <div className="w-10 h-10 bg-amber-400 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-neutral-950 font-bold text-lg">S</span>
-                    </div>
-                    <span className="text-neutral-300 text-sm font-medium">{cert}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Specializations */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Users className="w-6 h-6 text-amber-400" />
-                <h2 className="text-2xl font-bold text-white">Specializations</h2>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {specializations.map((spec, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm font-medium rounded-full"
-                  >
-                    {spec}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ServiceNow Partnership Details */}
-      <section className="bg-neutral-900 py-24">
+      <section className="bg-neutral-950 py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -163,7 +117,7 @@ const AboutPage = () => {
               {partnershipBadges.map((badge, index) => (
                 <div
                   key={index}
-                  className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 hover:border-amber-400/30 transition-all group"
+                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 hover:border-amber-400/30 transition-all group"
                 >
                   <img
                     src={badge.image}
@@ -181,7 +135,7 @@ const AboutPage = () => {
             {partnershipDetails.partnerTypes.map((partner, index) => (
               <div
                 key={index}
-                className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
+                className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
               >
                 <div className="text-amber-400 font-bold text-lg mb-2">{partner.type}</div>
                 <div className="text-white font-semibold mb-3">{partner.category}</div>
@@ -191,7 +145,7 @@ const AboutPage = () => {
           </div>
 
           {/* Expertise Areas */}
-          <div className="bg-neutral-950 border border-neutral-800 rounded-2xl p-8">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 mb-16">
             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
               <CheckCircle className="w-6 h-6 text-amber-400" />
               ServiceNow Expertise
@@ -206,8 +160,54 @@ const AboutPage = () => {
             </div>
           </div>
 
+          {/* Product Certifications */}
+          <div className="mb-16">
+            <h3 className="text-xl font-bold text-white text-center mb-8 flex items-center justify-center gap-2">
+              <Award className="w-6 h-6 text-amber-400" />
+              Product Certifications
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {productCertifications.map((cert, index) => (
+                <div
+                  key={index}
+                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
+                >
+                  <div className="text-amber-400 font-semibold mb-4">{cert.category}</div>
+                  <ul className="space-y-2">
+                    {cert.items.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-neutral-400 text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Accreditations */}
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-white text-center mb-8 flex items-center justify-center gap-2">
+              <Shield className="w-6 h-6 text-amber-400" />
+              Team Accreditations
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {accreditations.map((accred, index) => (
+                <div
+                  key={index}
+                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 text-center hover:border-amber-400/30 transition-all"
+                >
+                  <div className="text-4xl font-bold text-amber-400 mb-2">{accred.count}+</div>
+                  <div className="text-white font-semibold mb-3">{accred.type}</div>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{accred.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* View Partner Profile CTA */}
-          <div className="text-center mt-12">
+          <div className="text-center">
             <a
               href={contactInfo.partnerFinder}
               target="_blank"
