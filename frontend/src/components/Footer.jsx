@@ -148,17 +148,17 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* ServiceNow Partnership Badges */}
-        <div className="py-12 border-t border-neutral-800">
+        {/* ServiceNow Partnership Badges - Integrated */}
+        <div className="pt-12 pb-8">
           <div className="text-center mb-6">
-            <h3 className="text-white font-semibold mb-2">ServiceNow Partner Badges</h3>
-            <p className="text-neutral-500 text-sm">Proud to be a Premier ServiceNow Partner</p>
+            <p className="text-neutral-500 text-xs uppercase tracking-wider mb-3">ServiceNow Partner</p>
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-4 opacity-60 hover:opacity-100 transition-opacity">
             {partnershipBadges.map((badge, index) => (
               <div
                 key={index}
-                className="bg-neutral-950 border border-neutral-800 rounded-lg p-3 hover:border-amber-400/30 transition-all"
+                className="w-16 md:w-20 grayscale hover:grayscale-0 transition-all duration-300"
+                title={badge.name}
               >
                 <img
                   src={badge.image}
