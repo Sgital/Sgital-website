@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar } from 'lucide-react';
+import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-import { values, certifications, specializations, testimonials, stats, companyInfo } from '../data/mock';
+import { values, certifications, specializations, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails, contactInfo } from '../data/mock';
 
 const iconMap = { Heart, MessageCircle, Lightbulb, Globe };
 
@@ -136,6 +136,87 @@ const AboutPage = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ServiceNow Partnership Details */}
+      <section className="bg-neutral-900 py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our <span className="text-amber-400">ServiceNow Partnership</span>
+            </h2>
+            <p className="text-neutral-400 max-w-3xl mx-auto mb-6">
+              {partnershipDetails.description}
+            </p>
+            <div className="flex items-center justify-center gap-2 text-amber-400">
+              <Star className="w-5 h-5 fill-amber-400" />
+              <span className="text-lg font-semibold">Customer Satisfaction: {partnershipDetails.csatScore}</span>
+            </div>
+          </div>
+
+          {/* Partnership Badges */}
+          <div className="mb-16">
+            <h3 className="text-xl font-bold text-white text-center mb-8">Official Partner Badges</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {partnershipBadges.map((badge, index) => (
+                <div
+                  key={index}
+                  className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 hover:border-amber-400/30 transition-all group"
+                >
+                  <img
+                    src={badge.image}
+                    alt={badge.alt}
+                    className="w-full h-auto mb-3"
+                  />
+                  <p className="text-neutral-400 text-xs text-center leading-tight">{badge.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Partner Types Grid */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {partnershipDetails.partnerTypes.map((partner, index) => (
+              <div
+                key={index}
+                className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
+              >
+                <div className="text-amber-400 font-bold text-lg mb-2">{partner.type}</div>
+                <div className="text-white font-semibold mb-3">{partner.category}</div>
+                <p className="text-neutral-400 text-sm leading-relaxed">{partner.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Expertise Areas */}
+          <div className="bg-neutral-950 border border-neutral-800 rounded-2xl p-8">
+            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <CheckCircle className="w-6 h-6 text-amber-400" />
+              ServiceNow Expertise
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {partnershipDetails.expertise.map((area, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-neutral-300 text-sm">{area}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* View Partner Profile CTA */}
+          <div className="text-center mt-12">
+            <a
+              href={contactInfo.partnerFinder}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold rounded-lg transition-colors group"
+            >
+              View Our ServiceNow Partner Profile
+              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
           </div>
         </div>
       </section>

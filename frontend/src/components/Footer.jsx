@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, Mail, Phone, MapPin, Youtube, ExternalLink } from 'lucide-react';
-import { contactInfo, companyInfo, officeLocations } from '../data/mock';
+import { contactInfo, companyInfo, officeLocations, partnershipBadges } from '../data/mock';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -145,6 +145,28 @@ const Footer = () => {
                 </div>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* ServiceNow Partnership Badges */}
+        <div className="py-12 border-t border-neutral-800">
+          <div className="text-center mb-6">
+            <h3 className="text-white font-semibold mb-2">ServiceNow Partner Badges</h3>
+            <p className="text-neutral-500 text-sm">Proud to be a Premier ServiceNow Partner</p>
+          </div>
+          <div className="grid grid-cols-3 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+            {partnershipBadges.map((badge, index) => (
+              <div
+                key={index}
+                className="bg-neutral-950 border border-neutral-800 rounded-lg p-3 hover:border-amber-400/30 transition-all"
+              >
+                <img
+                  src={badge.image}
+                  alt={badge.alt}
+                  className="w-full h-auto"
+                />
+              </div>
+            ))}
           </div>
         </div>
 

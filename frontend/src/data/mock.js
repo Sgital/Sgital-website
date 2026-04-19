@@ -353,6 +353,70 @@ export const officeLocations = [
   }
 ];
 
+export const partnershipBadges = [
+  {
+    name: "Partner Advisory Council Member 2025",
+    image: "https://customer-assets.emergentagent.com/job_site-evolution-63/artifacts/p8zaou2x_PAC%202025.png",
+    alt: "ServiceNow Partner Advisory Council Member 2025"
+  },
+  {
+    name: "Premier Partner - Consulting & Implementation",
+    image: "https://customer-assets.emergentagent.com/job_site-evolution-63/artifacts/7qnxe4yu_Consulting%20%26%20Implementation.png",
+    alt: "ServiceNow Premier Partner - Consulting & Implementation"
+  },
+  {
+    name: "Select Partner - Reseller",
+    image: "https://customer-assets.emergentagent.com/job_site-evolution-63/artifacts/yqnhupo3_Reseller%20Select%20Badge.png",
+    alt: "ServiceNow Select Partner - Reseller"
+  },
+  {
+    name: "Authorized Training Partner",
+    image: "https://customer-assets.emergentagent.com/job_site-evolution-63/artifacts/1auxrir7_Authorized%20Training%20Blue%20Badge.png",
+    alt: "ServiceNow Authorized Training Partner"
+  },
+  {
+    name: "Built with ServiceNow Offering",
+    image: "https://customer-assets.emergentagent.com/job_site-evolution-63/artifacts/koz27fbo_Built%20With%20ServiceNow%20Offering.png",
+    alt: "Built with ServiceNow Offering"
+  }
+];
+
+export const partnershipDetails = {
+  csatScore: "4.36 out of 5",
+  description: "Sgital is a premier consulting partner of ServiceNow, a reseller and an authorised training partner. We specialise in AI enabled Digital Workflows.",
+  headquarters: "Singapore",
+  partnerTypes: [
+    {
+      type: "Premier Partner",
+      category: "Consulting & Implementation",
+      description: "Delivers implementations, consulting, transformation, deployment, offering creation, adoption, and ongoing support."
+    },
+    {
+      type: "Select Partner",
+      category: "Reseller",
+      description: "Markets and resells ServiceNow products and packaged services."
+    },
+    {
+      type: "Registered Partner",
+      category: "Build",
+      description: "Builds solutions and apps/integrations made available on the ServiceNow Store."
+    }
+  ],
+  expertise: [
+    "Finance Shared Services Automation",
+    "Project Portfolio Management",
+    "Customer Service Management",
+    "HR Service Delivery",
+    "Integrated Risk Management",
+    "Security Operations",
+    "IT and non-IT Applications"
+  ],
+  coverage: {
+    consulting: ["Americas (Canada, United States)", "Asia Pacific & Japan (Australia, India, Japan, South Korea, Malaysia, New Zealand, Singapore)", "Europe, Middle East & Africa (30+ countries)"],
+    reseller: ["Asia Pacific & Japan (Singapore)"]
+  }
+};
+
 export const contactInfo = {
   email: "info@sgital.com",
   phone: "+65 9810 7986",
