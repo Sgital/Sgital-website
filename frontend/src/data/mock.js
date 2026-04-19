@@ -434,6 +434,45 @@ export const partnershipDetails = {
   }
 };
 
+export const globalCoverage = {
+  consulting: {
+    title: "Consulting & Implementation Coverage",
+    regions: [
+      {
+        name: "Asia Pacific & Japan",
+        countries: ["Australia", "India", "Japan", "South Korea", "Malaysia", "New Zealand", "Singapore"],
+        offices: ["Singapore"]
+      },
+      {
+        name: "Americas",
+        countries: ["Canada", "United States"],
+        offices: []
+      },
+      {
+        name: "Europe, Middle East & Africa",
+        countries: [
+          "Austria", "Belgium", "Bulgaria", "Switzerland", "Cyprus", "Czech Republic", 
+          "Germany", "Denmark", "Estonia", "Spain", "Finland", "France", "United Kingdom", 
+          "Greece", "Croatia", "Hungary", "Ireland", "Italy", "Lithuania", "Luxembourg", 
+          "Latvia", "Malta", "Netherlands", "Norway", "Poland", "Portugal", "Romania", 
+          "Sweden", "Slovenia", "Slovakia"
+        ],
+        offices: []
+      }
+    ]
+  },
+  reseller: {
+    title: "Reseller Coverage",
+    regions: [
+      {
+        name: "Asia Pacific & Japan",
+        countries: ["Singapore"],
+        offices: ["Singapore"]
+      }
+    ]
+  }
+};
+
 export const contactInfo = {
   email: "info@sgital.com",
   phone: "+65 9810 7986",

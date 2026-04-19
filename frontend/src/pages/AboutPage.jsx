@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle, Shield } from 'lucide-react';
+import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle, Shield, MapPin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-import { values, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails, contactInfo, productCertifications, accreditations } from '../data/mock';
+import { values, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails, contactInfo, productCertifications, accreditations, globalCoverage, officeLocations } from '../data/mock';
 
 const iconMap = { Heart, MessageCircle, Lightbulb, Globe };
 
@@ -253,20 +253,98 @@ const AboutPage = () => {
 
       {/* Global Presence */}
       <section className="bg-neutral-950 py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
-            Global <span className="text-amber-400">Presence</span>
-          </h2>
-          <p className="text-neutral-400 mb-8">Serving enterprises across multiple regions</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {companyInfo.globalPresence.map((region, index) => (
-              <span
-                key={index}
-                className="px-6 py-3 bg-neutral-900/50 border border-neutral-800 text-neutral-300 rounded-lg"
-              >
-                {region}
-              </span>
-            ))}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Global <span className="text-amber-400">Presence</span>
+            </h2>
+            <p className="text-neutral-400 max-w-2xl mx-auto">
+              Delivering ServiceNow excellence across three continents with offices in Asia Pacific
+            </p>
+          </div>
+
+          {/* Office Locations */}
+          <div className="mb-16">
+            <h3 className="text-xl font-bold text-white text-center mb-8 flex items-center justify-center gap-2">
+              <MapPin className="w-6 h-6 text-amber-400" />
+              Our Office Locations
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {officeLocations.map((office, index) => (
+                <div
+                  key={index}
+                  className={`relative bg-neutral-900 border rounded-xl p-6 hover:border-amber-400/30 transition-all ${
+                    office.isHQ ? 'border-amber-400/30' : 'border-neutral-800'
+                  }`}
+                >
+                  {office.isHQ && (
+                    <div className="absolute -top-3 left-6 px-3 py-1 bg-amber-400 text-neutral-950 text-xs font-bold rounded-full">
+                      HQ
+                    </div>
+                  )}
+                  <div className="text-white font-bold text-lg mb-2">{office.city}, {office.country}</div>
+                  <p className="text-neutral-400 text-sm mb-4">{office.address}</p>
+                  <a
+                    href={office.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-400 text-sm hover:text-amber-300 transition-colors inline-flex items-center gap-1"
+                  >
+                    View on Maps
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Consulting & Implementation Coverage */}
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-white text-center mb-8">
+              Consulting & Implementation Coverage
+            </h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {globalCoverage.consulting.regions.map((region, index) => (
+                <div
+                  key={index}
+                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                    <Globe className="w-5 h-5 text-amber-400" />
+                    <h4 className="text-white font-semibold">{region.name}</h4>
+                  </div>
+                  <div className="text-amber-400 text-sm font-medium mb-3">
+                    {region.countries.length} {region.countries.length === 1 ? 'Country' : 'Countries'}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {region.countries.slice(0, 8).map((country, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 bg-neutral-950 border border-neutral-700 text-neutral-300 text-xs rounded-full"
+                      >
+                        {country}
+                      </span>
+                    ))}
+                    {region.countries.length > 8 && (
+                      <span className="px-3 py-1 text-neutral-500 text-xs">
+                        +{region.countries.length - 8} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Reseller Coverage */}
+          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8 text-center">
+            <h3 className="text-xl font-bold text-white mb-4">Reseller Coverage</h3>
+            <p className="text-neutral-400 mb-4">
+              Authorized ServiceNow Reseller in Asia Pacific & Japan
+            </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full">
+              <span className="text-amber-400 font-medium">Singapore</span>
+            </div>
           </div>
         </div>
       </section>
