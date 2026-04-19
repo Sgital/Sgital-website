@@ -17,6 +17,32 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+    };
+  }, [isMobileMenuOpen]);
+
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -69,7 +95,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800'
           : 'bg-transparent'
       }`}
@@ -152,33 +178,39 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-neutral-300 hover:text-white"
+            className="lg:hidden p-2 text-neutral-300 hover:text-white z-50"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full Screen Overlay */}
       <div
-        className={`lg:hidden absolute top-full left-0 right-0 bg-neutral-950/98 backdrop-blur-md border-b border-neutral-800 transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        className={`lg:hidden fixed inset-0 top-20 bg-neutral-950 transition-all duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
+        style={{ height: 'calc(100vh - 80px)' }}
       >
-        <nav className="max-w-7xl mx-auto px-6 py-6">
+        <nav 
+          className="h-full overflow-y-auto overscroll-contain px-6 py-6 pb-24"
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <div className="space-y-1">
             {navLinks.map((link) => (
               <div key={link.name}>
                 {link.hasDropdown ? (
                   <>
-                    <div className="px-4 py-2 text-neutral-500 text-xs font-medium uppercase tracking-wider">
+                    <div className="px-4 py-3 text-neutral-500 text-xs font-medium uppercase tracking-wider border-b border-neutral-800 mb-2">
                       {link.name}
                     </div>
                     {link.dropdownItems.map((item) => (
                       <Link
                         key={item.name}
                         to={item.href}
-                        className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ml-2 ${
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`block px-4 py-4 text-base font-medium rounded-lg transition-colors ml-2 ${
                           location.pathname === item.href
                             ? 'text-amber-400 bg-amber-400/10'
                             : 'text-neutral-300 hover:text-white hover:bg-neutral-800'
@@ -187,11 +219,13 @@ const Header = () => {
                         {item.name}
                       </Link>
                     ))}
+                    <div className="h-4" />
                   </>
                 ) : (
                   <Link
                     to={link.href}
-                    className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block px-4 py-4 text-base font-medium rounded-lg transition-colors ${
                       isActive(link.href)
                         ? 'text-amber-400 bg-amber-400/10'
                         : 'text-neutral-300 hover:text-white hover:bg-neutral-800'
@@ -203,10 +237,11 @@ const Header = () => {
               </div>
             ))}
           </div>
-          <div className="mt-6 pt-6 border-t border-neutral-800">
+          <div className="mt-8 pt-6 border-t border-neutral-800">
             <Button
               asChild
               className="w-full bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold py-6"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               <Link to="/contact">Book a Meeting</Link>
             </Button>
