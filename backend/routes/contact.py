@@ -1,4 +1,6 @@
 from fastapi import APIRouter, Form, HTTPException
+from typing import Optional
+from datetime import datetime
 import boto3
 from botocore.exceptions import ClientError
 from email.mime.multipart import MIMEMultipart
@@ -6,12 +8,22 @@ from email.mime.text import MIMEText
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from motor.motor_asyncio import AsyncIOMotorClient
 
 # Load environment variables
 ROOT_DIR = Path(__file__).parent.parent
 load_dotenv(ROOT_DIR / '.env')
 
 router = APIRouter()
+
+# MongoDB connection
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017/')
+db_name = os.environ.get('DB_NAME', 'fullstack_app')
+client = AsyncIOMotorClient(mongo_url)
+db = client[db_name]
+
+async def get_db():
+    return db
 
 # AWS SES Configuration
 AWS_REGION = os.getenv('AWS_REGION', 'ap-south-1')
@@ -151,26 +163,91 @@ async def submit_contact_form(
             "company": company,
             "phone": phone,
             "subject": subject,
-            "message": message
+            "message": message,
+            "submitted_at": datetime.utcnow(),
+            "status": "new"
         }
+        
+        # Store in MongoDB
+        db = await get_db()
+        result = await db.contacts.insert_one(contact_data)
         
         # Send email via AWS SES
         try:
             message_id = send_contact_email(contact_data)
+            await db.contacts.update_one(
+                {"_id": result.inserted_id},
+                {"$set": {"email_sent": True, "email_message_id": message_id}}
+            )
             return {
                 "success": True,
                 "message": "Your message has been sent successfully. We'll get back to you within 24 hours.",
-                "email_message_id": message_id
+                "email_message_id": message_id,
+                "contact_id": str(result.inserted_id)
             }
         except Exception as email_error:
             # Log error but return success to user
-            print(f"Email sending failed: {str(email_error)}")
+            await db.contacts.update_one(
+                {"_id": result.inserted_id},
+                {"$set": {"email_sent": False, "email_error": str(email_error)}}
+            )
             return {
                 "success": True,
                 "message": "Your message has been received. We'll get back to you within 24 hours.",
                 "email_sent": False,
-                "error": str(email_error)
+                "contact_id": str(result.inserted_id)
             }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/list")
+async def list_contacts(
+    status: Optional[str] = None,
+    limit: int = 50
+):
+    """List all contact form submissions (admin only)"""
+    
+    try:
+        db = await get_db()
+        query = {}
+        
+        if status:
+            query["status"] = status
+        
+        contacts = await db.contacts.find(query).sort("submitted_at", -1).limit(limit).to_list(limit)
+        
+        # Convert ObjectId to string for JSON serialization
+        for contact in contacts:
+            if "_id" in contact:
+                contact["_id"] = str(contact["_id"])
+        
+        return {"success": True, "contacts": contacts}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.patch("/update-status/{contact_id}")
+async def update_contact_status(
+    contact_id: str,
+    status: str = Form(...)
+):
+    """Update contact submission status (admin only)"""
+    
+    try:
+        from bson import ObjectId
+        db = await get_db()
+        result = await db.contacts.update_one(
+            {"_id": ObjectId(contact_id)},
+            {"$set": {"status": status, "updated_at": datetime.utcnow()}}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Contact not found")
+        
+        return {"success": True, "message": "Status updated successfully"}
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
