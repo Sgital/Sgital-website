@@ -35,10 +35,11 @@ export const blogPosts = [
     id: 0,
     slug: 'are-you-attending-knowledge26',
     title: 'Are you attending Knowledge26?',
-    description: "We'll be at ServiceNow Knowledge26 in Las Vegas — the biggest gathering of the ServiceNow community. Let's meet up and talk about the latest announcements.",
+    description: "We'll be at ServiceNow Knowledge26 in Las Vegas (May 5–7, 2026) — the biggest gathering of the ServiceNow community. Let's meet and talk about what it all means for your business.",
     content: `
       <p class="text-xl text-neutral-300 leading-relaxed mb-8">
-        The announcements we've been waiting for are out! And just in time for insightful discussions at
+        Knowledge26 is packed with new features, new roadmaps, and new ways to get more from ServiceNow.
+        The announcements we've been waiting for are out — and just in time for insightful discussions at
         <a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-moves-beyond-the-sidecar-AI-era-giving-customers-a-complete-AI-native-experience-across-all-products-and-packages/default.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline"><strong>ServiceNow Knowledge26</strong></a>.
       </p>
 
@@ -51,7 +52,7 @@ export const blogPosts = [
       </ul>
 
       <div class="bg-neutral-800/50 border-l-4 border-amber-400 p-6 rounded-r-xl my-8">
-        <p class="text-neutral-300">
+        <p class="text-neutral-300 m-0">
           📖 Read the full announcement on
           <a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-moves-beyond-the-sidecar-AI-era-giving-customers-a-complete-AI-native-experience-across-all-products-and-packages/default.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline font-semibold">the ServiceNow Newsroom</a>.
         </p>
@@ -59,10 +60,23 @@ export const blogPosts = [
 
       <h2>🤝 Let's Meet in Las Vegas</h2>
       <p>
-        Let's meet up and talk about the latest and greatest. We're looking forward to meeting
-        <strong class="text-white">customers, fellow experts, and partners</strong> at the largest gathering of
-        the <strong class="text-white">#ServiceNow</strong> community.
+        If you're attending, we're excited to meet you. Let's talk about what it all means for your
+        business — we'll be meeting <strong class="text-white">customers, fellow experts, and partners</strong>
+        at the largest gathering of the <strong class="text-white">#ServiceNow</strong> community.
       </p>
+
+      <!-- CEO / QR CTA -->
+      <div class="my-12 bg-gradient-to-br from-amber-400/10 to-amber-600/5 border border-amber-400/30 rounded-2xl p-6 md:p-8">
+        <div class="text-center mb-6">
+          <span class="inline-block px-3 py-1 bg-amber-400 text-neutral-950 text-xs font-bold rounded-full mb-3 tracking-wide">BOOK A MEETING</span>
+          <h3 class="text-2xl md:text-3xl font-bold text-white m-0">Meet our CEO at Knowledge26</h3>
+          <p class="text-neutral-400 mt-2 m-0">Scan the QR code below to book a time with <strong class="text-white">Sachin Khatri</strong>, CEO of Sgital.</p>
+        </div>
+        <a href="https://sgital-website-assets.s3.ap-south-1.amazonaws.com/images/blog/knowledge26-poster.png" target="_blank" rel="noopener noreferrer" class="block max-w-xl mx-auto rounded-xl overflow-hidden border border-amber-400/20 shadow-2xl hover:border-amber-400/50 transition-colors" title="Click to open full-size image — scan the QR with your phone">
+          <img src="https://sgital-website-assets.s3.ap-south-1.amazonaws.com/images/blog/knowledge26-poster.png" alt="Scan QR to book a meeting with Sachin Khatri, CEO of Sgital, at ServiceNow Knowledge26" class="w-full h-auto block m-0" />
+        </a>
+        <p class="text-center text-neutral-500 text-sm mt-4 m-0">Prefer to message directly? DM <a href="https://www.linkedin.com/in/sachinkhatri/" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline">@sachinkhatri</a> on LinkedIn.</p>
+      </div>
 
       <div class="flex flex-wrap gap-2 my-8">
         <span class="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm font-medium rounded-full">#Knowledge26</span>
@@ -75,7 +89,7 @@ export const blogPosts = [
       ${aboutSgitalSection}
     `,
     date: 'April 23, 2026',
-    image: 'https://sgital-website-assets.s3.ap-south-1.amazonaws.com/images/blog/20260423_120139_ac412f40.png',
+    image: 'https://sgital-website-assets.s3.ap-south-1.amazonaws.com/images/blog/knowledge26-poster.png',
     category: 'Events',
     author: 'SGITAL Team',
     readTime: '3 min read'

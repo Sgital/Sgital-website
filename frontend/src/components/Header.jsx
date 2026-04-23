@@ -95,11 +95,12 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen
           ? 'bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800'
           : 'bg-transparent'
       }`}
+      style={{ top: 'var(--banner-h, 0px)' }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">

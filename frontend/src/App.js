@@ -6,6 +6,7 @@ import { Toaster } from "./components/ui/sonner";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import AnnouncementBanner from "./components/AnnouncementBanner";
 
 // Pages
 import HomePage from "./pages/HomePage";
@@ -26,6 +27,7 @@ import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 const Layout = ({ children }) => {
   return (
     <div className="bg-neutral-950 min-h-screen">
+      <AnnouncementBanner />
       <Header />
       <main>{children}</main>
       <Footer />
