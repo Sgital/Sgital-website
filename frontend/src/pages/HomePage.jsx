@@ -34,6 +34,10 @@ const HomePage = () => {
 
 // Hero Section Component
 const HeroSection = () => {
+  const VIDEO_MP4 = 'https://sgital-website-assets.s3.ap-south-1.amazonaws.com/video/goai-hero.mp4';
+  const VIDEO_WEBM = 'https://sgital-website-assets.s3.ap-south-1.amazonaws.com/video/goai-hero.webm';
+  const VIDEO_POSTER = 'https://sgital-website-assets.s3.ap-south-1.amazonaws.com/video/goai-hero-poster.jpg';
+
   return (
     <section className="relative min-h-screen flex items-center bg-neutral-950 overflow-hidden">
       {/* Background Pattern */}
@@ -43,47 +47,82 @@ const HeroSection = () => {
         <div className="absolute bottom-1/4 -left-40 w-[400px] h-[400px] bg-amber-400/5 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-40">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-8">
-            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-            <span className="text-amber-400 text-sm font-medium">Enterprise AI Solutions</span>
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-28 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Text column */}
+          <div className="text-center lg:text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-8">
+              <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+              <span className="text-amber-400 text-sm font-medium">Enterprise AI Solutions</span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              The AI Control Tower
+              <span className="block text-amber-400">for Enterprise Workflows</span>
+            </h1>
+
+            {/* Subtext */}
+            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed mb-10 lg:max-w-xl">
+              Sgital helps enterprises operationalize AI across workflows—with governance,
+              control, and measurable outcomes delivered in weeks, not years.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <Button
+                asChild
+                className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-8 py-6 text-base group"
+              >
+                <Link to="/goai">
+                  See AI in Action
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="border-neutral-700 text-white hover:bg-neutral-800 px-8 py-6 text-base"
+              >
+                <Link to="/contact">
+                  <Play className="mr-2 w-5 h-5" />
+                  Get a Workflow Assessment
+                </Link>
+              </Button>
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            The AI Control Tower
-            <span className="block text-amber-400">for Enterprise Workflows</span>
-          </h1>
-
-          {/* Subtext */}
-          <p className="text-lg md:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed mb-10">
-            Sgital helps enterprises operationalize AI across workflows—with governance, 
-            control, and measurable outcomes delivered in weeks, not years.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              asChild
-              className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-8 py-6 text-base group"
-            >
-              <Link to="/goai">
-                See AI in Action
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-neutral-700 text-white hover:bg-neutral-800 px-8 py-6 text-base"
-            >
-              <Link to="/contact">
-                <Play className="mr-2 w-5 h-5" />
-                Get a Workflow Assessment
-              </Link>
-            </Button>
+          {/* Video column */}
+          <div className="relative group" data-testid="home-hero-video-wrapper">
+            {/* Ambient glow */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-amber-400/20 via-amber-400/5 to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity" />
+            {/* Frame */}
+            <div className="relative rounded-2xl overflow-hidden border border-amber-400/20 bg-neutral-900 shadow-2xl aspect-video">
+              <video
+                data-testid="home-hero-video"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster={VIDEO_POSTER}
+                className="w-full h-full object-cover"
+              >
+                <source src={VIDEO_WEBM} type="video/webm" />
+                <source src={VIDEO_MP4} type="video/mp4" />
+                Your browser does not support embedded video.
+              </video>
+              {/* Subtle gradient for text contrast overlays */}
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/5 rounded-2xl" />
+            </div>
+            {/* Caption */}
+            <div className="absolute -bottom-4 left-6 right-6 flex justify-center lg:justify-start">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-neutral-900 border border-amber-400/30 rounded-full shadow-lg">
+                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse" />
+                <span className="text-amber-400 text-xs font-medium tracking-wide">GoAI 2.0 · ServiceNow-Powered</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
