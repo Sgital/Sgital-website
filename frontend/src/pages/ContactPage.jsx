@@ -14,12 +14,39 @@ const ContactPage = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+
+    try {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach(key => {
+        if (formData[key]) {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
+
+      const response = await fetch(`${apiUrl}/api/contact/submit`, {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to send message');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || 'Failed to send message. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -157,6 +184,11 @@ const ContactPage = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8">
+                  {error && (
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                      {error}
+                    </div>
+                  )}
                   <div className="grid md:grid-cols-2 gap-6 mb-6">
                     <div>
                       <label className="block text-white font-medium mb-2">Name *</label>
@@ -244,10 +276,15 @@ const ContactPage = () => {
 
                   <Button
                     type="submit"
+                    disabled={submitting}
                     className="w-full bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold py-6 group"
                   >
-                    Send Message
-                    <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    {submitting ? 'Sending...' : (
+                      <>
+                        Send Message
+                        <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
                   </Button>
                 </form>
               )}
