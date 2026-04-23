@@ -46,6 +46,43 @@
                 document.head.appendChild(tailwindScript);
             }
         </script>
+        <style>
+            /* Hide the Emergent badge — plan permits removal (confirmed via support) */
+            #emergent-badge,
+            #emergent-badge * {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+                width: 0 !important;
+                height: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
+                top: -9999px !important;
+            }
+        </style>
+        <script>
+            // Keep Emergent badge hidden (plan permits removal — confirmed via support).
+            (function suppressEmergentBadge() {
+                var HIDE = 'display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;position:absolute!important;left:-9999px!important;top:-9999px!important;pointer-events:none!important;';
+                function nuke() {
+                    var b = document.getElementById('emergent-badge');
+                    if (!b) return;
+                    // Only mutate if something actually needs changing — avoids observer feedback loops.
+                    if (b.getAttribute('style') !== HIDE) {
+                        b.setAttribute('style', HIDE);
+                    }
+                    if (b.childNodes.length) {
+                        try { b.innerHTML = ''; } catch (e) {}
+                    }
+                    if (b.hasAttribute('href')) b.removeAttribute('href');
+                }
+                nuke();
+                document.addEventListener('DOMContentLoaded', nuke);
+                window.addEventListener('load', nuke);
+                setInterval(nuke, 250);
+            })();
+        </script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -64,49 +101,8 @@
             id="emergent-badge"
             target="_blank"
             href="https://app.emergent.sh/?utm_source=emergent-badge"
-            style="
-                display: flex !important;
-                align-items: center !important;
-                position: fixed !important;
-                bottom: 20px;
-                right: 20px;
-                text-decoration: none;
-                padding: 6px 10px;
-                font-family: -apple-system, BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell,
-                    &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;,
-                    sans-serif !important;
-                font-size: 12px !important;
-                z-index: 9999 !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-                border-radius: 8px !important;
-                background-color: #ffffff !important;
-                border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            "
-        >
-            <div
-                style="display: flex; flex-direction: row; align-items: center"
-            >
-                <img
-                    style="width: 20px; height: 20px; margin-right: 8px"
-                    src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4"
-                />
-                <p
-                    style="
-                        color: #000000;
-                        font-family: -apple-system, BlinkMacSystemFont,
-                            &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu,
-                            Cantarell, &quot;Open Sans&quot;,
-                            &quot;Helvetica Neue&quot;, sans-serif !important;
-                        font-size: 12px !important;
-                        align-items: center;
-                        margin-bottom: 0;
-                    "
-                >
-                    Made with Emergent
-                </p>
-            </div>
-        </a>
+            style="display: none !important;"
+        ></a>
         <script>
             !(function (t, e) {
                 var o, n, p, r;
