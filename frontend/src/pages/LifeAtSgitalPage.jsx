@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Play, Users, Heart, Sparkles, ArrowRight, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Users, Heart, Sparkles, ArrowRight, ExternalLink, X, ChevronLeft, ChevronRight, Award, MapPin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -180,14 +180,14 @@ const LifeAtSgitalPage = () => {
                 <div className="text-neutral-400 text-sm">Years of Excellence</div>
               </div>
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 text-center hover:border-amber-400/30 transition-colors">
-                <Heart className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-white mb-1">3</div>
-                <div className="text-neutral-400 text-sm">Global Regions</div>
+                <Award className="w-8 h-8 text-amber-400 mx-auto mb-3" />
+                <div className="text-2xl font-bold text-white mb-1">500+</div>
+                <div className="text-neutral-400 text-sm">Certifications</div>
               </div>
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 text-center hover:border-amber-400/30 transition-colors">
-                <Play className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-white mb-1">{videos.length}</div>
-                <div className="text-neutral-400 text-sm">Videos</div>
+                <MapPin className="w-8 h-8 text-amber-400 mx-auto mb-3" />
+                <div className="text-2xl font-bold text-white mb-1">3</div>
+                <div className="text-neutral-400 text-sm">Office Locations</div>
               </div>
             </div>
           </div>
