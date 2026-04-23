@@ -10,8 +10,8 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 
-# Import new routes
-from routes import applications, admin_auth, contact, gallery, blog, admin_gallery
+# Import routes
+from routes import applications, admin_auth, contact, gallery, admin_gallery
 
 
 ROOT_DIR = Path(__file__).parent
@@ -77,7 +77,6 @@ app.include_router(applications.router, prefix="/api/applications", tags=["appli
 app.include_router(admin_auth.router, prefix="/api/admin", tags=["admin"])
 app.include_router(contact.router, prefix="/api/contact", tags=["contact"])
 app.include_router(gallery.router, prefix="/api/gallery", tags=["gallery"])
-app.include_router(blog.router, prefix="/api/blog", tags=["blog"])
 app.include_router(admin_gallery.router, prefix="/api/admin/gallery", tags=["admin-gallery"])
 
 app.add_middleware(

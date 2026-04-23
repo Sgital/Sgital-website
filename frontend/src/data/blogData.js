@@ -32,6 +32,55 @@ const aboutSgitalSection = `
 
 export const blogPosts = [
   {
+    id: 0,
+    slug: 'are-you-attending-knowledge26',
+    title: 'Are you attending Knowledge26?',
+    description: "We'll be at ServiceNow Knowledge26 in Las Vegas — the biggest gathering of the ServiceNow community. Let's meet up and talk about the latest announcements.",
+    content: `
+      <p class="text-xl text-neutral-300 leading-relaxed mb-8">
+        The announcements we've been waiting for are out! And just in time for insightful discussions at
+        <a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-moves-beyond-the-sidecar-AI-era-giving-customers-a-complete-AI-native-experience-across-all-products-and-packages/default.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline"><strong>ServiceNow Knowledge26</strong></a>.
+      </p>
+
+      <h2>🚀 Key Announcements from ServiceNow</h2>
+      <ul class="my-6 space-y-3 list-disc pl-6 marker:text-amber-400">
+        <li class="text-neutral-300"><strong class="text-white">AI, data, security, and governance</strong> are now in every ServiceNow offering.</li>
+        <li class="text-neutral-300"><strong class="text-white">Enterprise Service Management (ESM) Foundation</strong> brings a single product with all multi-department workflows on a single AI platform.</li>
+        <li class="text-neutral-300"><strong class="text-white">ServiceNow Context Engine, ServiceNow SDK and Build Agents</strong> are now available for everyone.</li>
+        <li class="text-neutral-300"><strong class="text-white">AI assistance, agentic automation, and fully autonomous operations</strong> are now available across the entire portfolio of products.</li>
+      </ul>
+
+      <div class="bg-neutral-800/50 border-l-4 border-amber-400 p-6 rounded-r-xl my-8">
+        <p class="text-neutral-300">
+          📖 Read the full announcement on
+          <a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-moves-beyond-the-sidecar-AI-era-giving-customers-a-complete-AI-native-experience-across-all-products-and-packages/default.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline font-semibold">the ServiceNow Newsroom</a>.
+        </p>
+      </div>
+
+      <h2>🤝 Let's Meet in Las Vegas</h2>
+      <p>
+        Let's meet up and talk about the latest and greatest. We're looking forward to meeting
+        <strong class="text-white">customers, fellow experts, and partners</strong> at the largest gathering of
+        the <strong class="text-white">#ServiceNow</strong> community.
+      </p>
+
+      <div class="flex flex-wrap gap-2 my-8">
+        <span class="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm font-medium rounded-full">#Knowledge26</span>
+        <span class="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm font-medium rounded-full">#GoAIwithSgital</span>
+        <span class="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm font-medium rounded-full">#LasVegas</span>
+        <span class="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm font-medium rounded-full">#ServiceNow</span>
+      </div>
+
+      <p class="text-lg font-semibold text-amber-400">Let's Go! — SGITAL · AI Workflows</p>
+      ${aboutSgitalSection}
+    `,
+    date: 'April 23, 2026',
+    image: 'https://sgital-website-assets.s3.ap-south-1.amazonaws.com/images/blog/20260423_120139_ac412f40.png',
+    category: 'Events',
+    author: 'SGITAL Team',
+    readTime: '3 min read'
+  },
+  {
     id: 1,
     slug: 'sgital-marks-8-years',
     title: "SGITAL Marks 8 Years of Powering Singapore's AI Workflows",

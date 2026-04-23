@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Calendar, Loader2 } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { blogPosts } from '../data/blogData';
 
 const BlogPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let mounted = true;
-    fetch(`${API}/blog/posts`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (!mounted) return;
-        if (data?.success) setPosts(data.posts || []);
-      })
-      .catch(() => {})
-      .finally(() => mounted && setLoading(false));
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  const featuredPost = posts[0];
-  const otherPosts = posts.slice(1);
+  const featuredPost = blogPosts[0];
+  const otherPosts = blogPosts.slice(1);
 
   return (
     <>
@@ -62,16 +43,7 @@ const BlogPage = () => {
         </div>
       </section>
 
-      {loading && (
-        <section className="bg-neutral-950 py-16">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-            <Loader2 className="w-8 h-8 text-amber-400 mx-auto animate-spin" />
-            <p className="text-neutral-400 mt-3 text-sm">Loading posts...</p>
-          </div>
-        </section>
-      )}
-
-      {!loading && featuredPost && (
+      {featuredPost && (
         <section className="bg-neutral-950 py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Link to={`/our-blog/${featuredPost.slug}`} className="block group">
@@ -111,7 +83,7 @@ const BlogPage = () => {
         </section>
       )}
 
-      {!loading && otherPosts.length > 0 && (
+      {otherPosts.length > 0 && (
         <section className="bg-neutral-950 py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -156,14 +128,6 @@ const BlogPage = () => {
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-      )}
-
-      {!loading && posts.length === 0 && (
-        <section className="bg-neutral-950 py-16">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-            <p className="text-neutral-400">No articles available yet. Check back soon!</p>
           </div>
         </section>
       )}

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Users, Filter, Download, Eye, CheckCircle, XCircle, Clock, Mail, Phone, MapPin, Briefcase, Calendar, DollarSign, FileText, RefreshCw, FileEdit, Image as ImageIcon } from 'lucide-react';
+import { Users, Filter, Download, Eye, CheckCircle, XCircle, Clock, Mail, Phone, MapPin, Briefcase, Calendar, DollarSign, FileText, RefreshCw, Image as ImageIcon } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import BlogAdminTab from '../components/admin/BlogAdminTab';
 import GalleryAdminTab from '../components/admin/GalleryAdminTab';
 
 const AdminApplicationsPage = () => {
-  const [activeTab, setActiveTab] = useState('applications'); // 'applications' | 'contacts' | 'blog' | 'gallery'
+  const [activeTab, setActiveTab] = useState('applications'); // 'applications' | 'contacts' | 'gallery'
   const [applications, setApplications] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -270,7 +269,6 @@ const AdminApplicationsPage = () => {
               <p className="text-neutral-400">
                 {activeTab === 'applications' && `${filteredApplications.length} application(s) found`}
                 {activeTab === 'contacts' && `${filteredContacts.length} contact(s) found`}
-                {activeTab === 'blog' && `Manage blog posts`}
                 {activeTab === 'gallery' && `Manage Life at Sgital photos`}
               </p>
             </div>
@@ -322,18 +320,6 @@ const AdminApplicationsPage = () => {
             >
               <Mail className="w-4 h-4 inline mr-2" />
               Contact Messages ({contacts.length})
-            </button>
-            <button
-              data-testid="admin-tab-blog"
-              onClick={() => setActiveTab('blog')}
-              className={`px-5 py-3 rounded-lg font-semibold transition-colors ${
-                activeTab === 'blog'
-                  ? 'bg-amber-400 text-neutral-950'
-                  : 'bg-neutral-900 text-neutral-400 hover:text-white'
-              }`}
-            >
-              <FileEdit className="w-4 h-4 inline mr-2" />
-              Blog Posts
             </button>
             <button
               data-testid="admin-tab-gallery"
@@ -396,8 +382,7 @@ const AdminApplicationsPage = () => {
           </div>
           )}
 
-          {/* Blog admin tab */}
-          {activeTab === 'blog' && <BlogAdminTab />}
+          {/* Blog admin tab removed — blog content now maintained in /app/frontend/src/data/blogData.js */}
 
           {/* Gallery admin tab */}
           {activeTab === 'gallery' && <GalleryAdminTab />}

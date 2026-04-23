@@ -1,40 +1,22 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Clock, Search, Loader2 } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Search } from 'lucide-react';
 import { Button } from '../components/ui/button';
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { blogPosts } from '../data/blogData';
 
 const OurBlogPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  useEffect(() => {
-    let mounted = true;
-    fetch(`${API}/blog/posts`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (!mounted) return;
-        if (data?.success) setPosts(data.posts || []);
-      })
-      .catch(() => {})
-      .finally(() => mounted && setLoading(false));
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   const categories = useMemo(
-    () => ['all', ...Array.from(new Set(posts.map((p) => p.category))).filter(Boolean)],
-    [posts]
+    () => ['all', ...Array.from(new Set(blogPosts.map((p) => p.category))).filter(Boolean)],
+    []
   );
 
   const filteredPosts = useMemo(() => {
     const q = searchTerm.toLowerCase();
-    return posts.filter((post) => {
+    return blogPosts.filter((post) => {
       const matchesSearch =
         !q ||
         post.title.toLowerCase().includes(q) ||
@@ -42,7 +24,7 @@ const OurBlogPage = () => {
       const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [posts, searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory]);
 
   const featuredPost = filteredPosts[0];
   const otherPosts = filteredPosts.slice(1);
@@ -51,14 +33,8 @@ const OurBlogPage = () => {
     <>
       <Helmet>
         <title>Our Blog | Insights & Updates - Sgital</title>
-        <meta
-          name="description"
-          content="Unveiling Digital Insights, Innovations, and Industry Best Practices. Explore SGITAL's blog for the latest in ServiceNow, AI workflows, and digital transformation."
-        />
-        <meta
-          name="keywords"
-          content="ServiceNow blog, digital transformation insights, AI workflows, enterprise automation, SGITAL updates"
-        />
+        <meta name="description" content="Unveiling Digital Insights, Innovations, and Industry Best Practices. Explore SGITAL's blog for the latest in ServiceNow, AI workflows, and digital transformation." />
+        <meta name="keywords" content="ServiceNow blog, digital transformation insights, AI workflows, enterprise automation, SGITAL updates" />
         <link rel="canonical" href="https://sgital.com/our-blog" />
       </Helmet>
 
@@ -94,7 +70,6 @@ const OurBlogPage = () => {
             <div className="relative flex-1">
               <Search className="w-4 h-4 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
-                data-testid="blog-search-input"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search articles..."
@@ -120,16 +95,7 @@ const OurBlogPage = () => {
         </div>
       </section>
 
-      {loading && (
-        <section className="bg-neutral-950 py-16">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-            <Loader2 className="w-8 h-8 text-amber-400 mx-auto animate-spin" />
-            <p className="text-neutral-400 mt-3 text-sm">Loading posts...</p>
-          </div>
-        </section>
-      )}
-
-      {!loading && featuredPost && (
+      {featuredPost && (
         <section className="bg-neutral-950 py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Link to={`/our-blog/${featuredPost.slug}`} className="block group">
@@ -150,10 +116,10 @@ const OurBlogPage = () => {
                       <Calendar className="w-4 h-4" />
                       <span>{featuredPost.date}</span>
                     </div>
-                    {featuredPost.read_time && (
+                    {featuredPost.readTime && (
                       <div className="flex items-center gap-2 text-neutral-500 text-sm">
                         <Clock className="w-4 h-4" />
-                        <span>{featuredPost.read_time}</span>
+                        <span>{featuredPost.readTime}</span>
                       </div>
                     )}
                   </div>
@@ -172,7 +138,7 @@ const OurBlogPage = () => {
         </section>
       )}
 
-      {!loading && otherPosts.length > 0 && (
+      {otherPosts.length > 0 && (
         <section className="bg-neutral-950 py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -220,14 +186,10 @@ const OurBlogPage = () => {
         </section>
       )}
 
-      {!loading && filteredPosts.length === 0 && (
+      {filteredPosts.length === 0 && (
         <section className="bg-neutral-950 py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-            <p className="text-neutral-400">
-              {posts.length === 0
-                ? 'No articles available yet. Check back soon!'
-                : 'No articles match your filters.'}
-            </p>
+            <p className="text-neutral-400">No articles match your filters.</p>
           </div>
         </section>
       )}

@@ -1,60 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Calendar, Clock, User, Tag, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, Tag } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import 'react-quill-new/dist/quill.snow.css';
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { getBlogBySlug, getRelatedPosts, blogPosts } from '../data/blogData';
 
 const BlogDetailPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [post, setPost] = useState(null);
-  const [allPosts, setAllPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+  const post = getBlogBySlug(slug);
 
-  useEffect(() => {
-    let mounted = true;
-    setLoading(true);
-    setNotFound(false);
-
-    Promise.all([
-      fetch(`${API}/blog/posts/${slug}`).then(async (r) => {
-        if (!r.ok) return null;
-        return r.json();
-      }),
-      fetch(`${API}/blog/posts`).then((r) => r.json()).catch(() => null),
-    ])
-      .then(([detail, listing]) => {
-        if (!mounted) return;
-        if (detail?.success && detail.post) {
-          setPost(detail.post);
-        } else {
-          setNotFound(true);
-        }
-        if (listing?.success) setAllPosts(listing.posts || []);
-      })
-      .finally(() => mounted && setLoading(false));
-
-    return () => {
-      mounted = false;
-    };
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="bg-neutral-950 min-h-screen pt-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center py-24">
-          <Loader2 className="w-8 h-8 text-amber-400 mx-auto animate-spin" />
-          <p className="text-neutral-400 mt-3">Loading article...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (notFound || !post) {
+  if (!post) {
     return (
       <div className="bg-neutral-950 min-h-screen pt-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center py-24">
@@ -68,16 +24,10 @@ const BlogDetailPage = () => {
     );
   }
 
-  // Related posts
-  const relatedPosts = allPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3);
-
-  // Prev / Next
-  const currentIndex = allPosts.findIndex((p) => p.slug === slug);
-  const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-  const nextPost =
-    currentIndex >= 0 && currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const relatedPosts = getRelatedPosts(slug, post.category, 3);
+  const currentIndex = blogPosts.findIndex((p) => p.slug === slug);
+  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   return (
     <>
@@ -127,10 +77,10 @@ const BlogDetailPage = () => {
                 <span>{post.date}</span>
               </div>
             )}
-            {post.read_time && (
+            {post.readTime && (
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{post.read_time}</span>
+                <span>{post.readTime}</span>
               </div>
             )}
             {post.author && (
@@ -151,8 +101,7 @@ const BlogDetailPage = () => {
           <p className="text-xl text-neutral-400 mb-12 leading-relaxed">{post.description}</p>
 
           <article
-            data-testid="blog-detail-content"
-            className="ql-snow blog-content prose prose-invert prose-lg max-w-none
+            className="prose prose-invert prose-lg max-w-none
               prose-headings:text-white prose-headings:font-bold
               prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
@@ -162,9 +111,8 @@ const BlogDetailPage = () => {
               prose-strong:text-white
               prose-a:text-amber-400 prose-a:no-underline hover:prose-a:underline
               prose-img:rounded-xl"
-          >
-            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: post.content }} />
-          </article>
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
 
           <div className="mt-16 pt-8 border-t border-neutral-800">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
