@@ -19,6 +19,7 @@ import OurBlogPage from "./pages/OurBlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import LifeAtSgitalPage from "./pages/LifeAtSgitalPage";
 import CareersPage from "./pages/CareersPage";
+import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 
 // Layout Component
 const Layout = ({ children }) => {
@@ -47,6 +48,7 @@ function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/life-at-sgital" element={<LifeAtSgitalPage />} />
               <Route path="/careers" element={<CareersPage />} />
+              <Route path="/admin/applications" element={<AdminApplicationsPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/our-blog" element={<OurBlogPage />} />
               <Route path="/our-blog/:slug" element={<BlogDetailPage />} />

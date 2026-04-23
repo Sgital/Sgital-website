@@ -265,10 +265,12 @@ async def list_applications(
         if position:
             query["position"] = position
         
-        applications = await db.applications.find(
-            query,
-            {"_id": 0, "resume_content": 0}
-        ).sort("applied_at", -1).limit(limit).to_list(limit)
+        applications = await db.applications.find(query).sort("applied_at", -1).limit(limit).to_list(limit)
+        
+        # Convert ObjectId to string for JSON serialization
+        for app in applications:
+            if "_id" in app:
+                app["_id"] = str(app["_id"])
         
         return {"success": True, "applications": applications}
         

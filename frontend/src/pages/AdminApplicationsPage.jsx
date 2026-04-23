@@ -1,0 +1,447 @@
+import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Users, Filter, Download, Eye, CheckCircle, XCircle, Clock, Mail, Phone, MapPin, Briefcase, Calendar, DollarSign, FileText, RefreshCw } from 'lucide-react';
+import { Button } from '../components/ui/button';
+
+const AdminApplicationsPage = () => {
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const [filterPosition, setFilterPosition] = useState('all');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [selectedApp, setSelectedApp] = useState(null);
+
+  const statusColors = {
+    new: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+    reviewed: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
+    shortlisted: 'bg-green-500/10 text-green-400 border-green-500/30',
+    rejected: 'bg-red-500/10 text-red-400 border-red-500/30'
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      const response = await fetch(`${apiUrl}/api/admin/verify`, {
+        headers: {
+          'Authorization': 'Basic ' + btoa(`${credentials.username}:${credentials.password}`)
+        }
+      });
+
+      if (response.ok) {
+        setAuthenticated(true);
+        localStorage.setItem('adminAuth', btoa(`${credentials.username}:${credentials.password}`));
+        fetchApplications();
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (err) {
+      setError('Authentication failed. Please try again.');
+    }
+  };
+
+  const fetchApplications = async () => {
+    setLoading(true);
+    try {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      const auth = localStorage.getItem('adminAuth');
+      const response = await fetch(`${apiUrl}/api/applications/list`, {
+        headers: {
+          'Authorization': `Basic ${auth}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setApplications(data.applications || []);
+      } else {
+        setError('Failed to fetch applications');
+      }
+    } catch (err) {
+      setError('Error loading applications');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateStatus = async (appId, newStatus) => {
+    try {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      const auth = localStorage.getItem('adminAuth');
+      const formData = new FormData();
+      formData.append('status', newStatus);
+
+      const response = await fetch(`${apiUrl}/api/applications/update-status/${appId}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Basic ${auth}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        fetchApplications();
+      }
+    } catch (err) {
+      console.error('Failed to update status:', err);
+    }
+  };
+
+  const exportToCSV = () => {
+    const headers = ['Name', 'Email', 'Phone', 'Position', 'Experience', 'SN Experience', 'Current Salary', 'Expected Salary', 'Notice Period', 'Status', 'Applied Date'];
+    const rows = filteredApplications.map(app => [
+      app.name,
+      app.email,
+      app.contact_number,
+      app.position,
+      app.total_experience,
+      app.servicenow_experience,
+      app.current_salary,
+      app.expected_salary,
+      app.notice_period,
+      app.status,
+      new Date(app.applied_at).toLocaleDateString()
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `applications_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+  };
+
+  useEffect(() => {
+    const auth = localStorage.getItem('adminAuth');
+    if (auth) {
+      setAuthenticated(true);
+      fetchApplications();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const filteredApplications = applications.filter(app => {
+    if (filterPosition !== 'all' && app.position !== filterPosition) return false;
+    if (filterStatus !== 'all' && app.status !== filterStatus) return false;
+    return true;
+  });
+
+  if (!authenticated) {
+    return (
+      <>
+        <Helmet>
+          <title>Admin Login - Sgital Careers</title>
+        </Helmet>
+        <div className="min-h-screen bg-neutral-950 flex items-center justify-center px-6">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 w-full max-w-md">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-white mb-2">Admin Portal</h1>
+              <p className="text-neutral-400">Sign in to manage applications</p>
+            </div>
+            <form onSubmit={handleLogin} className="space-y-6">
+              {error && (
+                <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                  {error}
+                </div>
+              )}
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Username</label>
+                <input
+                  type="text"
+                  value={credentials.username}
+                  onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                  required
+                  className="w-full px-4 py-3 bg-neutral-950 border border-neutral-700 rounded-lg text-white focus:outline-none focus:border-amber-400 transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Password</label>
+                <input
+                  type="password"
+                  value={credentials.password}
+                  onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                  required
+                  className="w-full px-4 py-3 bg-neutral-950 border border-neutral-700 rounded-lg text-white focus:outline-none focus:border-amber-400 transition-colors"
+                />
+              </div>
+              <Button
+                type="submit"
+                className="w-full bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold py-3"
+              >
+                Sign In
+              </Button>
+            </form>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Helmet>
+        <title>Admin Dashboard - Job Applications</title>
+      </Helmet>
+
+      <div className="min-h-screen bg-neutral-950 pt-24 pb-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-white mb-2">Job Applications</h1>
+              <p className="text-neutral-400">{filteredApplications.length} application(s) found</p>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                onClick={fetchApplications}
+                variant="outline"
+                className="border-neutral-700 text-white hover:bg-neutral-800"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Refresh
+              </Button>
+              <Button
+                onClick={exportToCSV}
+                className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
+            </div>
+          </div>
+
+          {/* Filters */}
+          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Filter className="w-5 h-5 text-amber-400" />
+              <h3 className="text-white font-semibold">Filters</h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-neutral-400 text-sm mb-2">Position</label>
+                <select
+                  value={filterPosition}
+                  onChange={(e) => setFilterPosition(e.target.value)}
+                  className="w-full px-4 py-2 bg-neutral-950 border border-neutral-700 rounded-lg text-white focus:outline-none focus:border-amber-400"
+                >
+                  <option value="all">All Positions</option>
+                  <option value="ServiceNow Senior Consultant">ServiceNow Senior Consultant</option>
+                  <option value="ServiceNow Business Analyst">ServiceNow Business Analyst</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-neutral-400 text-sm mb-2">Status</label>
+                <select
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                  className="w-full px-4 py-2 bg-neutral-950 border border-neutral-700 rounded-lg text-white focus:outline-none focus:border-amber-400"
+                >
+                  <option value="all">All Status</option>
+                  <option value="new">New</option>
+                  <option value="reviewed">Reviewed</option>
+                  <option value="shortlisted">Shortlisted</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Applications Grid */}
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="inline-block w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-neutral-400">Loading applications...</p>
+            </div>
+          ) : filteredApplications.length === 0 ? (
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-12 text-center">
+              <Users className="w-16 h-16 text-neutral-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">No Applications Found</h3>
+              <p className="text-neutral-400">Applications will appear here once candidates start applying</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredApplications.map((app, index) => (
+                <div
+                  key={index}
+                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-bold text-white">{app.name}</h3>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[app.status]}`}>
+                          {app.status.charAt(0).toUpperCase() + app.status.slice(1)}
+                        </span>
+                      </div>
+                      <p className="text-amber-400 font-medium mb-3">{app.position}</p>
+                      <div className="grid md:grid-cols-3 gap-3 text-sm">
+                        <div className="flex items-center gap-2 text-neutral-400">
+                          <Mail className="w-4 h-4" />
+                          {app.email}
+                        </div>
+                        <div className="flex items-center gap-2 text-neutral-400">
+                          <Phone className="w-4 h-4" />
+                          {app.contact_number}
+                        </div>
+                        <div className="flex items-center gap-2 text-neutral-400">
+                          <Calendar className="w-4 h-4" />
+                          {new Date(app.applied_at).toLocaleDateString()}
+                        </div>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => setSelectedApp(selectedApp?.email === app.email ? null : app)}
+                      variant="outline"
+                      className="border-neutral-700 text-white hover:bg-neutral-800"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      {selectedApp?.email === app.email ? 'Hide' : 'View'}
+                    </Button>
+                  </div>
+
+                  {selectedApp?.email === app.email && (
+                    <div className="mt-6 pt-6 border-t border-neutral-800">
+                      <div className="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                          <h4 className="text-white font-semibold mb-4">Personal Information</h4>
+                          <div className="space-y-3 text-sm">
+                            <div>
+                              <span className="text-neutral-500">Date of Birth:</span>
+                              <span className="text-neutral-300 ml-2">{app.dob}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Hometown:</span>
+                              <span className="text-neutral-300 ml-2">{app.hometown}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Address:</span>
+                              <span className="text-neutral-300 ml-2">{app.contact_address}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Alternate Contact:</span>
+                              <span className="text-neutral-300 ml-2">{app.alternate_contact || 'N/A'}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="text-white font-semibold mb-4">Professional Details</h4>
+                          <div className="space-y-3 text-sm">
+                            <div>
+                              <span className="text-neutral-500">Total Experience:</span>
+                              <span className="text-neutral-300 ml-2">{app.total_experience} years</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">ServiceNow Experience:</span>
+                              <span className="text-neutral-300 ml-2">{app.servicenow_experience} years</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Certifications:</span>
+                              <span className="text-neutral-300 ml-2">{app.certifications || 'None'}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Job Changes:</span>
+                              <span className="text-neutral-300 ml-2">{app.job_changes}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Notice Period:</span>
+                              <span className="text-neutral-300 ml-2">{app.notice_period}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="text-white font-semibold mb-4">Education</h4>
+                          <div className="space-y-3 text-sm">
+                            <div>
+                              <span className="text-neutral-500">Secondary:</span>
+                              <p className="text-neutral-300 mt-1">{app.secondary_education}</p>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Senior Secondary:</span>
+                              <p className="text-neutral-300 mt-1">{app.senior_secondary}</p>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Graduation:</span>
+                              <p className="text-neutral-300 mt-1">{app.graduation}</p>
+                            </div>
+                            {app.post_graduation && (
+                              <div>
+                                <span className="text-neutral-500">Post Graduation:</span>
+                                <p className="text-neutral-300 mt-1">{app.post_graduation}</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="text-white font-semibold mb-4">Compensation</h4>
+                          <div className="space-y-3 text-sm">
+                            <div>
+                              <span className="text-neutral-500">Current/Last Salary:</span>
+                              <span className="text-neutral-300 ml-2">{app.current_salary}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-500">Expected Salary:</span>
+                              <span className="text-neutral-300 ml-2">{app.expected_salary}</span>
+                            </div>
+                            <div className="mt-4">
+                              <span className="text-neutral-500">Resume:</span>
+                              <div className="flex items-center gap-2 mt-1">
+                                <FileText className="w-4 h-4 text-amber-400" />
+                                <span className="text-neutral-300 text-xs">{app.resume_filename}</span>
+                                <span className="text-neutral-500 text-xs">(Sent via email)</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3 pt-4 border-t border-neutral-800">
+                        <Button
+                          onClick={() => updateStatus(app._id || index, 'reviewed')}
+                          variant="outline"
+                          className="flex-1 border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10"
+                          disabled={app.status === 'reviewed'}
+                        >
+                          <Clock className="w-4 h-4 mr-2" />
+                          Mark Reviewed
+                        </Button>
+                        <Button
+                          onClick={() => updateStatus(app._id || index, 'shortlisted')}
+                          variant="outline"
+                          className="flex-1 border-green-500/30 text-green-400 hover:bg-green-500/10"
+                          disabled={app.status === 'shortlisted'}
+                        >
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          Shortlist
+                        </Button>
+                        <Button
+                          onClick={() => updateStatus(app._id || index, 'rejected')}
+                          variant="outline"
+                          className="flex-1 border-red-500/30 text-red-400 hover:bg-red-500/10"
+                          disabled={app.status === 'rejected'}
+                        >
+                          <XCircle className="w-4 h-4 mr-2" />
+                          Reject
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AdminApplicationsPage;
