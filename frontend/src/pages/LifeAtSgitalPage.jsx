@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Play, Users, Heart, Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
+import { Play, Users, Heart, Sparkles, ArrowRight, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 // Video data from Sgital YouTube channel
 const videos = [
@@ -76,10 +78,44 @@ const categories = ['All', 'Culture', 'Company', 'Product', 'Technical'];
 const LifeAtSgitalPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [playingVideo, setPlayingVideo] = useState(null);
+  const [photos, setPhotos] = useState([]);
+  const [photosLoading, setPhotosLoading] = useState(true);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   const filteredVideos = selectedCategory === 'All' 
     ? videos 
     : videos.filter(v => v.category === selectedCategory);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch(`${API}/gallery/life-at-sgital`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (!mounted) return;
+        if (data && data.success && Array.isArray(data.photos)) {
+          setPhotos(data.photos);
+        }
+      })
+      .catch(() => {})
+      .finally(() => mounted && setPhotosLoading(false));
+    return () => { mounted = false; };
+  }, []);
+
+  // Lightbox keyboard nav
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightboxIndex(null);
+      else if (e.key === 'ArrowRight') setLightboxIndex((i) => (i + 1) % photos.length);
+      else if (e.key === 'ArrowLeft') setLightboxIndex((i) => (i - 1 + photos.length) % photos.length);
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightboxIndex, photos.length]);
 
   return (
     <>
@@ -265,7 +301,7 @@ const LifeAtSgitalPage = () => {
         </div>
       </section>
 
-      {/* Photo Gallery Placeholder Section */}
+      {/* Photo Gallery Section */}
       <section className="bg-neutral-950 py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -277,28 +313,109 @@ const LifeAtSgitalPage = () => {
             </p>
           </div>
 
-          {/* Placeholder Grid for Photos */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div
-                key={i}
-                className="aspect-square bg-neutral-900/50 border border-neutral-800 rounded-xl flex items-center justify-center hover:border-amber-400/30 transition-colors group"
-              >
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-neutral-800 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-amber-400/20 transition-colors">
-                    <Sparkles className="w-6 h-6 text-neutral-600 group-hover:text-amber-400 transition-colors" />
+          {photosLoading ? (
+            <div
+              data-testid="gallery-loading"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <div
+                  key={i}
+                  className="aspect-square bg-neutral-900/60 border border-neutral-800 rounded-xl animate-pulse"
+                />
+              ))}
+            </div>
+          ) : photos.length === 0 ? (
+            <p className="text-center text-neutral-500">No photos available yet. Check back soon!</p>
+          ) : (
+            <div
+              data-testid="life-at-sgital-gallery"
+              className="columns-2 md:columns-3 lg:columns-4 gap-4 [column-fill:_balance]"
+            >
+              {photos.map((photo, idx) => (
+                <button
+                  key={photo.key}
+                  type="button"
+                  data-testid={`gallery-photo-${idx}`}
+                  onClick={() => setLightboxIndex(idx)}
+                  className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-xl border border-neutral-800 hover:border-amber-400/50 bg-neutral-900 transition-colors relative"
+                >
+                  <img
+                    src={photo.url}
+                    alt={photo.title}
+                    loading="lazy"
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-3 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all">
+                    <p className="text-white text-sm font-medium text-left">{photo.title}</p>
                   </div>
-                  <p className="text-neutral-600 text-sm">Coming Soon</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-center text-neutral-500 mt-8">
-            More photos will be added soon. Stay tuned!
-          </p>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && photos[lightboxIndex] && (
+        <div
+          data-testid="gallery-lightbox"
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-8"
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            type="button"
+            data-testid="gallery-lightbox-close"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+            className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <button
+            type="button"
+            data-testid="gallery-lightbox-prev"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((i) => (i - 1 + photos.length) % photos.length);
+            }}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            type="button"
+            data-testid="gallery-lightbox-next"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((i) => (i + 1) % photos.length);
+            }}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          <div
+            className="relative max-w-6xl w-full max-h-[88vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={photos[lightboxIndex].url}
+              alt={photos[lightboxIndex].title}
+              className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
+            />
+            <div className="mt-4 flex items-center justify-between w-full text-neutral-300 text-sm">
+              <span className="font-medium text-white">{photos[lightboxIndex].title}</span>
+              <span className="text-neutral-500">{lightboxIndex + 1} / {photos.length}</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Values Section */}
       <section className="bg-neutral-900 py-24">
