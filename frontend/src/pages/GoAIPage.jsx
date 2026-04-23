@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, CheckCircle2, Zap, Target, Rocket, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Zap, Target, Rocket, TrendingUp, ExternalLink } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
 import { goAIFeatures } from '../data/mock';
@@ -35,6 +35,25 @@ const GoAIPage = () => {
               A proven 4-phase methodology that takes you from AI readiness to enterprise-wide 
               intelligent automation—with measurable outcomes at every step.
             </p>
+
+            {/* ServiceNow Store badge */}
+            <div className="mt-10 flex justify-center">
+              <a
+                href="https://store.servicenow.com/store/frame/app?pp=ac256acb1bbfe1905858c845624bcbf4"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="goai-hero-store-link"
+                className="inline-flex items-center gap-3 px-5 py-3 bg-neutral-900 border border-amber-400/30 rounded-full hover:border-amber-400/60 hover:bg-neutral-800 transition-colors group shadow-lg"
+                title="View GoAI with Sgital on the ServiceNow Store"
+              >
+                <span className="inline-flex items-center gap-1.5 text-neutral-400 text-sm">
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                  Available on
+                </span>
+                <span className="text-amber-400 font-semibold">ServiceNow Store</span>
+                <ExternalLink className="w-4 h-4 text-amber-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -199,6 +218,21 @@ const GoAIPage = () => {
                 <Link to="/case-studies">
                   See GoAI in Action
                 </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                data-testid="goai-cta-servicenow-store"
+                className="border-amber-400/40 text-amber-400 hover:bg-amber-400/10 px-8 py-6 group"
+              >
+                <a
+                  href="https://store.servicenow.com/store/frame/app?pp=ac256acb1bbfe1905858c845624bcbf4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on ServiceNow Store
+                  <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
               </Button>
             </div>
           </div>
