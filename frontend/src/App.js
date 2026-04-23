@@ -22,6 +22,8 @@ import BlogDetailPage from "./pages/BlogDetailPage";
 import LifeAtSgitalPage from "./pages/LifeAtSgitalPage";
 import CareersPage from "./pages/CareersPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/TermsOfServicePage";
 
 // Layout Component
 const Layout = ({ children }) => {
@@ -57,6 +59,8 @@ function App() {
               <Route path="/our-blog" element={<OurBlogPage />} />
               <Route path="/our-blog/:slug" element={<BlogDetailPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsOfServicePage />} />
             </Routes>
           </Layout>
         </BrowserRouter>
