@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Users, Filter, Download, Eye, CheckCircle, XCircle, Clock, Mail, Phone, MapPin, Briefcase, Calendar, DollarSign, FileText, RefreshCw } from 'lucide-react';
+import { Users, Filter, Download, Eye, CheckCircle, XCircle, Clock, Mail, Phone, MapPin, Briefcase, Calendar, DollarSign, FileText, RefreshCw, FileEdit, Image as ImageIcon } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import BlogAdminTab from '../components/admin/BlogAdminTab';
+import GalleryAdminTab from '../components/admin/GalleryAdminTab';
 
 const AdminApplicationsPage = () => {
-  const [activeTab, setActiveTab] = useState('applications'); // 'applications' or 'contacts'
+  const [activeTab, setActiveTab] = useState('applications'); // 'applications' | 'contacts' | 'blog' | 'gallery'
   const [applications, setApplications] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -266,33 +268,41 @@ const AdminApplicationsPage = () => {
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">Admin Dashboard</h1>
               <p className="text-neutral-400">
-                {activeTab === 'applications' ? `${filteredApplications.length} application(s)` : `${filteredContacts.length} contact(s)`} found
+                {activeTab === 'applications' && `${filteredApplications.length} application(s) found`}
+                {activeTab === 'contacts' && `${filteredContacts.length} contact(s) found`}
+                {activeTab === 'blog' && `Manage blog posts`}
+                {activeTab === 'gallery' && `Manage Life at Sgital photos`}
               </p>
             </div>
             <div className="flex gap-3">
-              <Button
-                onClick={fetchApplications}
-                variant="outline"
-                className="border-neutral-700 text-white hover:bg-neutral-800"
-              >
-                <RefreshCw className="w-4 h-4 mr-2" />
-                Refresh
-              </Button>
-              <Button
-                onClick={exportToCSV}
-                className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Export CSV
-              </Button>
+              {(activeTab === 'applications' || activeTab === 'contacts') && (
+                <>
+                  <Button
+                    onClick={fetchApplications}
+                    variant="outline"
+                    className="border-neutral-700 text-white hover:bg-neutral-800"
+                  >
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Refresh
+                  </Button>
+                  <Button
+                    onClick={exportToCSV}
+                    className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Export CSV
+                  </Button>
+                </>
+              )}
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-6">
             <button
+              data-testid="admin-tab-applications"
               onClick={() => setActiveTab('applications')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+              className={`px-5 py-3 rounded-lg font-semibold transition-colors ${
                 activeTab === 'applications'
                   ? 'bg-amber-400 text-neutral-950'
                   : 'bg-neutral-900 text-neutral-400 hover:text-white'
@@ -302,8 +312,9 @@ const AdminApplicationsPage = () => {
               Job Applications ({applications.length})
             </button>
             <button
+              data-testid="admin-tab-contacts"
               onClick={() => setActiveTab('contacts')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+              className={`px-5 py-3 rounded-lg font-semibold transition-colors ${
                 activeTab === 'contacts'
                   ? 'bg-amber-400 text-neutral-950'
                   : 'bg-neutral-900 text-neutral-400 hover:text-white'
@@ -312,9 +323,34 @@ const AdminApplicationsPage = () => {
               <Mail className="w-4 h-4 inline mr-2" />
               Contact Messages ({contacts.length})
             </button>
+            <button
+              data-testid="admin-tab-blog"
+              onClick={() => setActiveTab('blog')}
+              className={`px-5 py-3 rounded-lg font-semibold transition-colors ${
+                activeTab === 'blog'
+                  ? 'bg-amber-400 text-neutral-950'
+                  : 'bg-neutral-900 text-neutral-400 hover:text-white'
+              }`}
+            >
+              <FileEdit className="w-4 h-4 inline mr-2" />
+              Blog Posts
+            </button>
+            <button
+              data-testid="admin-tab-gallery"
+              onClick={() => setActiveTab('gallery')}
+              className={`px-5 py-3 rounded-lg font-semibold transition-colors ${
+                activeTab === 'gallery'
+                  ? 'bg-amber-400 text-neutral-950'
+                  : 'bg-neutral-900 text-neutral-400 hover:text-white'
+              }`}
+            >
+              <ImageIcon className="w-4 h-4 inline mr-2" />
+              Gallery
+            </button>
           </div>
 
-          {/* Filters */}
+          {/* Filters (only for applications/contacts) */}
+          {(activeTab === 'applications' || activeTab === 'contacts') && (
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
             <div className="flex items-center gap-2 mb-4">
               <Filter className="w-5 h-5 text-amber-400" />
@@ -358,10 +394,18 @@ const AdminApplicationsPage = () => {
               </div>
             </div>
           </div>
+          )}
+
+          {/* Blog admin tab */}
+          {activeTab === 'blog' && <BlogAdminTab />}
+
+          {/* Gallery admin tab */}
+          {activeTab === 'gallery' && <GalleryAdminTab />}
 
           {/* Content based on active tab */}
-          {activeTab === 'applications' ? (
-            // Applications content (existing code)
+          {(activeTab === 'applications' || activeTab === 'contacts') && (
+            activeTab === 'applications' ? (
+            // Applications content
             loading ? (
             <div className="text-center py-12">
               <div className="inline-block w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -674,7 +718,7 @@ const AdminApplicationsPage = () => {
                 ))}
               </div>
             )
-          )}
+          ))}
         </div>
       </div>
     </>
