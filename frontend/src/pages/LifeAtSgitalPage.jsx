@@ -112,20 +112,21 @@ const LifeAtSgitalPage = () => {
                   asChild
                   className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-6 py-5 group"
                 >
-                  <a href="https://www.youtube.com/@Sgital" target="_blank" rel="noopener noreferrer">
-                    <Play className="mr-2 w-5 h-5" />
-                    Visit Our YouTube
-                    <ExternalLink className="ml-2 w-4 h-4" />
-                  </a>
+                  <Link to="/careers">
+                    Join Our Team
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
                 <Button
                   asChild
                   variant="outline"
                   className="border-neutral-700 text-white hover:bg-neutral-800 px-6 py-5"
                 >
-                  <Link to="/contact">
-                    Join Our Team
-                  </Link>
+                  <a href="https://www.youtube.com/@Sgital" target="_blank" rel="noopener noreferrer">
+                    <Play className="mr-2 w-5 h-5" />
+                    Visit Our YouTube
+                    <ExternalLink className="ml-2 w-4 h-4" />
+                  </a>
                 </Button>
               </div>
             </div>
@@ -352,8 +353,8 @@ const LifeAtSgitalPage = () => {
                   asChild
                   className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-8 py-6 group"
                 >
-                  <Link to="/contact">
-                    Get in Touch
+                  <Link to="/careers">
+                    Explore Careers
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -362,8 +363,8 @@ const LifeAtSgitalPage = () => {
                   variant="outline"
                   className="border-neutral-600 text-white hover:bg-neutral-800 px-8 py-6"
                 >
-                  <Link to="/about">
-                    Learn About Us
+                  <Link to="/contact">
+                    Get in Touch
                   </Link>
                 </Button>
               </div>

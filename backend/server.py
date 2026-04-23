@@ -10,6 +10,9 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 
+# Import new routes
+from routes import applications, admin_auth
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -68,6 +71,10 @@ async def get_status_checks():
 
 # Include the router in the main app
 app.include_router(api_router)
+
+# Include new application routes
+app.include_router(applications.router, prefix="/api/applications", tags=["applications"])
+app.include_router(admin_auth.router, prefix="/api/admin", tags=["admin"])
 
 app.add_middleware(
     CORSMiddleware,

@@ -434,6 +434,66 @@ export const partnershipDetails = {
   }
 };
 
+export const jobListings = [
+  {
+    id: "senior-consultant",
+    title: "ServiceNow Senior Consultant",
+    locations: ["Bengaluru", "Singapore"],
+    type: "Full-time",
+    workMode: "On-site",
+    description: "SGITAL - AI Workflows is a boutique partner of the ServiceNow platform, serving clients across Singapore, Malaysia, India, Australia, and New Zealand. With expertise in ServiceNow product lines such as IT Workflows, IRM and Security Workflows, Customer Workflows, and App Engine for Enterprise Workflows, SGITAL empowers businesses to streamline and automate their processes, backed by 20+ years of experience in digital transformation.",
+    responsibilities: [
+      "Designing and developing solutions on the ServiceNow platform",
+      "Collaborating with stakeholders to gather and understand requirements",
+      "Implementing AI, CRM, IT and business workflows",
+      "Ensuring seamless integration with existing systems",
+      "Managing databases effectively",
+      "Project planning, coordination, and delivery while maintaining quality standards"
+    ],
+    requirements: [
+      "Strong expertise in Software Development and Integration",
+      "Proficiency in at least 2 out of ServiceNow ITSM, CSM, IRM, SecOps, ITOM, App Engine and Project Management",
+      "5-10 years of experience in ServiceNow consulting",
+      "NowAssist experience mandatory",
+      "Experience in working with Databases and developing workflows",
+      "Proven ability to implement ServiceNow platform solutions",
+      "Excellent problem-solving and analytical skills",
+      "Strong communication and collaboration abilities for working with cross-functional teams",
+      "Relevant certifications in ServiceNow, at least 2 CIS",
+      "Bachelor's degree in Computer Science, Information Technology, or a related discipline"
+    ]
+  },
+  {
+    id: "business-analyst",
+    title: "ServiceNow Business Analyst",
+    locations: ["Bengaluru", "Singapore"],
+    type: "Full-time",
+    workMode: "Remote",
+    description: "SGITAL is a boutique partner of the AI-driven ServiceNow platform, operating across Singapore, Malaysia, India, Australia, and New Zealand. With over 20 years of expertise in digital transformation, SGITAL has successfully delivered more than 800 workflows to enterprise customers. Through their GoAIwithSgital service offering, they empower businesses to integrate AI capabilities into the Now Platform for optimized business processes.",
+    responsibilities: [
+      "Understanding and analyzing business processes",
+      "Gathering and documenting business requirements",
+      "Translating business requirements into actionable solutions within the ServiceNow platform",
+      "Collaborating with cross-functional teams",
+      "Performing data analysis",
+      "Preparing detailed reports",
+      "Supporting implementation projects",
+      "Ensuring delivered solutions align with business goals and best practices"
+    ],
+    requirements: [
+      "Strong analytical skills, including the ability to interpret data and identify trends",
+      "Proven experience in business analysis, including gathering and documenting business requirements",
+      "Excellent communication skills, with the ability to effectively collaborate with stakeholders",
+      "Ability to understand, analyze, and improve business processes",
+      "Minimum 4 years' experience with the ServiceNow platform in a customer-facing BA/PM role",
+      "Certified ServiceNow Administrator (CSA) and any 1 CIS certification",
+      "Knowledge of digital transformation and workflow automation",
+      "Master's degree in Business, IT, or a related discipline",
+      "Extensive user of AI to manage work more effectively"
+    ]
+  }
+];
+
 export const globalCoverage = {
   consulting: {
     title: "Consulting & Implementation Coverage",
