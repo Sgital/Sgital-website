@@ -40,7 +40,7 @@ export const blogPosts = [
       <p class="text-xl text-neutral-300 leading-relaxed mb-8">
         Knowledge26 is packed with new features, new roadmaps, and new ways to get more from ServiceNow.
         The announcements we've been waiting for are out — and just in time for insightful discussions at
-        <a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-moves-beyond-the-sidecar-AI-era-giving-customers-a-complete-AI-native-experience-across-all-products-and-packages/default.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline"><strong>ServiceNow Knowledge26</strong></a>.
+        <a href="https://www.servicenow.com/events/knowledge.html" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline"><strong>ServiceNow Knowledge26</strong></a>.
       </p>
 
       <h2>🚀 Key Announcements from ServiceNow</h2>
