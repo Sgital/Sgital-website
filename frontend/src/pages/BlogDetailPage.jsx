@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, Tag, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import 'react-quill-new/dist/quill.snow.css';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -151,7 +152,7 @@ const BlogDetailPage = () => {
 
           <article
             data-testid="blog-detail-content"
-            className="prose prose-invert prose-lg max-w-none
+            className="ql-snow blog-content prose prose-invert prose-lg max-w-none
               prose-headings:text-white prose-headings:font-bold
               prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
@@ -161,8 +162,9 @@ const BlogDetailPage = () => {
               prose-strong:text-white
               prose-a:text-amber-400 prose-a:no-underline hover:prose-a:underline
               prose-img:rounded-xl"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          >
+            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: post.content }} />
+          </article>
 
           <div className="mt-16 pt-8 border-t border-neutral-800">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
