@@ -505,7 +505,19 @@ const AdminApplicationsPage = () => {
                               <div className="flex items-center gap-2 mt-1">
                                 <FileText className="w-4 h-4 text-amber-400" />
                                 <span className="text-neutral-300 text-xs">{app.resume_filename}</span>
-                                <span className="text-neutral-500 text-xs">(Sent via email)</span>
+                                {app.resume_s3_url ? (
+                                  <a
+                                    href={app.resume_s3_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-amber-400 hover:text-amber-300 text-xs inline-flex items-center gap-1 ml-2"
+                                  >
+                                    <Download className="w-3 h-3" />
+                                    Download
+                                  </a>
+                                ) : (
+                                  <span className="text-neutral-500 text-xs ml-2">(Email attachment only)</span>
+                                )}
                               </div>
                             </div>
                           </div>

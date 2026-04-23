@@ -11,6 +11,11 @@ import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
 from pathlib import Path
+import sys
+
+# Add parent directory to path for imports
+sys.path.append(str(Path(__file__).parent.parent))
+from utils.s3_utils import upload_resume_to_s3
 
 # Load environment variables
 ROOT_DIR = Path(__file__).parent.parent
@@ -192,6 +197,12 @@ async def submit_application(
         if len(resume_content) > 10 * 1024 * 1024:
             raise HTTPException(status_code=400, detail="Resume file too large (max 10MB)")
         
+        # Upload resume to S3
+        s3_upload_result = upload_resume_to_s3(resume_content, resume.filename)
+        
+        if not s3_upload_result.get("success"):
+            raise HTTPException(status_code=500, detail=f"Failed to upload resume: {s3_upload_result.get('error')}")
+        
         # Prepare application data
         application_data = {
             "name": name,
@@ -214,6 +225,8 @@ async def submit_application(
             "notice_period": notice_period,
             "position": position,
             "resume_filename": resume.filename,
+            "resume_s3_key": s3_upload_result["file_key"],
+            "resume_s3_url": s3_upload_result["file_url"],
             "applied_at": datetime.utcnow(),
             "status": "new"
         }
