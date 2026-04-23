@@ -19,7 +19,7 @@ load_dotenv(ROOT_DIR / '.env')
 router = APIRouter()
 
 # MongoDB connection
-mongo_url = os.environ.get('MONGO_URL', 'mongodb://mongodb:27017/')
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017/')
 db_name = os.environ.get('DB_NAME', 'fullstack_app')
 client = AsyncIOMotorClient(mongo_url)
 db = client[db_name]
