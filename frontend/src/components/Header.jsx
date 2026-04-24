@@ -111,12 +111,15 @@ const Header = () => {
               alt="Sgital"
               className="h-16 md:h-[72px] w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
-            <div className="hidden sm:flex flex-col items-start leading-tight pl-3 border-l border-amber-400/30">
-              <span className="text-[11px] font-semibold tracking-[0.25em] text-amber-400 uppercase">
+            <div className="hidden sm:flex items-center pl-3 border-l border-amber-400/30">
+              <span
+                className="text-xl md:text-2xl font-normal tracking-[0.15em] uppercase leading-none"
+                style={{
+                  fontFamily: "Impact, 'Haettenschweiler', 'Arial Narrow Bold', sans-serif",
+                  color: '#F0C81E',
+                }}
+              >
                 AI Workflows
-              </span>
-              <span className="text-[10px] text-neutral-500 tracking-wider">
-                Enterprise · ServiceNow
               </span>
             </div>
           </Link>
