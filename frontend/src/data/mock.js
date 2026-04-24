@@ -153,6 +153,24 @@ export const industries = [
 
 export const caseStudies = [
   {
+    id: 7,
+    client: "Leading Gaming Peripherals Company, Singapore",
+    industry: "Gaming & Consumer Electronics",
+    title: "AI-Powered Vendor Document Extraction",
+    description: "Deployed NowAssist + GenAI + OCR to auto-extract vendor data (phone, address, contact & bank info) from uploaded documents and populate ServiceNow forms instantly — eliminating manual entry and accelerating vendor onboarding end-to-end.",
+    metrics: "Zero manual entry · Full data accuracy",
+    tags: ["NowAssist", "GenAI", "OCR", "Finance Automation"]
+  },
+  {
+    id: 8,
+    client: "Large Conglomerate, Singapore",
+    industry: "Diversified Enterprise",
+    title: "ITSM Pro Plus + NowAssist across 20+ Countries",
+    description: "Replaced manual PDF-based service requests with automated ITSM workflows, CMDB, and integrations with Intune, Saviynt & eBonding — with full NowAssist enablement: Virtual Agent for self-service, auto-generated KB articles from incident clusters, sidebar chat summarisation for fulfiller context, and one-click dashboard export.",
+    metrics: "20+ Countries · NowAssist Enabled",
+    tags: ["ITSM Pro Plus", "NowAssist", "CMDB", "Integrations"]
+  },
+  {
     id: 1,
     client: "Global Chemicals Manufacturer",
     industry: "Chemicals & Industrial Gas",
