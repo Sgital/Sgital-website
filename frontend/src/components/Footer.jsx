@@ -155,7 +155,7 @@ const Footer = () => {
             {partnershipBadges.map((badge, index) => (
               <div
                 key={index}
-                className="w-14 md:w-16 grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-14 md:w-16 transition-transform duration-300 hover:scale-110"
                 title={badge.name}
               >
                 <img
