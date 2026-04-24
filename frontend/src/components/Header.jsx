@@ -103,14 +103,22 @@ const Header = () => {
       style={{ top: 'var(--banner-h, 0px)' }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img 
-              src="/sgital-logo.png" 
-              alt="Sgital AI Workflows" 
-              className="h-12 w-auto object-contain"
+          <Link to="/" className="flex items-center gap-3 group" aria-label="Sgital home">
+            <img
+              src="/sgital-logo-only.png"
+              alt="Sgital"
+              className="h-16 md:h-[72px] w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
+            <div className="hidden sm:flex flex-col items-start leading-tight pl-3 border-l border-amber-400/30">
+              <span className="text-[11px] font-semibold tracking-[0.25em] text-amber-400 uppercase">
+                AI Workflows
+              </span>
+              <span className="text-[10px] text-neutral-500 tracking-wider">
+                Enterprise · ServiceNow
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -190,7 +198,7 @@ const Header = () => {
 
       {/* Mobile Menu - Full Screen Overlay */}
       <div
-        className={`lg:hidden fixed inset-0 top-20 bg-neutral-950 transition-all duration-300 ${
+        className={`lg:hidden fixed inset-0 top-24 bg-neutral-950 transition-all duration-300 ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
         style={{ height: 'calc(100vh - 80px)' }}
