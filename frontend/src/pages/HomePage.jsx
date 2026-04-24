@@ -141,10 +141,11 @@ const HeroSection = () => {
 // Trust Bar Component with Infinite Carousel
 const TrustBar = () => {
   const clientLogosData = [
+    { name: 'ServiceNow', src: '/logos/servicenow.png', alt: 'ServiceNow' },
     { name: 'TotalEnergies', src: '/logos/total-energies.svg', alt: 'TotalEnergies' },
     { name: 'Air Liquide', src: '/logos/air-liquide.svg', alt: 'Air Liquide' },
     { name: 'Panasonic', src: '/logos/panasonic.png', alt: 'Panasonic' },
-    { name: 'SPH Media', src: '/logos/sph.png', alt: 'SPH Media' },
+    { name: 'Seatrium', src: '/logos/seatrium.png', alt: 'Seatrium' },
     { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu' },
     { name: 'Razer', src: '/logos/razer.png', alt: 'Razer' },
     { name: 'Keppel', src: '/logos/keppel.png', alt: 'Keppel Corporation' }
