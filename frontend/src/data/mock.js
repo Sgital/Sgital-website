@@ -153,6 +153,15 @@ export const industries = [
 
 export const caseStudies = [
   {
+    id: 9,
+    client: "Leading Semiconductor Manufacturer, Singapore",
+    industry: "Semiconductor & Advanced Packaging",
+    title: "Automated eQuality Management System (eQMS)",
+    description: "Replaced fragmented document storage and email-driven approvals with a centralised ServiceNow eQMS — automating document categorisation, role-based access, version control, record linking, approvals, and one-click PDF generation. Delivers ISO 9001 / IATF 16949 audit-readiness at scale.",
+    metrics: "8 Quality Processes · 10 Sprints · 40% faster retrieval · 50% faster approvals",
+    tags: ["eQMS", "App Engine", "Custom Workflows", "Compliance"]
+  },
+  {
     id: 7,
     client: "Leading Gaming Peripherals Company, Singapore",
     industry: "Gaming & Consumer Electronics",
