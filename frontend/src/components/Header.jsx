@@ -113,9 +113,11 @@ const Header = () => {
             />
             <div className="hidden sm:flex items-center pl-3 border-l border-amber-400/30">
               <span
-                className="text-xl md:text-2xl font-normal tracking-[0.15em] uppercase leading-none"
+                className="text-xl md:text-2xl tracking-[0.18em] uppercase leading-none"
                 style={{
-                  fontFamily: "Impact, 'Haettenschweiler', 'Arial Narrow Bold', sans-serif",
+                  fontFamily: "'Arial Narrow', 'Helvetica Neue', 'Roboto Condensed', sans-serif",
+                  fontWeight: 400,
+                  fontStretch: 'condensed',
                   color: '#F0C81E',
                 }}
               >
