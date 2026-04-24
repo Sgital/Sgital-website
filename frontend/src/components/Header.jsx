@@ -105,25 +105,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" aria-label="Sgital home">
+          <Link to="/" className="flex items-center group" aria-label="Sgital AI Workflows home">
             <img
-              src="/sgital-logo-only.png"
-              alt="Sgital"
-              className="h-16 md:h-[72px] w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              src="/sgital-long-logo.png"
+              alt="Sgital — AI Workflows"
+              className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
-            <div className="hidden sm:flex items-center pl-3 border-l border-amber-400/30">
-              <span
-                className="text-xl md:text-2xl tracking-[0.18em] uppercase leading-none"
-                style={{
-                  fontFamily: "'Arial Narrow', 'Helvetica Neue', 'Roboto Condensed', sans-serif",
-                  fontWeight: 400,
-                  fontStretch: 'condensed',
-                  color: '#F0C81E',
-                }}
-              >
-                AI Workflows
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
