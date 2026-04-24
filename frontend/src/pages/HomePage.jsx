@@ -145,8 +145,8 @@ const TrustBar = () => {
     { name: 'TotalEnergies', src: '/logos/total-energies.svg', alt: 'TotalEnergies' },
     { name: 'Air Liquide', src: '/logos/air-liquide.svg', alt: 'Air Liquide' },
     { name: 'Panasonic', src: '/logos/panasonic.png', alt: 'Panasonic' },
-    { name: 'Seatrium', src: '/logos/seatrium.png', alt: 'Seatrium' },
-    { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu' },
+    { name: 'Seatrium', src: '/logos/seatrium.png', alt: 'Seatrium', invert: true },
+    { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu', invert: true },
     { name: 'Razer', src: '/logos/razer.png', alt: 'Razer' },
     { name: 'Keppel', src: '/logos/keppel.png', alt: 'Keppel Corporation' }
   ];
@@ -194,7 +194,7 @@ const TrustBar = () => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-10 md:h-12 w-auto min-w-[100px] max-w-[140px] object-contain transition-all duration-300 group-hover/card:scale-105 group-hover/card:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+                  className={`h-10 md:h-12 w-auto min-w-[100px] max-w-[140px] object-contain transition-all duration-300 group-hover/card:scale-105 group-hover/card:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)] ${logo.invert ? 'brightness-0 invert opacity-90' : ''}`}
                 />
               </div>
             ))}
