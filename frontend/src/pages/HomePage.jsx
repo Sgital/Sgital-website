@@ -8,10 +8,19 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Sgital | The AI Control Tower for Enterprise Workflows</title>
-        <meta name="description" content="Sgital helps enterprises operationalize AI across workflows—with governance, control, and measurable outcomes delivered in weeks, not years." />
-        <meta name="keywords" content="ServiceNow, AI workflows, enterprise automation, digital transformation, workflow governance" />
-        <link rel="canonical" href="https://sgital.com" />
+        <title>Sgital | ServiceNow Partner — AI Workflows for Singapore, Australia & India</title>
+        <meta name="description" content="Sgital is a premier ServiceNow Partner delivering AI-powered enterprise workflows across Singapore, Australia, India and ASEAN. Operationalize AI with GoAI 2.0 — measurable outcomes in weeks." />
+        <meta name="keywords" content="ServiceNow Partner Singapore, ServiceNow Partner Australia, ServiceNow Partner India, AI workflows, NowAssist, GoAI 2.0, enterprise automation, digital transformation, ASEAN ServiceNow consulting" />
+        <link rel="canonical" href="https://sgital.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/" />
+        <meta property="og:title" content="Sgital | ServiceNow Partner — AI Workflows for Singapore, Australia & India" />
+        <meta property="og:description" content="Premier ServiceNow Partner delivering AI-powered enterprise workflows across Singapore, Australia, India and ASEAN. Operationalize AI with GoAI 2.0." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sgital | ServiceNow Partner — AI Workflows" />
+        <meta name="twitter:description" content="Premier ServiceNow Partner across Singapore, Australia, India, ASEAN. AI workflows powered by GoAI 2.0." />
+        <meta name="twitter:image" content="https://sgital.com/sgital-long-logo.png" />
       </Helmet>
 
       {/* Hero Section */}

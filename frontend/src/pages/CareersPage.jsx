@@ -17,9 +17,16 @@ const CareersPage = () => {
   return (
     <>
       <Helmet>
-        <title>Careers | Join Our Team - Sgital</title>
-        <meta name="description" content="Join Sgital's team of ServiceNow experts. Explore career opportunities in Singapore and Bengaluru." />
+        <title>Careers at Sgital | ServiceNow Jobs in Singapore & Bengaluru</title>
+        <meta name="description" content="Build your career as a ServiceNow expert at Sgital. Open roles in Singapore and Bengaluru — developers, architects, consultants. Apply today." />
+        <meta name="keywords" content="ServiceNow jobs Singapore, ServiceNow careers Bengaluru, ServiceNow developer jobs India, ServiceNow architect Singapore, work at Sgital, ServiceNow hiring ASEAN" />
         <link rel="canonical" href="https://sgital.com/careers" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/careers" />
+        <meta property="og:title" content="Careers at Sgital — Join Our ServiceNow Team" />
+        <meta property="og:description" content="Open ServiceNow roles in Singapore and Bengaluru. Apply now." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {/* Hero Section */}

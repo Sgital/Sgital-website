@@ -102,10 +102,16 @@ const SolutionsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{activeCategory === 'AI Workflows' ? 'AI Workflows | AI-Powered Workflow Capabilities' : 'Solutions | ServiceNow Services'} - Sgital</title>
-        <meta name="description" content="Comprehensive ServiceNow solutions including ITSM, ITOM, HRSD, CSM, IRM, and custom application development. Transform your enterprise workflows with AI." />
-        <meta name="keywords" content="ServiceNow ITSM, ITOM, HR Service Delivery, Customer Service Management, Security Operations, App Engine, AI Workflows" />
+        <title>{activeCategory === 'AI Workflows' ? 'AI Workflows on ServiceNow | NowAssist Solutions - Sgital' : 'ServiceNow Solutions | ITSM, ITOM, HRSD, CSM, IRM - Sgital'}</title>
+        <meta name="description" content="Comprehensive ServiceNow solutions — ITSM, ITOM, HRSD, CSM, IRM, App Engine and AI Workflows powered by NowAssist. Delivered globally from Singapore, Australia, and India." />
+        <meta name="keywords" content="ServiceNow ITSM partner, ServiceNow ITOM, HR Service Delivery, Customer Service Management, IRM SecOps, App Engine consulting, NowAssist implementation, AI Workflows ServiceNow Singapore Australia India" />
         <link rel="canonical" href="https://sgital.com/solutions" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/solutions" />
+        <meta property="og:title" content="ServiceNow Solutions — ITSM, ITOM, HRSD, CSM, IRM, AI Workflows" />
+        <meta property="og:description" content="End-to-end ServiceNow solutions and AI Workflows delivered by Sgital across Singapore, Australia, India and ASEAN." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {/* Hero Section */}

@@ -56,10 +56,16 @@ const IndustriesPage = () => {
   return (
     <>
       <Helmet>
-        <title>Industries We Serve | ServiceNow Solutions - Sgital</title>
-        <meta name="description" content="Sgital delivers ServiceNow solutions across 10+ industries including Financial Services, Healthcare, Energy, Manufacturing, and more." />
-        <meta name="keywords" content="ServiceNow industries, financial services automation, healthcare IT, energy utilities, manufacturing workflows" />
+        <title>Industries We Serve | ServiceNow Solutions Across 10+ Sectors - Sgital</title>
+        <meta name="description" content="ServiceNow solutions tailored for Financial Services, Healthcare, Energy & Utilities, Manufacturing, Aviation, Semiconductor and more — delivered across Singapore, Australia, India and ASEAN." />
+        <meta name="keywords" content="ServiceNow financial services, ServiceNow healthcare, ServiceNow manufacturing, ServiceNow energy utilities, ServiceNow aviation, ServiceNow semiconductor partner Singapore Australia India" />
         <link rel="canonical" href="https://sgital.com/industries" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/industries" />
+        <meta property="og:title" content="Industries We Serve — ServiceNow Solutions by Sgital" />
+        <meta property="og:description" content="ServiceNow solutions across 10+ industries delivered globally from Singapore, Australia and India." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {/* Hero Section */}

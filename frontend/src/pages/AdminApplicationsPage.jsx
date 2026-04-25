@@ -207,7 +207,8 @@ const AdminApplicationsPage = () => {
     return (
       <>
         <Helmet>
-          <title>Admin Login - Sgital Careers</title>
+          <title>Admin Login - Sgital</title>
+          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <div className="min-h-screen bg-neutral-950 flex items-center justify-center px-6">
           <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 w-full max-w-md">
@@ -257,7 +258,8 @@ const AdminApplicationsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Admin Dashboard - Job Applications</title>
+        <title>Admin Dashboard - Sgital</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       <div className="min-h-screen bg-neutral-950 pt-24 pb-16">

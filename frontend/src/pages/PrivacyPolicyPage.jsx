@@ -13,6 +13,7 @@ const PrivacyPolicyPage = () => {
         <title>Privacy Policy - Sgital</title>
         <meta name="description" content="Sgital's Privacy Policy explaining how we collect, use, and protect your personal information when you use our website and services." />
         <link rel="canonical" href="https://sgital.com/privacy" />
+        <meta name="robots" content="noindex, follow" />
       </Helmet>
 
       {/* Hero */}

@@ -32,14 +32,43 @@ const BlogDetailPage = () => {
   return (
     <>
       <Helmet>
-        <title>{post.title} - Sgital Blog</title>
+        <title>{post.title} | Sgital Blog</title>
         <meta name="description" content={post.description} />
-        <meta name="keywords" content={`${post.category}, ServiceNow, SGITAL, ${post.title}`} />
+        <meta name="keywords" content={`${post.category}, ServiceNow, ${post.title}, ServiceNow Partner Singapore Australia India, NowAssist, AI Workflows`} />
         <link rel="canonical" href={`https://sgital.com/our-blog/${post.slug}`} />
+        <meta name="author" content={post.author || 'Sgital'} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://sgital.com/our-blog/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:image" content={post.image} />
-        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={post.date} />
+        <meta property="article:author" content={post.author || 'Sgital'} />
+        <meta property="article:section" content={post.category} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.description} />
+        <meta name="twitter:image" content={post.image} />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          'headline': post.title,
+          'description': post.description,
+          'image': post.image,
+          'datePublished': post.date,
+          'dateModified': post.date,
+          'author': { '@type': 'Organization', 'name': post.author || 'Sgital' },
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'Sgital',
+            'logo': { '@type': 'ImageObject', 'url': 'https://sgital.com/sgital-long-logo.png' }
+          },
+          'mainEntityOfPage': {
+            '@type': 'WebPage',
+            '@id': `https://sgital.com/our-blog/${post.slug}`
+          },
+          'articleSection': post.category
+        })}</script>
       </Helmet>
 
       {/* Hero Image */}

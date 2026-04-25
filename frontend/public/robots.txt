@@ -1,0 +1,20 @@
+# https://sgital.com/robots.txt
+# Allow all crawlers, with explicit disallow for admin & API routes.
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /privacy
+Disallow: /terms
+Disallow: /blog$
+
+# Block AI scrapers from training on full site content (optional — comment out if you want AI inclusion)
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: anthropic-ai
+# Disallow: /
+
+Sitemap: https://sgital.com/sitemap.xml

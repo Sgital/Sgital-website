@@ -9,10 +9,16 @@ const CaseStudiesPage = () => {
   return (
     <>
       <Helmet>
-        <title>Case Studies | Success Stories - Sgital</title>
-        <meta name="description" content="Discover how Sgital has helped enterprises transform their operations with ServiceNow. Real case studies with measurable outcomes." />
-        <meta name="keywords" content="ServiceNow case studies, digital transformation success, workflow automation results, enterprise implementation" />
+        <title>Case Studies | ServiceNow Implementation Success Stories - Sgital</title>
+        <meta name="description" content="Real ServiceNow case studies from Singapore, Australia and India — semiconductor eQMS, AI-powered vendor automation, ITSM Pro Plus + NowAssist across 20+ countries, and more." />
+        <meta name="keywords" content="ServiceNow case studies Singapore, ServiceNow success stories Australia, ServiceNow implementation India, NowAssist case study, AI workflows results, eQMS semiconductor, ITSM Pro Plus rollout" />
         <link rel="canonical" href="https://sgital.com/case-studies" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/case-studies" />
+        <meta property="og:title" content="ServiceNow Case Studies — Real Outcomes from Sgital" />
+        <meta property="og:description" content="Measurable ServiceNow & AI Workflow outcomes from clients across Singapore, Australia, India and ASEAN." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {/* Hero Section */}

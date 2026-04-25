@@ -13,6 +13,7 @@ const TermsOfServicePage = () => {
         <title>Terms of Service - Sgital</title>
         <meta name="description" content="The terms and conditions governing your use of Sgital's website and services." />
         <link rel="canonical" href="https://sgital.com/terms" />
+        <meta name="robots" content="noindex, follow" />
       </Helmet>
 
       {/* Hero */}

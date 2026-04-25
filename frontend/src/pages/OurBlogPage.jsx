@@ -32,10 +32,16 @@ const OurBlogPage = () => {
   return (
     <>
       <Helmet>
-        <title>Our Blog | Insights & Updates - Sgital</title>
-        <meta name="description" content="Unveiling Digital Insights, Innovations, and Industry Best Practices. Explore SGITAL's blog for the latest in ServiceNow, AI workflows, and digital transformation." />
-        <meta name="keywords" content="ServiceNow blog, digital transformation insights, AI workflows, enterprise automation, SGITAL updates" />
+        <title>Our Blog | ServiceNow, NowAssist & AI Workflow Insights - Sgital</title>
+        <meta name="description" content="ServiceNow updates, NowAssist deep-dives, AI workflow strategy, and ServiceNow Knowledge takeaways — written by Sgital's certified consultants." />
+        <meta name="keywords" content="ServiceNow blog, NowAssist articles, AI workflows blog, ServiceNow Xanadu Yokohama Tokyo, ServiceNow Knowledge26, ServiceNow Partner Singapore Australia India" />
         <link rel="canonical" href="https://sgital.com/our-blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/our-blog" />
+        <meta property="og:title" content="Our Blog — ServiceNow & AI Workflow Insights from Sgital" />
+        <meta property="og:description" content="ServiceNow updates, NowAssist deep-dives and AI workflow strategy from Sgital's certified consultants." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {/* Hero */}

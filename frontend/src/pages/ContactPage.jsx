@@ -59,10 +59,16 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us | Get in Touch - Sgital</title>
-        <meta name="description" content="Contact Sgital for ServiceNow consulting, implementation, and support services. Offices in Singapore, Bengaluru, and Jodhpur. Book a free consultation." />
-        <meta name="keywords" content="contact Sgital, ServiceNow Singapore, ServiceNow India, ServiceNow Bengaluru, workflow assessment" />
+        <title>Contact Sgital | ServiceNow Consulting in Singapore, Bengaluru & Jodhpur</title>
+        <meta name="description" content="Get in touch for ServiceNow consulting, implementation, AI Workflows and managed services. Offices in Singapore, Bengaluru and Jodhpur — serving clients across Australia, India, and ASEAN." />
+        <meta name="keywords" content="contact ServiceNow Partner Singapore, ServiceNow consulting Bengaluru, ServiceNow help India, ServiceNow services Australia, workflow assessment, NowAssist consultation" />
         <link rel="canonical" href="https://sgital.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sgital.com/contact" />
+        <meta property="og:title" content="Contact Sgital — ServiceNow Consulting & AI Workflows" />
+        <meta property="og:description" content="Talk to a ServiceNow expert. Offices in Singapore, Bengaluru, Jodhpur. Free workflow assessment available." />
+        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {/* Hero Section */}
