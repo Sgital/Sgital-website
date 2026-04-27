@@ -56,7 +56,10 @@ const HeroSection = () => {
         <div className="absolute bottom-1/4 -left-40 w-[400px] h-[400px] bg-amber-400/5 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-28 w-full">
+      <div
+        className="relative max-w-7xl mx-auto px-6 lg:px-8 pb-20 w-full"
+        style={{ paddingTop: 'calc(var(--banner-h, 0px) + 9rem)' }}
+      >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text column */}
           <div className="text-center lg:text-left">

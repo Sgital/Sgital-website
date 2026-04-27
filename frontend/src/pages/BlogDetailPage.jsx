@@ -72,7 +72,7 @@ const BlogDetailPage = () => {
       </Helmet>
 
       {/* Hero Image */}
-      <section className="bg-neutral-950 pt-24">
+      <section className="bg-neutral-950 pt-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <button
             onClick={() => navigate('/our-blog')}
