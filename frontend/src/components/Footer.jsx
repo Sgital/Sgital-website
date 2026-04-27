@@ -32,9 +32,9 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-4">
               <img 
-                src="/sgital-logo.png" 
-                alt="Sgital AI Workflows" 
-                className="h-10 w-auto object-contain"
+                src="/sgital-long-logo.png" 
+                alt="Sgital — AI Workflows" 
+                className="h-12 w-auto object-contain"
               />
             </Link>
             <p className="text-neutral-400 text-sm leading-relaxed mb-4">
