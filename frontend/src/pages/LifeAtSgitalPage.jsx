@@ -128,7 +128,7 @@ const LifeAtSgitalPage = () => {
         <meta property="og:url" content="https://sgital.com/life-at-sgital" />
         <meta property="og:title" content="Life at Sgital — Inside Our ServiceNow Team" />
         <meta property="og:description" content="Meet the team, explore our culture and see ServiceNow events across Singapore, Bengaluru and Jodhpur." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

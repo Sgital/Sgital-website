@@ -67,7 +67,7 @@ const ContactPage = () => {
         <meta property="og:url" content="https://sgital.com/contact" />
         <meta property="og:title" content="Contact Sgital — ServiceNow Consulting & AI Workflows" />
         <meta property="og:description" content="Talk to a ServiceNow expert. Offices in Singapore, Bengaluru, Jodhpur. Free workflow assessment available." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

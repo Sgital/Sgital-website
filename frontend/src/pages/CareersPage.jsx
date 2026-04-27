@@ -25,7 +25,7 @@ const CareersPage = () => {
         <meta property="og:url" content="https://sgital.com/careers" />
         <meta property="og:title" content="Careers at Sgital — Join Our ServiceNow Team" />
         <meta property="og:description" content="Open ServiceNow roles in Singapore and Bengaluru. Apply now." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

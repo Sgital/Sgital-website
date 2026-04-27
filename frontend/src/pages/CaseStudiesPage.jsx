@@ -17,7 +17,7 @@ const CaseStudiesPage = () => {
         <meta property="og:url" content="https://sgital.com/case-studies" />
         <meta property="og:title" content="ServiceNow Case Studies — Real Outcomes from Sgital" />
         <meta property="og:description" content="Measurable ServiceNow & AI Workflow outcomes from clients across Singapore, Australia, India and ASEAN." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

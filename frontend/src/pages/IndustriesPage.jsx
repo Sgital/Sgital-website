@@ -64,7 +64,7 @@ const IndustriesPage = () => {
         <meta property="og:url" content="https://sgital.com/industries" />
         <meta property="og:title" content="Industries We Serve — ServiceNow Solutions by Sgital" />
         <meta property="og:description" content="ServiceNow solutions across 10+ industries delivered globally from Singapore, Australia and India." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

@@ -20,7 +20,7 @@ const AboutPage = () => {
         <meta property="og:url" content="https://sgital.com/about" />
         <meta property="og:title" content="About Sgital — Premier ServiceNow Partner" />
         <meta property="og:description" content="8+ years, 60+ certified consultants, offices in Singapore, Bengaluru, Jodhpur — serving Australia, India and ASEAN." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

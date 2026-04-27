@@ -21,7 +21,7 @@ const BlogPage = () => {
         <meta property="og:url" content="https://sgital.com/our-blog" />
         <meta property="og:title" content="Sgital Blog — ServiceNow & AI Workflow Insights" />
         <meta property="og:description" content="ServiceNow announcements, NowAssist guidance, and AI workflow best practices from Sgital." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

@@ -16,11 +16,11 @@ const HomePage = () => {
         <meta property="og:url" content="https://sgital.com/" />
         <meta property="og:title" content="Sgital | ServiceNow Partner — AI Workflows for Singapore, Australia & India" />
         <meta property="og:description" content="Premier ServiceNow Partner delivering AI-powered enterprise workflows across Singapore, Australia, India and ASEAN. Operationalize AI with GoAI 2.0." />
-        <meta property="og:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Sgital | ServiceNow Partner — AI Workflows" />
         <meta name="twitter:description" content="Premier ServiceNow Partner across Singapore, Australia, India, ASEAN. AI workflows powered by GoAI 2.0." />
-        <meta name="twitter:image" content="https://sgital.com/sgital-long-logo.png" />
+        <meta name="twitter:image" content="https://sgital.com/og-image.png" />
       </Helmet>
 
       {/* Hero Section */}
