@@ -1,67 +1,77 @@
 # Sgital Website - PRD
 
 ## Original Problem Statement
-Convert a single-page website into a fully SEO-optimized multi-page React website with branding, blog, and content sections. Extensions: Careers + application form, AWS SES emails, Admin Dashboard (applications & contacts), AWS S3 for resume/file storage, photo gallery for "Life at Sgital", MongoDB-backed Blog CMS, and Admin gallery manager.
+Convert a single-page website into a fully SEO-optimized multi-page React website with branding (logos, client carousels), new content sections (AI Workflows, Life at Sgital), internal blog system, Careers + application form, AWS SES email workflows, AWS S3 (masonry gallery + resumes), ServiceNow Store links, Technical SEO, and a global announcement banner. Blog is managed statically via `blogData.js` (user explicitly declined a backend CMS).
 
 ## Stack
-- Frontend: React + Tailwind + React Router DOM, shadcn/ui, lucide-react, **react-quill-new** (WYSIWYG)
+- Frontend: React + Tailwind + React Router DOM, shadcn/ui, lucide-react, React Helmet (SEO)
 - Backend: FastAPI + Motor (MongoDB)
-- Integrations: AWS SES (email), AWS S3 (file storage), YouTube embeds
+- Integrations: AWS SES (email — info & hr recipients), AWS S3 (file/gallery storage), YouTube embeds
 
 ## Credentials
-- Admin: `webadmin` / `Sgital2026` (HTTP Basic on all `/api/admin/*` and `/api/blog/admin/*`)
+- Admin: `webadmin` / `Sgital2026` (HTTP Basic on `/api/admin/*`)
 - AWS region: `ap-south-1`, S3 bucket: `sgital-website-assets`
-- SES verified: `info@sgital.com`, `hr@sgital.com` (SES sandbox)
+- SES verified domain: `sgital.com` (out of sandbox), senders: info@, hr@ as "Sgital Info"
 
 ## Implemented Features
-- Multi-page site: Home, Solutions, GoAI 2.0, Industries, Case Studies, About, Contact, Blog, Our Blog, Blog Detail, Life at Sgital, Careers
-- Careers page + job application form (resume → S3)
-- Contact form + SES email
-- Admin dashboard (`/admin/applications`) with 4 tabs:
-  - **Job Applications** — list/view/status/export CSV
-  - **Contact Messages** — list/view/status/export CSV
-  - **Blog Posts** — list/create/edit/delete/publish-toggle/view-on-site (uses Quill WYSIWYG)
-  - **Gallery** — drag-drop upload + grid with delete
-- **[Feb 2026] Life at Sgital Photo Gallery** — 17 photos migrated from Google Drive → S3, served via `/api/gallery/life-at-sgital` with 5-min cache; masonry + lightbox with keyboard nav
-- **[Feb 2026] Blog CMS migration** — 9 posts from `blogData.js` seeded into MongoDB via `seed_blog.py`; public pages (`/blog`, `/our-blog`, `/our-blog/:slug`) now fetch from API
-- **[Feb 2026] Admin Blog Editor** — ReactQuill with dark-theme CSS overrides; featured image upload direct to S3 (`/images/blog/`); auto-slug, unique-slug dedup, draft/publish toggle
-- **[Feb 2026] Admin Gallery Manager** — Multi-file drop-zone upload to S3 (`/images/life-at-sgital/`), 10 MB limit, JPG/PNG/WebP/GIF only, per-photo delete, in-memory cache auto-invalidated on mutation, prefix-guard on DELETE
+- Multi-page site: Home, Solutions, GoAI 2.0, Industries, Case Studies, About, Contact, Our Blog, Blog Detail, Life at Sgital, Careers, Privacy, Terms
+- Careers + job application form (resume → S3) + auto-confirmation email to applicant + HR notification
+- Contact form + SES notification to info@ + auto-confirmation to submitter
+- Admin dashboard (`/admin/applications`): Job Applications, Contact Messages, Gallery manager
+- Life at Sgital masonry gallery from S3 with lightbox + keyboard nav
+- GoAI auto-playing hero video on HomePage
+- ServiceNow Store CTAs across Home and GoAI pages
+- AnnouncementBanner (ServiceNow Knowledge26) — dismissible, height-adaptive, exposes `--banner-h` CSS var for dynamic Header/Hero offset; verified responsive at 280/320/360/375/414/640+ viewports
+- Blog: static source of truth in `/app/frontend/src/data/blogData.js` (CMS was built then removed per user request)
+- 3 new case studies: Gaming, Conglomerate, Semiconductor
+- Technical SEO: sitemap.xml, robots.txt, canonical links, unique meta tags, JSON-LD schema, Google Search Console verification, OG image (1200x630)
+- Custom "Made with Emergent" badge suppressor in `index.html`
+- Updated Sgital logo (yellow, wider) across header/footer; client logos use transparent versions with invert CSS
 
 ## Key API Endpoints
 Public:
-- `GET  /api/blog/posts` — list published
-- `GET  /api/blog/posts/{slug}` — single post
-- `GET  /api/blog/categories` — distinct categories
-- `GET  /api/gallery/life-at-sgital` — gallery photos (cached 5 min)
-- `POST /api/applications` — job app (SES + S3)
-- `POST /api/contact` — contact form (SES)
+- `POST /api/applications` — job app (S3 upload + SES notify hr@ + confirmation to applicant)
+- `POST /api/contact` — contact form (SES notify info@ + confirmation to submitter)
+- `GET /api/gallery/life-at-sgital` — gallery photos (cached 5 min)
 
-Admin (HTTP Basic required):
-- `GET/POST/PATCH/DELETE /api/blog/admin/posts[/{id}]` — blog CRUD
-- `POST /api/blog/admin/upload-image` — featured image upload to S3
-- `GET /api/admin/gallery/life-at-sgital` — list gallery
-- `POST /api/admin/gallery/life-at-sgital/upload` — multi-file upload
-- `DELETE /api/admin/gallery/life-at-sgital?key=...` — delete (prefix-guarded)
+Admin (HTTP Basic):
 - `GET /api/applications/list`, `GET /api/contact/list`
 - `PATCH /api/applications/update-status/{id}`, `PATCH /api/contact/update-status/{id}`
-- `POST /api/admin/login` (Basic auth verify)
+- `GET/POST/DELETE /api/admin/gallery/life-at-sgital` — gallery CRUD (prefix-guarded)
+- `POST /api/admin/login` — basic auth verify
 
 ## DB Collections
-- `blog_posts`: id, slug, title, description, content (HTML), category, author, image, read_time, date, published, created_at, updated_at
-- `applications`: name, email, phone, experience, linkedin, portfolio, position, cover_letter, resume_s3_url, status, created_at
-- `contacts`: name, email, company, phone, subject, message, status, created_at
+- `applications`: name, email, phone, experience, linkedin, portfolio, position, cover_letter, resume_s3_url, status, email_sent, confirmation_sent, created_at
+- `contacts`: name, email, company, phone, subject, message, status, email_sent, confirmation_sent, created_at
 
-## Tests
-- `/app/backend/tests/test_blog_and_gallery.py` — 18 backend pytest cases, all passing (blog CRUD, admin auth, gallery upload/delete, cache invalidation, prefix-guard)
+## Env Variables (backend/.env)
+- `MONGO_URL`, `DB_NAME`
+- AWS: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `S3_BUCKET_NAME`
+- SES: `SES_SENDER_EMAIL`, `SES_CONTACT_RECIPIENT_EMAIL`, `SES_HR_RECIPIENT_EMAIL`
+- Admin: `ADMIN_USERNAME`, `ADMIN_PASSWORD`
+
+## Changelog
+- **Feb 2026**: AnnouncementBanner mobile overflow verified fixed across 280–414px viewports ✅
+- **Feb 2026**: Auto-confirmation emails for Contact + Job Applications; "Sgital Info" sender name
+- **Feb 2026**: SES routing split into distinct contact/HR recipients
+- **Feb 2026**: 3 new case studies added (Gaming, Conglomerate, Semiconductor)
+- **Feb 2026**: Technical SEO complete (sitemap, robots, canonical, JSON-LD, GSC verification)
+- **Feb 2026**: Blog CMS removed; migrated Knowledge26 post to static `blogData.js` per user request
+- **Feb 2026**: Privacy + Terms pages; Made-with-Emergent badge suppressor
+- **Feb 2026**: Life at Sgital masonry gallery migrated to S3
+- **Feb 2026**: AnnouncementBanner + dynamic Header/Hero padding
 
 ## Backlog
-- **P2**: SES production-mode (exit sandbox)
-- **P2**: Admin UI for blog categories/tags taxonomy
-- **P3**: CDN (CloudFront) in front of S3 for global asset delivery
-- **P3**: Split `AdminApplicationsPage.jsx` (now 728 lines) into smaller `ApplicationsList` / `ContactsList` components
-- **P3**: Add image compression on blog/gallery uploads (sharp-equivalent server-side)
+- **P1**: Geo-targeted landing pages — `/servicenow-partner-singapore`, `/australia`, `/india` for local SEO
+- **P2**: Admin UI for case studies / blog taxonomy (only if user reconsiders CMS)
+- **P3**: CloudFront CDN in front of S3 for asset delivery
+- **P3**: Split `AdminApplicationsPage.jsx` (~728 lines) into smaller components
+- **P3**: Server-side image compression on gallery uploads
 
-## Notes
-- MONGO_URL in backend/.env: `mongodb://localhost:27017/`
-- Quill dark-theme CSS is in `/app/frontend/src/App.css` (scoped under `.blog-quill-wrapper`)
-- Old `/app/frontend/src/data/blogData.js` still exists but is no longer imported anywhere (safe to delete later)
+## Tests
+- `/app/backend/tests/test_blog_and_gallery.py` — backend pytest (blog CRUD tests are stale since CMS removed; gallery tests still valid)
+
+## Notes / Critical
+- **Blog is STATIC** — edit `/app/frontend/src/data/blogData.js` only. Do NOT reintroduce a backend CMS.
+- **`--banner-h` CSS var** drives Header + Hero top padding dynamically; set in `AnnouncementBanner.jsx` via ResizeObserver.
+- **Emergent badge hidden** via script at bottom of `public/index.html`. Don't touch unless user complains.
