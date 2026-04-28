@@ -30,6 +30,8 @@ AWS_REGION = os.getenv('AWS_REGION', 'ap-south-1')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 SES_SENDER_EMAIL = os.getenv('SES_SENDER_EMAIL', 'info@sgital.com')
+SES_SENDER_NAME = os.getenv('SES_SENDER_NAME', 'Sgital Info')
+SES_FROM_ADDRESS = f'"{SES_SENDER_NAME}" <{SES_SENDER_EMAIL}>'
 SES_RECIPIENT_EMAIL = os.getenv('SES_CONTACT_RECIPIENT_EMAIL', 'info@sgital.com')
 
 # Initialize SES client
@@ -46,7 +48,7 @@ def send_contact_email(contact_data: dict):
     # Create MIME message
     msg = MIMEMultipart('mixed')
     msg['Subject'] = f"New Contact Form Submission: {contact_data['subject']}"
-    msg['From'] = SES_SENDER_EMAIL
+    msg['From'] = SES_FROM_ADDRESS
     msg['To'] = SES_RECIPIENT_EMAIL
     
     # Create message body
@@ -133,7 +135,7 @@ This message was sent from the Sgital website contact form.
     
     try:
         response = ses_client.send_raw_email(
-            Source=SES_SENDER_EMAIL,
+            Source=SES_FROM_ADDRESS,
             Destinations=[SES_RECIPIENT_EMAIL],
             RawMessage={'Data': msg.as_string()}
         )

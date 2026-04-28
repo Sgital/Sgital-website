@@ -37,6 +37,8 @@ AWS_REGION = os.getenv('AWS_REGION', 'ap-south-1')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 SES_SENDER_EMAIL = os.getenv('SES_SENDER_EMAIL', 'info@sgital.com')
+SES_SENDER_NAME = os.getenv('SES_SENDER_NAME', 'Sgital Info')
+SES_FROM_ADDRESS = f'"{SES_SENDER_NAME}" <{SES_SENDER_EMAIL}>'
 SES_RECIPIENT_EMAIL = os.getenv('SES_HR_RECIPIENT_EMAIL', os.getenv('SES_RECIPIENT_EMAIL', 'hr@sgital.com'))
 
 # Initialize SES client
@@ -53,7 +55,7 @@ def send_application_email(applicant_data: dict, resume_bytes: bytes, resume_fil
     # Create MIME message
     msg = MIMEMultipart('mixed')
     msg['Subject'] = f"New Job Application: {applicant_data['position']}"
-    msg['From'] = SES_SENDER_EMAIL
+    msg['From'] = SES_FROM_ADDRESS
     msg['To'] = SES_RECIPIENT_EMAIL
     
     # Create message body
@@ -149,7 +151,7 @@ Please review the attached resume for complete details.
     
     try:
         response = ses_client.send_raw_email(
-            Source=SES_SENDER_EMAIL,
+            Source=SES_FROM_ADDRESS,
             Destinations=[SES_RECIPIENT_EMAIL],
             RawMessage={'Data': msg.as_string()}
         )
