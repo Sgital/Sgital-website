@@ -8,18 +8,18 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Sgital | ServiceNow Partner — AI Workflows for Singapore, Australia & India</title>
-        <meta name="description" content="Sgital is a premier ServiceNow Partner delivering AI-powered enterprise workflows across Singapore, Australia, India and ASEAN. Operationalize AI with GoAI 2.0 — measurable outcomes in weeks." />
-        <meta name="keywords" content="ServiceNow Partner Singapore, ServiceNow Partner Australia, ServiceNow Partner India, AI workflows, NowAssist, GoAI 2.0, enterprise automation, digital transformation, ASEAN ServiceNow consulting" />
+        <title>Sgital | ServiceNow Premier Partner for Enterprise AI Workflows</title>
+        <meta name="description" content="Sgital is a ServiceNow Premier Partner delivering enterprise AI workflows globally. Operationalize AI with GoAI 2.0 — measurable outcomes in weeks, backed by 60+ certified consultants across Singapore, Australia, India and ASEAN." />
+        <meta name="keywords" content="ServiceNow Premier Partner, enterprise AI workflows, ServiceNow Partner Singapore, ServiceNow Partner Australia, ServiceNow Partner India, NowAssist, GoAI 2.0, enterprise automation, digital transformation, ASEAN ServiceNow consulting" />
         <link rel="canonical" href="https://sgital.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sgital.com/" />
-        <meta property="og:title" content="Sgital | ServiceNow Partner — AI Workflows for Singapore, Australia & India" />
-        <meta property="og:description" content="Premier ServiceNow Partner delivering AI-powered enterprise workflows across Singapore, Australia, India and ASEAN. Operationalize AI with GoAI 2.0." />
+        <meta property="og:title" content="Sgital | ServiceNow Premier Partner for Enterprise AI Workflows" />
+        <meta property="og:description" content="ServiceNow Premier Partner delivering enterprise AI workflows globally. Operationalize AI with GoAI 2.0 — measurable outcomes in weeks." />
         <meta property="og:image" content="https://sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sgital | ServiceNow Partner — AI Workflows" />
-        <meta name="twitter:description" content="Premier ServiceNow Partner across Singapore, Australia, India, ASEAN. AI workflows powered by GoAI 2.0." />
+        <meta name="twitter:title" content="Sgital | ServiceNow Premier Partner for Enterprise AI Workflows" />
+        <meta name="twitter:description" content="ServiceNow Premier Partner delivering enterprise AI workflows globally — powered by GoAI 2.0." />
         <meta name="twitter:image" content="https://sgital.com/og-image.png" />
       </Helmet>
 
