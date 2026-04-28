@@ -37,7 +37,7 @@ AWS_REGION = os.getenv('AWS_REGION', 'ap-south-1')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 SES_SENDER_EMAIL = os.getenv('SES_SENDER_EMAIL', 'info@sgital.com')
-SES_RECIPIENT_EMAIL = os.getenv('SES_RECIPIENT_EMAIL', 'hr@sgital.com')
+SES_RECIPIENT_EMAIL = os.getenv('SES_HR_RECIPIENT_EMAIL', os.getenv('SES_RECIPIENT_EMAIL', 'hr@sgital.com'))
 
 # Initialize SES client
 ses_client = boto3.client(
