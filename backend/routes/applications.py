@@ -49,6 +49,98 @@ ses_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY
 )
 
+
+def send_applicant_confirmation(applicant_data: dict):
+    """Send auto-confirmation email to the job applicant."""
+    first_name = (applicant_data.get('name') or '').split()[0] or 'there'
+    position = applicant_data.get('position', 'the role')
+
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = f"Application received — {position} at Sgital"
+    msg['From'] = SES_FROM_ADDRESS
+    msg['To'] = applicant_data['email']
+    msg['Reply-To'] = SES_RECIPIENT_EMAIL
+
+    text_content = f"""Hi {first_name},
+
+Thank you for applying to the {position} role at Sgital.
+
+We've received your application, including your resume, and our HR team will review it carefully. If your profile matches what we're looking for, we'll reach out to schedule a conversation — typically within 7–10 business days.
+
+Here are the details we received:
+
+Position: {position}
+Name: {applicant_data.get('name')}
+Email: {applicant_data.get('email')}
+Phone: {applicant_data.get('phone', 'Not provided')}
+Experience: {applicant_data.get('experience_years', 'Not specified')}
+LinkedIn: {applicant_data.get('linkedin', 'Not provided')}
+
+In the meantime, feel free to explore more about life at Sgital:
+https://sgital.com/life-at-sgital
+
+If you have any questions, reply to this email or reach us at hr@sgital.com.
+
+Warm regards,
+Sgital HR Team
+Premier ServiceNow Partner — AI Workflows
+https://sgital.com
+"""
+
+    html_content = f"""
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#f6f6f6;margin:0;padding:24px;">
+  <div style="max-width:580px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+    <div style="background:#0a0a0a;padding:28px 32px;text-align:center;">
+      <div style="display:inline-block;padding:8px 16px;background:rgba(240,200,30,0.15);border:1px solid rgba(240,200,30,0.3);border-radius:999px;color:#F0C81E;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Sgital Careers</div>
+      <h1 style="color:#ffffff;margin:16px 0 4px;font-size:22px;font-weight:600;">Application Received</h1>
+      <p style="color:#a3a3a3;margin:0;font-size:14px;">Thanks for your interest in joining Sgital!</p>
+    </div>
+    <div style="padding:32px;color:#262626;line-height:1.6;">
+      <p style="margin:0 0 16px;">Hi <strong>{first_name}</strong>,</p>
+      <p style="margin:0 0 16px;">Thank you for applying to the <strong>{position}</strong> role at Sgital. We've received your application and resume, and our HR team will review it carefully.</p>
+      <p style="margin:0 0 24px;">If your profile matches what we're looking for, we'll reach out to schedule a conversation — typically within <strong>7–10 business days</strong>.</p>
+      <div style="background:#fafafa;border-left:3px solid #F0C81E;border-radius:6px;padding:16px 18px;margin:0 0 24px;">
+        <p style="margin:0 0 8px;font-size:12px;color:#737373;text-transform:uppercase;letter-spacing:0.05em;">Application Summary</p>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+          <tr><td style="padding:4px 0;color:#737373;width:110px;">Position</td><td style="padding:4px 0;color:#1a1a1a;font-weight:600;">{position}</td></tr>
+          <tr><td style="padding:4px 0;color:#737373;">Name</td><td style="padding:4px 0;color:#1a1a1a;">{applicant_data.get('name')}</td></tr>
+          <tr><td style="padding:4px 0;color:#737373;">Email</td><td style="padding:4px 0;color:#1a1a1a;">{applicant_data.get('email')}</td></tr>
+          <tr><td style="padding:4px 0;color:#737373;">Phone</td><td style="padding:4px 0;color:#1a1a1a;">{applicant_data.get('phone', 'Not provided')}</td></tr>
+          <tr><td style="padding:4px 0;color:#737373;">Experience</td><td style="padding:4px 0;color:#1a1a1a;">{applicant_data.get('experience_years', 'Not specified')}</td></tr>
+        </table>
+      </div>
+      <p style="margin:0 0 8px;">In the meantime, feel free to explore more about our culture:</p>
+      <p style="margin:0 0 24px;">
+        <a href="https://sgital.com/life-at-sgital" style="display:inline-block;padding:10px 18px;background:#F0C81E;color:#0a0a0a;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Life at Sgital →</a>
+      </p>
+      <p style="margin:0 0 16px;">Questions? Reply to this email or reach us at <a href="mailto:hr@sgital.com" style="color:#B8860B;">hr@sgital.com</a>.</p>
+      <p style="margin:24px 0 0;">Warm regards,<br/><strong>Sgital HR Team</strong><br/><span style="color:#737373;font-size:13px;">Premier ServiceNow Partner — AI Workflows</span></p>
+    </div>
+    <div style="background:#fafafa;padding:18px 32px;text-align:center;border-top:1px solid #eee;font-size:12px;color:#737373;">
+      <a href="https://sgital.com" style="color:#B8860B;text-decoration:none;">sgital.com</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/company/sgital" style="color:#B8860B;text-decoration:none;">LinkedIn</a>
+      <p style="margin:10px 0 0;color:#a3a3a3;">This is an automated confirmation. Our HR team will follow up separately.</p>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+    msg.attach(MIMEText(text_content, 'plain'))
+    msg.attach(MIMEText(html_content, 'html'))
+
+    response = ses_client.send_raw_email(
+        Source=SES_FROM_ADDRESS,
+        Destinations=[applicant_data['email']],
+        RawMessage={'Data': msg.as_string()}
+    )
+    return response['MessageId']
+
+
 def send_application_email(applicant_data: dict, resume_bytes: bytes, resume_filename: str):
     """Send application email with resume attachment via AWS SES"""
     
@@ -249,6 +341,19 @@ async def submit_application(
             await db.applications.update_one(
                 {"_id": result.inserted_id},
                 {"$set": {"email_sent": False, "email_error": str(email_error)}}
+            )
+
+        # Send confirmation email to the applicant (non-fatal if it fails)
+        try:
+            conf_id = send_applicant_confirmation(application_data)
+            await db.applications.update_one(
+                {"_id": result.inserted_id},
+                {"$set": {"confirmation_sent": True, "confirmation_message_id": conf_id}}
+            )
+        except Exception as conf_err:
+            await db.applications.update_one(
+                {"_id": result.inserted_id},
+                {"$set": {"confirmation_sent": False, "confirmation_error": str(conf_err)}}
             )
         
         return {
