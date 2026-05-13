@@ -5,11 +5,8 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
-Disallow: /privacy
-Disallow: /terms
-Disallow: /blog$
 
-# Block AI scrapers from training on full site content (optional — comment out if you want AI inclusion)
+# Block AI scrapers from training on full site content (optional — uncomment to enable)
 # User-agent: GPTBot
 # Disallow: /
 # User-agent: CCBot

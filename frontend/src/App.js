@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "./components/ui/sonner";
 import Header from "./components/Header";
@@ -15,9 +15,9 @@ import IndustriesPage from "./pages/IndustriesPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
-import BlogPage from "./pages/BlogPage";
 import OurBlogPage from "./pages/OurBlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import LifeAtSgitalPage from "./pages/LifeAtSgitalPage";
 import CareersPage from "./pages/CareersPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
@@ -53,12 +53,13 @@ function App() {
               <Route path="/life-at-sgital" element={<LifeAtSgitalPage />} />
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/admin/applications" element={<AdminApplicationsPage />} />
-              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog" element={<Navigate to="/our-blog" replace />} />
               <Route path="/our-blog" element={<OurBlogPage />} />
               <Route path="/our-blog/:slug" element={<BlogDetailPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/privacy" element={<PrivacyPolicyPage />} />
               <Route path="/terms" element={<TermsOfServicePage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Layout>
         </BrowserRouter>

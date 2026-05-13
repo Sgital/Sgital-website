@@ -51,8 +51,10 @@ Admin (HTTP Basic):
 - Admin: `ADMIN_USERNAME`, `ADMIN_PASSWORD`
 
 ## Changelog
-- **Feb 2026**: AnnouncementBanner mobile overflow verified fixed across 280–414px viewports ✅
-- **Feb 2026**: Auto-confirmation emails for Contact + Job Applications; "Sgital Info" sender name
+- **Feb 2026 (SEO fixes for Google Search Console "Duplicate without user-selected canonical")**: Added `NotFoundPage` (404) with `noindex` + canonical→`/`, `*` catch-all route; `/blog` now 301-style redirects to `/our-blog`; BlogDetailPage "article not found" branch now sets `noindex` + canonical→`/our-blog`; removed static `<meta name="robots">` from `index.html` so per-page Helmet wins; cleaned up `robots.txt` (removed Disallow for `/privacy`, `/terms`, `/blog$` — replaced by `noindex` meta + redirect).
+- **Feb 2026**: AnnouncementBanner removed (Knowledge26 conference passed); component file retained for future events.
+- **Feb 2026**: AnnouncementBanner mobile overflow verified fixed across 280–414px viewports.
+- **Feb 2026**: Auto-confirmation emails for Contact + Job Applications; "Sgital Info" sender name.
 - **Feb 2026**: SES routing split into distinct contact/HR recipients
 - **Feb 2026**: 3 new case studies added (Gaming, Conglomerate, Semiconductor)
 - **Feb 2026**: Technical SEO complete (sitemap, robots, canonical, JSON-LD, GSC verification)

@@ -12,15 +12,23 @@ const BlogDetailPage = () => {
 
   if (!post) {
     return (
-      <div className="bg-neutral-950 min-h-screen pt-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center py-24">
-          <h1 className="text-4xl font-bold text-white mb-4">Article Not Found</h1>
-          <p className="text-neutral-400 mb-8">The article you're looking for doesn't exist.</p>
-          <Button asChild className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold">
-            <Link to="/our-blog">Back to Blog</Link>
-          </Button>
+      <>
+        <Helmet>
+          <title>Article Not Found - Sgital Blog</title>
+          <meta name="description" content="The blog article you are looking for does not exist." />
+          <link rel="canonical" href="https://sgital.com/our-blog" />
+          <meta name="robots" content="noindex, follow" />
+        </Helmet>
+        <div className="bg-neutral-950 min-h-screen pt-32">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center py-24">
+            <h1 className="text-4xl font-bold text-white mb-4">Article Not Found</h1>
+            <p className="text-neutral-400 mb-8">The article you're looking for doesn't exist.</p>
+            <Button asChild className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold">
+              <Link to="/our-blog">Back to Blog</Link>
+            </Button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
