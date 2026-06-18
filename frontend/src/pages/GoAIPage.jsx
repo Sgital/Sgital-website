@@ -14,12 +14,12 @@ const GoAIPage = () => {
         <title>GoAI 2.0 | ServiceNow AI Implementation Framework - Sgital</title>
         <meta name="description" content="GoAI 2.0 is Sgital's proven 4-phase framework to operationalize ServiceNow AI and NowAssist — from readiness audit to enterprise rollout. Available on the ServiceNow Store." />
         <meta name="keywords" content="GoAI 2.0, ServiceNow AI implementation, NowAssist consulting, AI readiness assessment, agentic AI ServiceNow, ServiceNow Store apps Singapore Australia India" />
-        <link rel="canonical" href="https://sgital.com/goai" />
+        <link rel="canonical" href="https://www.sgital.com/goai" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sgital.com/goai" />
+        <meta property="og:url" content="https://www.sgital.com/goai" />
         <meta property="og:title" content="GoAI 2.0 — ServiceNow AI Implementation Framework by Sgital" />
         <meta property="og:description" content="Proven 4-phase framework to deploy ServiceNow AI and NowAssist with measurable ROI. Available on the ServiceNow Store." />
-        <meta property="og:image" content="https://sgital.com/og-image.png" />
+        <meta property="og:image" content="https://www.sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

@@ -16,12 +16,12 @@ const BlogPage = () => {
         <meta name="description" content="The latest ServiceNow announcements, NowAssist guidance, and AI workflow best practices from Sgital's team in Singapore, Australia and India." />
         <meta name="keywords" content="ServiceNow blog Singapore, NowAssist insights, AI workflows guide, ServiceNow Knowledge updates, Xanadu release notes, ServiceNow Partner blog" />
         {/* Canonical points to /our-blog to avoid duplicate content */}
-        <link rel="canonical" href="https://sgital.com/our-blog" />
+        <link rel="canonical" href="https://www.sgital.com/our-blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sgital.com/our-blog" />
+        <meta property="og:url" content="https://www.sgital.com/our-blog" />
         <meta property="og:title" content="Sgital Blog — ServiceNow & AI Workflow Insights" />
         <meta property="og:description" content="ServiceNow announcements, NowAssist guidance, and AI workflow best practices from Sgital." />
-        <meta property="og:image" content="https://sgital.com/og-image.png" />
+        <meta property="og:image" content="https://www.sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

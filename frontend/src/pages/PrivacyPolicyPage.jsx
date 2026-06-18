@@ -12,7 +12,7 @@ const PrivacyPolicyPage = () => {
       <Helmet>
         <title>Privacy Policy - Sgital</title>
         <meta name="description" content="Sgital's Privacy Policy explaining how we collect, use, and protect your personal information when you use our website and services." />
-        <link rel="canonical" href="https://sgital.com/privacy" />
+        <link rel="canonical" href="https://www.sgital.com/privacy" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
@@ -35,7 +35,7 @@ const PrivacyPolicyPage = () => {
             <p>
               Sgital Pte. Ltd. ("<strong className="text-white">Sgital</strong>", "we", "us", or "our") is committed to
               protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and
-              safeguard your information when you visit our website <a href="https://sgital.com" className="text-amber-400 hover:underline">sgital.com</a>,
+              safeguard your information when you visit our website <a href="https://www.sgital.com" className="text-amber-400 hover:underline">sgital.com</a>,
               interact with our services, or engage with us through other channels (collectively, the "Services").
             </p>
             <p>
@@ -152,7 +152,7 @@ const PrivacyPolicyPage = () => {
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mt-3">
               <p className="m-0"><strong className="text-white">Sgital Pte. Ltd.</strong></p>
               <p className="m-0 mt-1">Email: <a href="mailto:info@sgital.com" className="text-amber-400 hover:underline">info@sgital.com</a></p>
-              <p className="m-0 mt-1">Website: <a href="https://sgital.com" className="text-amber-400 hover:underline">sgital.com</a></p>
+              <p className="m-0 mt-1">Website: <a href="https://www.sgital.com" className="text-amber-400 hover:underline">sgital.com</a></p>
             </div>
           </article>
 

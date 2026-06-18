@@ -1,10 +1,23 @@
-# https://sgital.com/robots.txt
-# Allow all crawlers, with explicit disallow for admin & API routes.
+# https://www.sgital.com/robots.txt
+# Allow all crawlers, with explicit disallow for admin, API routes, and legacy WordPress paths.
 
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+
+# Block legacy WordPress system paths and crawl traps
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /*.php$
+Disallow: /feed/
+Disallow: /*/feed/
+Disallow: /author/
+Disallow: /category/
+Disallow: /tag/
 
 # Block AI scrapers from training on full site content (optional — uncomment to enable)
 # User-agent: GPTBot
@@ -14,4 +27,4 @@ Disallow: /api/
 # User-agent: anthropic-ai
 # Disallow: /
 
-Sitemap: https://sgital.com/sitemap.xml
+Sitemap: https://www.sgital.com/sitemap.xml

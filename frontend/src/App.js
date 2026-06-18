@@ -17,7 +17,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import OurBlogPage from "./pages/OurBlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import LegacyRedirects from "./components/LegacyRedirects";
 import LifeAtSgitalPage from "./pages/LifeAtSgitalPage";
 import CareersPage from "./pages/CareersPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
@@ -59,7 +59,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/privacy" element={<PrivacyPolicyPage />} />
               <Route path="/terms" element={<TermsOfServicePage />} />
-              <Route path="*" element={<NotFoundPage />} />
+              <Route path="*" element={<LegacyRedirects />} />
             </Routes>
           </Layout>
         </BrowserRouter>

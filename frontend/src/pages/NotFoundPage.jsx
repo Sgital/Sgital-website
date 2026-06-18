@@ -10,7 +10,7 @@ const NotFoundPage = () => {
       <Helmet>
         <title>Page Not Found - Sgital</title>
         <meta name="description" content="The page you are looking for does not exist. Return to Sgital — ServiceNow Premier Partner for Enterprise AI Workflows." />
-        <link rel="canonical" href="https://sgital.com/" />
+        <link rel="canonical" href="https://www.sgital.com/" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 

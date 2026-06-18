@@ -99,18 +99,24 @@ const SolutionsPage = () => {
 
   const activeCategoryData = categories.find(c => c.id === activeCategory);
 
+  // Self-referencing canonical: include ?category=X for known categories, strip everything else (utm_*, fbclid, gclid, etc.)
+  const canonicalCategory = categories.find(c => c.id === activeCategory)?.urlParam;
+  const canonicalUrl = canonicalCategory
+    ? `https://www.sgital.com/solutions?category=${canonicalCategory}`
+    : 'https://www.sgital.com/solutions';
+
   return (
     <>
       <Helmet>
         <title>{activeCategory === 'AI Workflows' ? 'AI Workflows on ServiceNow | NowAssist Solutions - Sgital' : 'ServiceNow Solutions | ITSM, ITOM, HRSD, CSM, IRM - Sgital'}</title>
         <meta name="description" content="Comprehensive ServiceNow solutions — ITSM, ITOM, HRSD, CSM, IRM, App Engine and AI Workflows powered by NowAssist. Delivered globally from Singapore, Australia, and India." />
         <meta name="keywords" content="ServiceNow ITSM partner, ServiceNow ITOM, HR Service Delivery, Customer Service Management, IRM SecOps, App Engine consulting, NowAssist implementation, AI Workflows ServiceNow Singapore Australia India" />
-        <link rel="canonical" href="https://sgital.com/solutions" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sgital.com/solutions" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content="ServiceNow Solutions — ITSM, ITOM, HRSD, CSM, IRM, AI Workflows" />
         <meta property="og:description" content="End-to-end ServiceNow solutions and AI Workflows delivered by Sgital across Singapore, Australia, India and ASEAN." />
-        <meta property="og:image" content="https://sgital.com/og-image.png" />
+        <meta property="og:image" content="https://www.sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

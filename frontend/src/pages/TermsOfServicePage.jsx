@@ -12,7 +12,7 @@ const TermsOfServicePage = () => {
       <Helmet>
         <title>Terms of Service - Sgital</title>
         <meta name="description" content="The terms and conditions governing your use of Sgital's website and services." />
-        <link rel="canonical" href="https://sgital.com/terms" />
+        <link rel="canonical" href="https://www.sgital.com/terms" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
@@ -34,7 +34,7 @@ const TermsOfServicePage = () => {
           <article className="legal-content space-y-6 text-neutral-300 leading-relaxed">
             <p>
               These Terms of Service ("<strong className="text-white">Terms</strong>") govern your access to and use
-              of the website <a href="https://sgital.com" className="text-amber-400 hover:underline">sgital.com</a>,
+              of the website <a href="https://www.sgital.com" className="text-amber-400 hover:underline">sgital.com</a>,
               content, and services made available by Sgital Pte. Ltd. ("<strong className="text-white">Sgital</strong>",
               "we", "us", or "our"). By accessing or using our website or services, you agree to be bound by these
               Terms. If you do not agree, please do not use the website.
@@ -152,7 +152,7 @@ const TermsOfServicePage = () => {
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mt-3">
               <p className="m-0"><strong className="text-white">Sgital Pte. Ltd.</strong></p>
               <p className="m-0 mt-1">Email: <a href="mailto:info@sgital.com" className="text-amber-400 hover:underline">info@sgital.com</a></p>
-              <p className="m-0 mt-1">Website: <a href="https://sgital.com" className="text-amber-400 hover:underline">sgital.com</a></p>
+              <p className="m-0 mt-1">Website: <a href="https://www.sgital.com" className="text-amber-400 hover:underline">sgital.com</a></p>
             </div>
           </article>
 

@@ -16,7 +16,7 @@ const BlogDetailPage = () => {
         <Helmet>
           <title>Article Not Found - Sgital Blog</title>
           <meta name="description" content="The blog article you are looking for does not exist." />
-          <link rel="canonical" href="https://sgital.com/our-blog" />
+          <link rel="canonical" href="https://www.sgital.com/our-blog" />
           <meta name="robots" content="noindex, follow" />
         </Helmet>
         <div className="bg-neutral-950 min-h-screen pt-32">
@@ -43,10 +43,10 @@ const BlogDetailPage = () => {
         <title>{post.title} | Sgital Blog</title>
         <meta name="description" content={post.description} />
         <meta name="keywords" content={`${post.category}, ServiceNow, ${post.title}, ServiceNow Partner Singapore Australia India, NowAssist, AI Workflows`} />
-        <link rel="canonical" href={`https://sgital.com/our-blog/${post.slug}`} />
+        <link rel="canonical" href={`https://www.sgital.com/our-blog/${post.slug}`} />
         <meta name="author" content={post.author || 'Sgital'} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://sgital.com/our-blog/${post.slug}`} />
+        <meta property="og:url" content={`https://www.sgital.com/our-blog/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:image" content={post.image} />
@@ -69,11 +69,11 @@ const BlogDetailPage = () => {
           'publisher': {
             '@type': 'Organization',
             'name': 'Sgital',
-            'logo': { '@type': 'ImageObject', 'url': 'https://sgital.com/sgital-long-logo.png' }
+            'logo': { '@type': 'ImageObject', 'url': 'https://www.sgital.com/sgital-long-logo.png' }
           },
           'mainEntityOfPage': {
             '@type': 'WebPage',
-            '@id': `https://sgital.com/our-blog/${post.slug}`
+            '@id': `https://www.sgital.com/our-blog/${post.slug}`
           },
           'articleSection': post.category
         })}</script>

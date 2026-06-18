@@ -3,55 +3,55 @@
 
   <!-- Core pages -->
   <url>
-    <loc>https://sgital.com/</loc>
+    <loc>https://www.sgital.com/</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sgital.com/solutions</loc>
+    <loc>https://www.sgital.com/solutions</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sgital.com/goai</loc>
+    <loc>https://www.sgital.com/goai</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sgital.com/industries</loc>
+    <loc>https://www.sgital.com/industries</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sgital.com/case-studies</loc>
+    <loc>https://www.sgital.com/case-studies</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sgital.com/about</loc>
+    <loc>https://www.sgital.com/about</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sgital.com/life-at-sgital</loc>
+    <loc>https://www.sgital.com/life-at-sgital</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/careers</loc>
+    <loc>https://www.sgital.com/careers</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sgital.com/contact</loc>
+    <loc>https://www.sgital.com/contact</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -59,7 +59,7 @@
 
   <!-- Blog index -->
   <url>
-    <loc>https://sgital.com/our-blog</loc>
+    <loc>https://www.sgital.com/our-blog</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -67,61 +67,61 @@
 
   <!-- Blog posts -->
   <url>
-    <loc>https://sgital.com/our-blog/are-you-attending-knowledge26</loc>
+    <loc>https://www.sgital.com/our-blog/are-you-attending-knowledge26</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/sgital-marks-8-years</loc>
+    <loc>https://www.sgital.com/our-blog/sgital-marks-8-years</loc>
     <lastmod>2025-10-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/future-of-customer-service-xanadu</loc>
+    <loc>https://www.sgital.com/our-blog/future-of-customer-service-xanadu</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/7-best-esg-updates-xanadu</loc>
+    <loc>https://www.sgital.com/our-blog/7-best-esg-updates-xanadu</loc>
     <lastmod>2024-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/sgital-success-network-partner</loc>
+    <loc>https://www.sgital.com/our-blog/sgital-success-network-partner</loc>
     <lastmod>2024-09-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/sgital-walkme-partnership</loc>
+    <loc>https://www.sgital.com/our-blog/sgital-walkme-partnership</loc>
     <lastmod>2024-08-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/annual-review-2021</loc>
+    <loc>https://www.sgital.com/our-blog/annual-review-2021</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/case-study-finance-workflows</loc>
+    <loc>https://www.sgital.com/our-blog/case-study-finance-workflows</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/future-of-work-digital-human</loc>
+    <loc>https://www.sgital.com/our-blog/future-of-work-digital-human</loc>
     <lastmod>2024-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sgital.com/our-blog/servicenow-knowledge-19-takeaways</loc>
+    <loc>https://www.sgital.com/our-blog/servicenow-knowledge-19-takeaways</loc>
     <lastmod>2019-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

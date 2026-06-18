@@ -123,12 +123,12 @@ const LifeAtSgitalPage = () => {
         <title>Life at Sgital | Culture, Team & Photo Gallery - ServiceNow Partner</title>
         <meta name="description" content="Inside Sgital — meet our ServiceNow consultants, see team events, learning days and ServiceNow Knowledge moments across Singapore, Bengaluru and Jodhpur." />
         <meta name="keywords" content="Sgital culture, ServiceNow team Singapore, ServiceNow community Bengaluru, work life ServiceNow consultant, Sgital photo gallery" />
-        <link rel="canonical" href="https://sgital.com/life-at-sgital" />
+        <link rel="canonical" href="https://www.sgital.com/life-at-sgital" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sgital.com/life-at-sgital" />
+        <meta property="og:url" content="https://www.sgital.com/life-at-sgital" />
         <meta property="og:title" content="Life at Sgital — Inside Our ServiceNow Team" />
         <meta property="og:description" content="Meet the team, explore our culture and see ServiceNow events across Singapore, Bengaluru and Jodhpur." />
-        <meta property="og:image" content="https://sgital.com/og-image.png" />
+        <meta property="og:image" content="https://www.sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

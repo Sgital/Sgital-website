@@ -15,12 +15,12 @@ const AboutPage = () => {
         <title>About Sgital | Premier ServiceNow Partner in Singapore, Australia & India</title>
         <meta name="description" content="Sgital is a premier ServiceNow Partner with 8+ years of expertise, 60+ certified consultants, and 500+ certifications. Offices in Singapore, Bengaluru, and Jodhpur serving clients globally." />
         <meta name="keywords" content="ServiceNow Partner Singapore, ServiceNow Partner Australia, ServiceNow Partner India, ServiceNow consulting Bengaluru, certified ServiceNow consultants ASEAN, digital transformation company Singapore" />
-        <link rel="canonical" href="https://sgital.com/about" />
+        <link rel="canonical" href="https://www.sgital.com/about" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sgital.com/about" />
+        <meta property="og:url" content="https://www.sgital.com/about" />
         <meta property="og:title" content="About Sgital — Premier ServiceNow Partner" />
         <meta property="og:description" content="8+ years, 60+ certified consultants, offices in Singapore, Bengaluru, Jodhpur — serving Australia, India and ASEAN." />
-        <meta property="og:image" content="https://sgital.com/og-image.png" />
+        <meta property="og:image" content="https://www.sgital.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
