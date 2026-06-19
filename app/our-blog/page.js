@@ -1,10 +1,23 @@
 import OurBlogPage from '@/components/pages/OurBlogPage';
+import { pageMetadata, breadcrumbSchema, JsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Our Blog | Sgital — ServiceNow Insights',
-  description: 'Latest insights, perspectives, and announcements from the Sgital team on ServiceNow, AI workflows, and enterprise digital transformation.',
-};
+export const metadata = pageMetadata({
+  path: '/our-blog',
+  title: 'Sgital Blog | ServiceNow, NowAssist & AI Workflow Insights',
+  description:
+    'Insights on ServiceNow releases, GoAI 2.0, AI Control Tower, Now Assist and enterprise AI workflows.',
+});
+
+const crumbs = breadcrumbSchema([
+  { name: 'Home', path: '/' },
+  { name: 'Blog', path: '/our-blog' },
+]);
 
 export default function Page() {
-  return <OurBlogPage />;
+  return (
+    <>
+      <JsonLd data={crumbs} />
+      <OurBlogPage />
+    </>
+  );
 }

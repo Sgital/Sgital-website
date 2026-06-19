@@ -1,9 +1,11 @@
 import TermsOfServicePage from '@/components/pages/TermsOfServicePage';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMetadata({
+  path: '/terms',
   title: 'Terms of Service | Sgital',
-  description: 'Read the Sgital terms of service.',
-};
+  description: 'Terms governing the use of sgital.com.',
+});
 
 export default function Page() {
   return <TermsOfServicePage />;

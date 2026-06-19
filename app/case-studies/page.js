@@ -1,10 +1,23 @@
 import CaseStudiesPage from '@/components/pages/CaseStudiesPage';
+import { pageMetadata, breadcrumbSchema, JsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Case Studies | Sgital — ServiceNow Success Stories',
-  description: 'Real ServiceNow + AI transformation stories: semiconductor eQMS, vendor automation, ITSM Pro Plus rollouts across 20+ countries, and more.',
-};
+export const metadata = pageMetadata({
+  path: '/case-studies',
+  title: 'ServiceNow Implementation Case Studies | Sgital Success Stories',
+  description:
+    'How Sgital has helped global enterprises transform with ServiceNow — Air Liquide, Razer, SiliconBox, SPH Media, GXBank, Keppel and more.',
+});
+
+const crumbs = breadcrumbSchema([
+  { name: 'Home', path: '/' },
+  { name: 'Case Studies', path: '/case-studies' },
+]);
 
 export default function Page() {
-  return <CaseStudiesPage />;
+  return (
+    <>
+      <JsonLd data={crumbs} />
+      <CaseStudiesPage />
+    </>
+  );
 }

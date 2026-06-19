@@ -117,7 +117,7 @@ const BlogDetailPage = () => {
                 <span className="text-neutral-500 text-sm">Share this article</span>
                 <div className="flex gap-3 mt-2">
                   <a
-                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}`}
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://www.sgital.com/our-blog/${post.slug}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-neutral-800 text-neutral-300 rounded-lg text-sm hover:bg-neutral-700 transition-colors"
@@ -125,7 +125,7 @@ const BlogDetailPage = () => {
                     Twitter
                   </a>
                   <a
-                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(post.title)}`}
+                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`https://www.sgital.com/our-blog/${post.slug}`)}&title=${encodeURIComponent(post.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-neutral-800 text-neutral-300 rounded-lg text-sm hover:bg-neutral-700 transition-colors"

@@ -1,9 +1,12 @@
 import CareersPage from '@/components/pages/CareersPage';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Careers | Sgital — Join Our Team',
-  description: 'Join Sgital. Apply for ServiceNow consultant, business analyst, and engineering roles across Singapore, Bengaluru and Jodhpur.',
-};
+export const metadata = pageMetadata({
+  path: '/careers',
+  title: 'Careers at Sgital | ServiceNow Jobs in Singapore & India',
+  description:
+    'Join a 100% ServiceNow-focused team. Roles for developers, architects, consultants and trainers across Singapore, Bengaluru and Jodhpur.',
+});
 
 export default function Page() {
   return <CareersPage />;
