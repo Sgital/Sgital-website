@@ -11,15 +11,16 @@ export async function generateMetadata({ params }) {
   const post = getBlogBySlug(params.slug);
   if (!post) {
     return {
-      title: 'Article Not Found | Sgital',
+      title: 'Article Not Found',
       robots: { index: false, follow: false },
       alternates: { canonical: `${SITE_URL}/our-blog` },
     };
   }
   const isoDate = post.date ? new Date(post.date).toISOString() : undefined;
-  const baseMeta = pageMetadata({
+  // NOTE: do not append "| Sgital" here — the layout title template adds it.
+  return pageMetadata({
     path: `/our-blog/${post.slug}`,
-    title: `${post.title} | Sgital`,
+    title: post.title,
     description: post.description || post.excerpt || post.title,
     ogImage: post.image || DEFAULT_OG_IMAGE,
     ogType: 'article',
@@ -29,7 +30,6 @@ export async function generateMetadata({ params }) {
       authors: [post.author || 'Sgital'],
     },
   });
-  return baseMeta;
 }
 
 export default function Page({ params }) {

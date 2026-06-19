@@ -3,7 +3,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   path: '/privacy',
-  title: 'Privacy Policy | Sgital',
+  title: 'Privacy Policy',
   description: 'How Sgital collects, uses and protects your information.',
 });
 

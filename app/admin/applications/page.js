@@ -3,7 +3,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   path: '/admin/applications',
-  title: 'Admin — Applications | Sgital',
+  title: 'Admin — Applications',
   description: 'Sgital admin dashboard.',
   noindex: true,
 });
