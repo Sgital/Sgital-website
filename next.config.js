@@ -142,7 +142,6 @@ const LEGACY_REDIRECTS = [
 ].map((r) => ({ ...r, statusCode: 301 }));
 
 const nextConfig = {
-  output: 'standalone',
   skipTrailingSlashRedirect: true,
   images: {
     unoptimized: true,
