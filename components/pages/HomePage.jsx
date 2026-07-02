@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Play, AlertTriangle, CheckCircle2, Workflow, Shield, BarChart3, Layers, ExternalLink } from 'lucide-react';
+import { ArrowRight, Play, AlertTriangle, CheckCircle2, Workflow, Shield, BarChart3, Layers, ExternalLink, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import ProofBar from '@/components/sections/ProofBar';
+import { customerLogoWall, partnerStrap, certificationTagline } from '@/lib/data/mock';
 
 const HomePage = () => {
   return (
@@ -13,7 +15,23 @@ const HomePage = () => {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Trust Bar */}
+      {/* Proof Bar — 1,500+ / 80+ / 60+ / 3 */}
+      <ProofBar />
+
+      {/* Partner strap + certified-at-every-level one-liner */}
+      <section className="bg-neutral-950 pt-6 pb-2">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center space-y-3">
+          <p className="text-neutral-300 text-sm md:text-base font-medium">
+            {partnerStrap}
+          </p>
+          <p className="text-amber-400/90 text-xs md:text-sm inline-flex items-center gap-2 justify-center">
+            <Award className="w-4 h-4 flex-shrink-0" />
+            <span>{certificationTagline}</span>
+          </p>
+        </div>
+      </section>
+
+      {/* Customer logo wall (public + anonymised tiles) */}
       <TrustBar />
 
       {/* Problem Section */}
@@ -137,24 +155,14 @@ const HeroSection = () => {
   );
 };
 
-// Trust Bar Component with Infinite Carousel
+// Trust Bar Component with Infinite Carousel — uses sanitised customerLogoWall from mock.js.
+// Does NOT surface Keppel, Panasonic or Westpac NZ by name. Anonymised tiles render in their slots.
 const TrustBar = () => {
-  const clientLogosData = [
-    { name: 'ServiceNow', src: '/logos/servicenow.png', alt: 'ServiceNow' },
-    { name: 'TotalEnergies', src: '/logos/total-energies.svg', alt: 'TotalEnergies' },
-    { name: 'Air Liquide', src: '/logos/air-liquide.svg', alt: 'Air Liquide' },
-    { name: 'Panasonic', src: '/logos/panasonic.png', alt: 'Panasonic' },
-    { name: 'Seatrium', src: '/logos/seatrium.png', alt: 'Seatrium', invert: true },
-    { name: 'Idemitsu', src: '/logos/idemitsu.png', alt: 'Idemitsu', invert: true },
-    { name: 'Razer', src: '/logos/razer.png', alt: 'Razer' },
-    { name: 'Keppel', src: '/logos/keppel.png', alt: 'Keppel Corporation' }
-  ];
-
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...clientLogosData, ...clientLogosData, ...clientLogosData];
+  // Duplicate for seamless infinite scroll
+  const duplicatedLogos = [...customerLogoWall, ...customerLogoWall, ...customerLogoWall];
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.05)_0%,transparent_70%)]" />
@@ -164,37 +172,45 @@ const TrustBar = () => {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-center text-neutral-400 text-sm uppercase tracking-[0.2em] mb-12 font-medium">
+        <p className="text-center text-neutral-400 text-sm uppercase tracking-[0.2em] mb-10 font-medium">
           Trusted by enterprise teams to digitize, automate, and scale operations
         </p>
       </div>
 
       {/* Carousel Container */}
       <div className="relative group">
-        {/* Left Fade Gradient */}
+        {/* Left/Right Fade Gradients */}
         <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-neutral-950 via-neutral-950/80 to-transparent z-10 pointer-events-none" />
-        
-        {/* Right Fade Gradient */}
         <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-neutral-950 via-neutral-950/80 to-transparent z-10 pointer-events-none" />
 
         {/* Scrolling Track */}
         <div className="flex overflow-hidden">
           <div 
-            className="flex gap-8 md:gap-12 animate-scroll group-hover:[animation-play-state:paused]"
-            style={{
-              animation: 'scroll 30s linear infinite',
-            }}
+            className="flex gap-6 md:gap-8 animate-scroll group-hover:[animation-play-state:paused]"
+            style={{ animation: 'scroll 40s linear infinite' }}
           >
-            {duplicatedLogos.map((logo, index) => (
+            {duplicatedLogos.map((entry, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 flex items-center justify-center px-6 py-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 shadow-lg shadow-black/20 hover:bg-white/10 hover:border-amber-400/30 hover:shadow-amber-400/10 transition-all duration-300 cursor-pointer group/card"
+                className="flex-shrink-0 flex items-center justify-center px-6 py-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 shadow-lg shadow-black/20 hover:bg-white/10 hover:border-amber-400/30 hover:shadow-amber-400/10 transition-all duration-300 min-w-[180px] md:min-w-[200px] h-20 md:h-24"
+                title={entry.name}
               >
-                <img 
-                  src={logo.src} 
-                  alt={logo.alt}
-                  className={`h-10 md:h-12 w-auto min-w-[100px] max-w-[140px] object-contain transition-all duration-300 group-hover/card:scale-105 group-hover/card:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)] ${logo.invert ? 'brightness-0 invert opacity-90' : ''}`}
-                />
+                {entry.type === 'logo' ? (
+                  <img 
+                    src={entry.src} 
+                    alt={entry.alt || entry.name}
+                    className={`h-10 md:h-12 w-auto max-w-[160px] object-contain transition-all duration-300 group-hover/card:scale-105 ${entry.invert ? 'brightness-0 invert opacity-90' : ''}`}
+                  />
+                ) : (
+                  <div className="text-center leading-tight">
+                    <div className={`font-semibold ${entry.type === 'anon' ? 'text-neutral-300 text-xs md:text-sm' : 'text-white text-sm md:text-base'}`}>
+                      {entry.name}
+                    </div>
+                    {entry.type === 'anon' && (
+                      <div className="text-neutral-500 text-[10px] mt-1 uppercase tracking-wider">Enterprise Customer</div>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -204,19 +220,11 @@ const TrustBar = () => {
       {/* CSS Animation */}
       <style>{`
         @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-100% / 3));
-          }
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-100% / 3)); }
         }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-        }
-        .group:hover .animate-scroll {
-          animation-play-state: paused;
-        }
+        .animate-scroll { animation: scroll 40s linear infinite; }
+        .group:hover .animate-scroll { animation-play-state: paused; }
       `}</style>
     </section>
   );

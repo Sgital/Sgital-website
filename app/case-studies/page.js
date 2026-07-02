@@ -5,7 +5,7 @@ export const metadata = pageMetadata({
   path: '/case-studies',
   title: 'ServiceNow Implementation Case Studies | Sgital Success Stories',
   description:
-    'How Sgital has helped global enterprises transform with ServiceNow — Air Liquide, Razer, SiliconBox, SPH Media, GXBank, Keppel and more.',
+    'How Sgital has helped global enterprises transform with ServiceNow — Air Liquide, Razer, SiliconBox, SPH Media, GXBank, Allianz, Resorts World and more.',
 });
 
 const crumbs = breadcrumbSchema([

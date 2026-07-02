@@ -1,10 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle, Shield, MapPin } from 'lucide-react';
+import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle, Shield, MapPin, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { values, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails, contactInfo, productCertifications, accreditations, globalCoverage, officeLocations } from '@/lib/data/mock';
+import {
+  values, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails,
+  contactInfo, globalCoverage, officeLocations,
+  mainlineCertifications, suiteCertifications, certificationTotals, founder,
+} from '@/lib/data/mock';
 import { blogPosts } from '@/lib/data/blogData';
 
 const iconMap = { Heart, MessageCircle, Lightbulb, Globe };
@@ -59,6 +63,94 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* Meet Our Founder */}
+      <section className="bg-neutral-950 py-24 border-t border-neutral-900">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-6">
+              <Users className="w-4 h-4 text-amber-400" />
+              <span className="text-amber-400 text-sm font-medium">Leadership</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Meet Our <span className="text-amber-400">Founder</span>
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-[300px_1fr] gap-10 lg:gap-16 items-start max-w-6xl mx-auto">
+            {/* Photo column */}
+            <div className="flex justify-center lg:justify-start">
+              {founder.photoUrl ? (
+                <img
+                  src={founder.photoUrl}
+                  alt={founder.name}
+                  className="w-64 h-64 lg:w-72 lg:h-72 rounded-full object-cover border-4 border-amber-400/30 shadow-2xl shadow-amber-400/10"
+                />
+              ) : (
+                <div
+                  className="w-64 h-64 lg:w-72 lg:h-72 rounded-full flex items-center justify-center border-4 border-amber-400/30 bg-gradient-to-br from-neutral-800 to-neutral-900 shadow-2xl shadow-amber-400/10"
+                  title="Founder photo placeholder — replace with S3-hosted headshot (min 400×400)"
+                >
+                  <div className="text-center">
+                    <div className="text-6xl font-bold text-amber-400 mb-2">
+                      {founder.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
+                    </div>
+                    <div className="text-neutral-500 text-xs uppercase tracking-wider">Photo coming soon</div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Bio column */}
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{founder.name}</h3>
+              <div className="text-amber-400 font-medium mb-1">{founder.title}</div>
+              <div className="text-neutral-500 text-sm mb-6 flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                {founder.location}
+              </div>
+
+              {/* Pull-quote */}
+              {founder.quote && (
+                <div className="relative bg-neutral-900/60 border-l-4 border-amber-400 rounded-r-xl px-6 py-5 mb-6">
+                  <Quote className="w-6 h-6 text-amber-400/40 mb-2" />
+                  <p className="text-neutral-200 italic leading-relaxed">"{founder.quote}"</p>
+                </div>
+              )}
+
+              {/* Bio paragraphs */}
+              <div className="space-y-4 text-neutral-400 leading-relaxed mb-8">
+                {founder.bio.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href={founder.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold rounded-lg transition-colors"
+                >
+                  <Linkedin className="w-5 h-5" />
+                  Connect on LinkedIn
+                </a>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-neutral-700 text-white hover:bg-neutral-800 px-6"
+                >
+                  <Link href="/contact">
+                    Book a Meeting
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Values Section */}
       <section className="bg-neutral-900 py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -98,12 +190,16 @@ const AboutPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Our <span className="text-amber-400">ServiceNow Partnership</span>
             </h2>
-            <p className="text-neutral-400 max-w-3xl mx-auto mb-6">
+            <p className="text-neutral-400 max-w-3xl mx-auto mb-4">
               {partnershipDetails.description}
+            </p>
+            <p className="text-neutral-300 text-sm md:text-base mb-6">
+              {partnershipDetails.combinedExperience}.
             </p>
             <div className="flex items-center justify-center gap-2 text-amber-400">
               <Star className="w-5 h-5 fill-amber-400" />
-              <span className="text-lg font-semibold">Customer Satisfaction: {partnershipDetails.csatScore}</span>
+              <span className="text-lg font-semibold">CSAT: {partnershipDetails.csatScore}</span>
+              <span className="text-neutral-500 text-sm ml-1">({partnershipDetails.csatSource})</span>
             </div>
           </div>
 
@@ -157,49 +253,81 @@ const AboutPage = () => {
             </div>
           </div>
 
-          {/* Product Certifications */}
-          <div className="mb-16">
-            <h3 className="text-xl font-bold text-white text-center mb-8 flex items-center justify-center gap-2">
-              <Award className="w-6 h-6 text-amber-400" />
-              Product Certifications
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {productCertifications.map((cert, index) => (
-                <div
-                  key={index}
-                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
-                >
-                  <div className="text-amber-400 font-semibold mb-4">{cert.category}</div>
-                  <ul className="space-y-2">
-                    {cert.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-neutral-400 text-sm">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+          {/* Certified at Every Level */}
+          <div className="mb-12">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 flex items-center justify-center gap-2">
+                <Award className="w-7 h-7 text-amber-400" />
+                Certified at Every Level
+              </h3>
+              <p className="text-neutral-400 max-w-3xl mx-auto text-sm md:text-base">
+                117 mainline · 51 suite · 263 micro · 148 accreditations …and counting
+              </p>
+            </div>
+
+            {/* Mini stat row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-4xl mx-auto">
+              {certificationTotals.map((c) => (
+                <div key={c.label} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 text-center hover:border-amber-400/30 transition-colors">
+                  <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-1">{c.value}</div>
+                  <div className="text-neutral-400 text-xs uppercase tracking-wider">{c.label}</div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Accreditations */}
-          <div className="mb-12">
-            <h3 className="text-xl font-bold text-white text-center mb-8 flex items-center justify-center gap-2">
-              <Shield className="w-6 h-6 text-amber-400" />
-              Team Accreditations
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {accreditations.map((accred, index) => (
-                <div
-                  key={index}
-                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 text-center hover:border-amber-400/30 transition-all"
-                >
-                  <div className="text-4xl font-bold text-amber-400 mb-2">{accred.count}+</div>
-                  <div className="text-white font-semibold mb-3">{accred.type}</div>
-                  <p className="text-neutral-400 text-sm leading-relaxed">{accred.description}</p>
+            {/* Two tables side-by-side on desktop, stacked on mobile */}
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Mainline */}
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+                <div className="bg-neutral-800/60 px-6 py-4 border-b border-neutral-800 flex items-center justify-between">
+                  <h4 className="text-white font-semibold">Mainline Certifications</h4>
+                  <span className="text-amber-400 font-bold">Total: 117</span>
                 </div>
-              ))}
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left text-neutral-500 text-xs uppercase tracking-wider">
+                        <th className="px-6 py-3 font-medium">Certification</th>
+                        <th className="px-6 py-3 font-medium text-right">Certified</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-800">
+                      {mainlineCertifications.map((cert, i) => (
+                        <tr key={i} className="hover:bg-neutral-800/30 transition-colors">
+                          <td className="px-6 py-3 text-neutral-300">{cert.name}</td>
+                          <td className="px-6 py-3 text-amber-400 font-semibold text-right tabular-nums">{cert.count}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Suite */}
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+                <div className="bg-neutral-800/60 px-6 py-4 border-b border-neutral-800 flex items-center justify-between">
+                  <h4 className="text-white font-semibold">Suite Certifications</h4>
+                  <span className="text-amber-400 font-bold">Total: 51</span>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left text-neutral-500 text-xs uppercase tracking-wider">
+                        <th className="px-6 py-3 font-medium">Certification</th>
+                        <th className="px-6 py-3 font-medium text-right">Certified</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-800">
+                      {suiteCertifications.map((cert, i) => (
+                        <tr key={i} className="hover:bg-neutral-800/30 transition-colors">
+                          <td className="px-6 py-3 text-neutral-300">{cert.name}</td>
+                          <td className="px-6 py-3 text-amber-400 font-semibold text-right tabular-nums">{cert.count}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
 
