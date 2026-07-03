@@ -186,12 +186,12 @@ const nextConfig = {
   async redirects() {
     return [
       // Part 1: apex (sgital.com) -> www.sgital.com, preserving path + query.
-      // Next.js matches has[].value as a regex; anchor it so we ONLY match the apex
-      // (otherwise 'sgital.com' would substring-match 'www.sgital.com' too).
+      // Note: middleware.js handles the same rule with more robust host detection
+      // (checks x-forwarded-host + host). This next.config redirect is a backup.
       {
         source: '/:path*',
-        has: [{ type: 'host', value: '^sgital\\.com$' }],
-        destination: `${SITE_URL_WWW}/:path*`,
+        has: [{ type: 'host', value: 'sgital.com' }],
+        destination: 'https://www.sgital.com/:path*',
         permanent: true,
         statusCode: 301,
       },
