@@ -171,6 +171,7 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // Global response headers on all paths (CORS + iframe embedding + basic security).
       {
         source: '/(.*)',
         headers: [
@@ -181,6 +182,18 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Headers', value: '*' },
         ],
       },
+      // Immutable brand assets: aggressive year-long cache at BOTH browser + CDN.
+      // Filenames rarely change; when they do we bust with a new filename.
+      {
+        source: '/logos/:file*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          { key: 'CDN-Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // Note: HTML page routes are cache-controlled from middleware.js via
+      // CDN-Cache-Control (Cloudflare-honored), because Next.js 14.2.x bakes
+      // in `s-maxage=31536000` on cached responses that headers() cannot override.
     ];
   },
   async redirects() {
