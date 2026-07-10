@@ -47,11 +47,17 @@ function verifyBasicAuth(request) {
 }
 
 function unauthorized() {
+  // NOTE: intentionally NO `WWW-Authenticate: Basic` header.
+  // If we send that header, every browser will pop up the NATIVE Basic Auth
+  // dialog on top of our custom /admin/applications login form the moment
+  // any 401 response comes back — even for XHR/fetch requests where the
+  // JavaScript would otherwise handle the error itself. That native popup
+  // is what caused users to be stuck in the "double login" loop.
+  //
+  // We keep the 401 status so the custom login form's `response.ok` check
+  // still shows "Invalid username or password" to the user.
   return handleCORS(
-    NextResponse.json({ error: 'Incorrect username or password' }, {
-      status: 401,
-      headers: { 'WWW-Authenticate': 'Basic' },
-    })
+    NextResponse.json({ error: 'Incorrect username or password' }, { status: 401 })
   );
 }
 
