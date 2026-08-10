@@ -198,17 +198,15 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Part 1: apex (sgital.com) -> www.sgital.com, preserving path + query.
-      // Note: middleware.js handles the same rule with more robust host detection
-      // (checks x-forwarded-host + host). This next.config redirect is a backup.
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'sgital.com' }],
-        destination: 'https://www.sgital.com/:path*',
-        permanent: true,
-        statusCode: 301,
-      },
-      // Part 2: 57 legacy WordPress URL redirects
+      // NOTE: apex (sgital.com) -> www.sgital.com is handled ONLY in middleware.js.
+      // Previously we also had a next.config.js redirect rule for the same,
+      // but Cloudflare + Emergent ingress can set x-forwarded-host inconsistently
+      // and the two layers together caused an ERR_TOO_MANY_REDIRECTS loop.
+      // Middleware runs earlier, has richer host-header inspection, and is
+      // loop-safe (checks Host header exactly + refuses to redirect if any
+      // signal indicates www).
+
+      // 57 legacy WordPress URL redirects
       ...LEGACY_REDIRECTS,
     ];
   },
