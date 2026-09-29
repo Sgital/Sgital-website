@@ -6,53 +6,23 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { caseStudies } from '@/lib/data/mock';
 
-// Filter categories (ServiceNow workflow families).
+// Filter categories (ServiceNow workflow families). Category lives on each
+// case study record in lib/data/mock.js.
 const FILTERS = ['All', 'AI & GenAI', 'Technology', 'Employee', 'Customer', 'Risk & Security'];
-
-// Category assignment per case study id.
-const CATEGORY_BY_ID = {
-  7: 'AI & GenAI',
-  8: 'AI & GenAI',
-  16: 'Technology',
-  13: 'Technology',
-  12: 'Technology',
-  10: 'Technology',
-  9: 'Technology',
-  1: 'Technology',
-  2: 'Technology',
-  17: 'Employee',
-  15: 'Employee',
-  6: 'Employee',
-  3: 'Customer',
-  14: 'Risk & Security',
-  11: 'Risk & Security',
-  4: 'Risk & Security',
-  5: 'Risk & Security',
-};
-
-// Quantified results already present in the data (not invented).
-// Every other case study shows "Results: to be updated".
-const RESULTS_BY_ID = {
-  15: '100% elimination of email-based reporting; hundreds of hours saved',
-  9: '40% faster document retrieval; 50% faster approvals',
-  1: 'Active users grew from 200 to 1,000',
-};
-
-const AI_IDS = [7, 8];
 
 const CaseStudiesPage = () => {
   const [activeFilter, setActiveFilter] = useState('All');
 
   // AI & GenAI studies first, then the rest in their existing order.
   const ordered = [
-    ...caseStudies.filter((s) => AI_IDS.includes(s.id)),
-    ...caseStudies.filter((s) => !AI_IDS.includes(s.id)),
+    ...caseStudies.filter((s) => s.category === 'AI & GenAI'),
+    ...caseStudies.filter((s) => s.category !== 'AI & GenAI'),
   ];
 
   const visible =
     activeFilter === 'All'
       ? ordered
-      : ordered.filter((s) => CATEGORY_BY_ID[s.id] === activeFilter);
+      : ordered.filter((s) => s.category === activeFilter);
 
   return (
     <>
@@ -102,9 +72,6 @@ const CaseStudiesPage = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {visible.map((study) => {
-              const isAI = AI_IDS.includes(study.id);
-              const displayTags = isAI ? ['AI & GenAI', ...study.tags] : study.tags;
-              const results = RESULTS_BY_ID[study.id] || 'to be updated';
               return (
                 <div
                   key={study.id}
@@ -126,11 +93,11 @@ const CaseStudiesPage = () => {
                       {study.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {displayTags.map((tag, i) => (
+                      {study.tags.map((tag, i) => (
                         <span
                           key={i}
                           className={`px-2 py-1 text-xs rounded ${
-                            isAI && i === 0
+                            tag === 'AI & GenAI'
                               ? 'bg-amber-400/20 text-amber-400 font-medium'
                               : 'bg-neutral-800 text-neutral-400'
                           }`}
@@ -146,12 +113,12 @@ const CaseStudiesPage = () => {
                     <div className="bg-neutral-800/50 rounded-xl p-4">
                       <div className="text-xs text-neutral-500 uppercase tracking-wider mb-2">Key Metrics</div>
                       <div className="text-amber-400 font-semibold">{study.metrics}</div>
-                      <div className="mt-3 pt-3 border-t border-neutral-700/50">
-                        <span className="text-xs text-neutral-500 uppercase tracking-wider">Results: </span>
-                        <span className={`text-sm ${results === 'to be updated' ? 'text-neutral-500 italic' : 'text-neutral-200'}`}>
-                          {results}
-                        </span>
-                      </div>
+                      {study.results && (
+                        <div className="mt-3 pt-3 border-t border-neutral-700/50">
+                          <span className="text-xs text-neutral-500 uppercase tracking-wider">Results: </span>
+                          <span className="text-sm text-neutral-200">{study.results}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
