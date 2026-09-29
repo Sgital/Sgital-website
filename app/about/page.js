@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: '/about',
   title: 'About Sgital | ServiceNow Premier Partner in Singapore, Bengaluru & Jodhpur',
   description:
-    'Sgital is 100% focused on ServiceNow — Premier Partner for Consulting & Implementation, Reseller, Build and Authorized Training partner, Partner Advisory Council member. 60+ certified consultants, 40+ enterprise customers, 2,000+ AI workflows delivered.',
+    'Sgital is a ServiceNow and Anthropic partner — ServiceNow Premier Partner for Consulting & Implementation, Reseller, Build and Authorized Training partner, Partner Advisory Council member, and Claude Partner Network member. 60+ certified consultants, 40+ enterprise customers, 2,000+ AI workflows delivered.',
 });
 
 const crumbs = breadcrumbSchema([

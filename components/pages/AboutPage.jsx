@@ -87,8 +87,8 @@ const AboutPage = () => {
                 <span className="text-amber-400 text-sm font-medium">About Sgital</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                100% Focused on
-                <span className="text-amber-400"> ServiceNow</span>
+                Enterprise AI, delivered on
+                <span className="text-amber-400"> ServiceNow and Claude</span>
               </h1>
               <p className="text-lg text-neutral-400 leading-relaxed mb-8">
                 {companyInfo.description}. Founded in {companyInfo.founded} and headquartered in 
@@ -243,12 +243,12 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* ServiceNow Partnership Details */}
+      {/* Partnerships Details */}
       <section className="bg-neutral-950 py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Our <span className="text-amber-400">ServiceNow Partnership</span>
+              Our <span className="text-amber-400">Partnerships</span>
             </h2>
             <p className="text-neutral-400 max-w-3xl mx-auto mb-4">
               {partnershipDetails.description}
@@ -264,9 +264,30 @@ const AboutPage = () => {
                 rel="noopener noreferrer"
                 className="text-lg font-semibold hover:text-amber-300 transition-colors inline-flex items-center gap-1.5"
               >
-                CSAT 4.8/5 on ServiceNow Partner Finder
+                CSAT 4.8 out of 5 (ServiceNow Partner Finder)
                 <ExternalLink className="w-4 h-4" />
               </a>
+            </div>
+          </div>
+
+          {/* Anthropic subsection */}
+          <div className="max-w-3xl mx-auto mb-16">
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 md:p-8 text-center hover:border-amber-400/30 transition-all">
+              <span className="inline-block px-3 py-1 bg-amber-400/10 text-amber-400 text-xs font-semibold rounded-full mb-4 tracking-wide">
+                ANTHROPIC
+              </span>
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-3">Claude Partner Network Member</h3>
+              <p className="text-neutral-400 leading-relaxed mb-5">
+                We design, build and run Claude solutions — standalone and inside ServiceNow, where Claude
+                is the default model for Build Agent.
+              </p>
+              <Link
+                href="/claude"
+                className="inline-flex items-center gap-2 text-amber-400 font-medium hover:gap-3 transition-all"
+              >
+                Explore our Claude practice
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
 
