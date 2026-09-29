@@ -258,8 +258,15 @@ const AboutPage = () => {
             </p>
             <div className="flex items-center justify-center gap-2 text-amber-400">
               <Star className="w-5 h-5 fill-amber-400" />
-              <span className="text-lg font-semibold">CSAT: {partnershipDetails.csatScore}</span>
-              <span className="text-neutral-500 text-sm ml-1">({partnershipDetails.csatSource})</span>
+              <a
+                href={contactInfo.partnerFinder}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lg font-semibold hover:text-amber-300 transition-colors inline-flex items-center gap-1.5"
+              >
+                CSAT 4.8/5 on ServiceNow Partner Finder
+                <ExternalLink className="w-4 h-4" />
+              </a>
             </div>
           </div>
 

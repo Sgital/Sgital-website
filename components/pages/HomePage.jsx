@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Play, AlertTriangle, CheckCircle2, Workflow, Shield, BarChart3, Layers, ExternalLink, Award } from 'lucide-react';
+import { ArrowRight, Play, AlertTriangle, CheckCircle2, Workflow, Shield, BarChart3, Layers, ExternalLink, Award, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import ProofBar from '@/components/sections/ProofBar';
 import AnnouncementBanner from '@/components/sections/AnnouncementBanner';
-import { customerLogoWall, partnerStrap, certificationTagline } from '@/lib/data/mock';
+import { customerLogoWall, partnerStrap, certificationTagline, partnershipBadges, contactInfo } from '@/lib/data/mock';
 
 const HomePage = () => {
   return (
@@ -17,7 +17,23 @@ const HomePage = () => {
       <HeroSection />
 
       {/* Proof Bar — 9+ / 2,000+ / 60+ / 40+ */}
-      <ProofBar />
+      <ProofBar
+        caption={
+          <a
+            href={contactInfo.partnerFinder}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="home-csat-caption"
+            className="inline-flex items-center gap-1.5 text-neutral-400 text-xs md:text-sm hover:text-amber-400 transition-colors"
+          >
+            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+            <span>
+              <span className="text-amber-400 font-semibold">CSAT 4.8/5</span> on ServiceNow Partner Finder
+            </span>
+            <ExternalLink className="w-3 h-3 opacity-70" />
+          </a>
+        }
+      />
 
       {/* Partner strap + certified-at-every-level one-liner */}
       <section className="bg-neutral-950 pt-6 pb-2">
@@ -34,6 +50,9 @@ const HomePage = () => {
 
       {/* Customer logo wall (public + anonymised tiles) */}
       <TrustBar />
+
+      {/* Our Partnerships */}
+      <PartnershipsSection />
 
       {/* Problem Section */}
       <ProblemSection />
@@ -72,19 +91,19 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-8">
               <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-              <span className="text-amber-400 text-sm font-medium">Enterprise AI Solutions</span>
+              <span className="text-amber-400 text-sm font-medium">Enterprise AI Workflows</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              The AI Control Tower
-              <span className="block text-amber-400">for Enterprise Workflows</span>
+              Enterprise AI, put to work on
+              <span className="block text-amber-400">ServiceNow and Claude</span>
             </h1>
 
             {/* Subtext */}
             <p className="text-lg md:text-xl text-neutral-400 leading-relaxed mb-10 lg:max-w-xl">
-              Sgital helps enterprises operationalize AI across workflows—with governance,
-              control, and measurable outcomes delivered in weeks, not years.
+              Sgital helps enterprises move AI from pilot to production — governed, integrated
+              into the workflows you run, and measured in weeks, not years.
             </p>
 
             {/* CTA Buttons */}
@@ -93,8 +112,8 @@ const HeroSection = () => {
                 asChild
                 className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-8 py-6 text-base group"
               >
-                <Link href="/goai">
-                  See AI in Action
+                <Link href="/contact">
+                  Book an AI Readiness Session
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -103,9 +122,9 @@ const HeroSection = () => {
                 variant="outline"
                 className="border-neutral-700 text-white hover:bg-neutral-800 px-8 py-6 text-base"
               >
-                <Link href="/contact">
+                <Link href="/claude">
                   <Play className="mr-2 w-5 h-5" />
-                  Get a Workflow Assessment
+                  Explore our Claude practice
                 </Link>
               </Button>
             </div>
@@ -230,6 +249,94 @@ const TrustBar = () => {
     </section>
   );
 };
+
+// Our Partnerships Section — two equal cards: ServiceNow + Anthropic (Claude).
+const PartnershipsSection = () => {
+  const serviceNowDesignations = [
+    'Premier Partner — Consulting & Implementation',
+    'Select Partner — Reseller',
+    'Registered Partner — Build',
+    'Authorized Training Partner',
+    'Partner Advisory Council Member 2025',
+  ];
+
+  return (
+    <section className="bg-neutral-950 py-20 border-t border-neutral-900" data-testid="home-partnerships">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Our <span className="text-amber-400">Partnerships</span>
+          </h2>
+          <p className="text-neutral-400">
+            Two platform partnerships, one delivery team — bringing governed enterprise AI to the workflows you run.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 items-stretch">
+          {/* ServiceNow Card */}
+          <div className="flex flex-col bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8 hover:border-amber-400/30 transition-all">
+            <span className="inline-block self-start px-3 py-1 bg-amber-400/10 text-amber-400 text-xs font-semibold rounded-full mb-4 tracking-wide">
+              SERVICENOW
+            </span>
+            <h3 className="text-2xl font-bold text-white mb-4">ServiceNow Premier Partner</h3>
+            <ul className="space-y-2.5 mb-6">
+              {serviceNowDesignations.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-neutral-300 text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Existing ServiceNow badges */}
+            <div className="flex flex-wrap items-center gap-4 mb-8 mt-auto">
+              {partnershipBadges.map((badge, i) => (
+                <img
+                  key={i}
+                  src={badge.image}
+                  alt={badge.alt}
+                  title={badge.name}
+                  className="h-14 w-auto object-contain"
+                />
+              ))}
+            </div>
+
+            <Link
+              href="/solutions"
+              data-testid="home-partnership-servicenow-link"
+              className="inline-flex items-center gap-2 text-amber-400 font-medium hover:gap-3 transition-all"
+            >
+              ServiceNow services
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Anthropic (Claude) Card — text only, no logo */}
+          <div className="flex flex-col bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8 hover:border-amber-400/30 transition-all">
+            <span className="inline-block self-start px-3 py-1 bg-amber-400/10 text-amber-400 text-xs font-semibold rounded-full mb-4 tracking-wide">
+              ANTHROPIC
+            </span>
+            <h3 className="text-2xl font-bold text-white mb-4">Claude Partner Network Member</h3>
+            <p className="text-neutral-300 leading-relaxed mb-8">
+              We design, build and run Claude solutions — standalone and inside ServiceNow, where
+              Claude is the default model for Build Agent.
+            </p>
+
+            <Link
+              href="/claude"
+              data-testid="home-partnership-claude-link"
+              className="inline-flex items-center gap-2 text-amber-400 font-medium hover:gap-3 transition-all mt-auto"
+            >
+              Claude services
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 // Problem Section Component
 const ProblemSection = () => {

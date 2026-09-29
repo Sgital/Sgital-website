@@ -65,7 +65,7 @@ const AnimatedNumber = ({ value, duration = 1400 }) => {
   );
 };
 
-const ProofBar = ({ compact = false }) => {
+const ProofBar = ({ compact = false, caption = null }) => {
   return (
     <section className={`bg-neutral-950 ${compact ? 'py-10' : 'py-16'} border-y border-neutral-900`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -79,6 +79,11 @@ const ProofBar = ({ compact = false }) => {
             </div>
           ))}
         </div>
+        {caption && (
+          <div className="mt-8 text-center">
+            {caption}
+          </div>
+        )}
       </div>
     </section>
   );
