@@ -68,6 +68,7 @@ const Header = () => {
       ]
     },
     { name: 'GoAI 2.0', href: '/goai' },
+    { name: 'Claude', href: '/claude' },
     { name: 'Industries', href: '/industries' },
     { name: 'Case Studies', href: '/case-studies' },
     { 

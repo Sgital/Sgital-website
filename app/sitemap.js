@@ -8,6 +8,7 @@ export default function sitemap() {
   const staticRoutes = [
     { url: '/', changeFrequency: 'weekly', priority: 1.0 },
     { url: '/goai', changeFrequency: 'monthly', priority: 0.9 },
+    { url: '/claude', changeFrequency: 'monthly', priority: 0.9 },
     { url: '/solutions', changeFrequency: 'monthly', priority: 0.9 },
     { url: '/solutions?category=ai', changeFrequency: 'monthly', priority: 0.9 },
     { url: '/solutions?category=technology', changeFrequency: 'monthly', priority: 0.9 },
