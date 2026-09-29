@@ -5,12 +5,13 @@ import { ArrowRight, Play, AlertTriangle, CheckCircle2, Workflow, Shield, BarCha
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import ProofBar from '@/components/sections/ProofBar';
+import AnnouncementBanner from '@/components/sections/AnnouncementBanner';
 import { customerLogoWall, partnerStrap, certificationTagline } from '@/lib/data/mock';
 
 const HomePage = () => {
   return (
     <>
-      
+      <AnnouncementBanner />
 
       {/* Hero Section */}
       <HeroSection />

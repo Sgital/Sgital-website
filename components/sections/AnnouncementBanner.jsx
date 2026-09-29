@@ -4,10 +4,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 
-const STORAGE_KEY = 'sgital_k26_banner_dismissed_v1';
+/* =========================================================================
+ * EASY ON/OFF SWITCH
+ * After the event, set BANNER_ENABLED to false to hide the announcement bar.
+ * (One line — no other changes needed.)
+ * ========================================================================= */
+const BANNER_ENABLED = true;
+
+const STORAGE_KEY = 'sgital_wf_mumbai_banner_dismissed_v1';
 
 /**
- * Dismissible site-wide announcement banner for ServiceNow Knowledge26.
+ * Dismissible announcement banner for ServiceNow World Forum Mumbai (6 Oct 2026).
  * Height adapts to content (mobile wraps to 2 lines, desktop stays 1 line).
  * Exposes actual measured height as --banner-h so the fixed Header can offset itself.
  */
@@ -16,6 +23,7 @@ const AnnouncementBanner = () => {
   const bannerRef = useRef(null);
 
   useEffect(() => {
+    if (!BANNER_ENABLED) return;
     try {
       if (localStorage.getItem(STORAGE_KEY) !== '1') {
         setVisible(true);
@@ -61,7 +69,7 @@ const AnnouncementBanner = () => {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!BANNER_ENABLED || !visible) return null;
 
   return (
     <div
@@ -70,18 +78,15 @@ const AnnouncementBanner = () => {
       className="fixed top-0 left-0 right-0 z-[70] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-neutral-950 shadow-lg"
     >
       <Link
-        href="/our-blog/are-you-attending-knowledge26"
+        href="/our-blog/servicenow-world-forum-mumbai-2026"
         className="flex items-center justify-center gap-2 sm:gap-3 pl-3 pr-10 sm:pl-12 sm:pr-12 py-2 sm:py-2.5 text-xs sm:text-sm font-medium hover:bg-amber-400/90 transition-colors"
         data-testid="announcement-banner-link"
       >
         <Sparkles className="w-4 h-4 flex-shrink-0 hidden sm:inline" />
         <span className="text-center leading-snug">
-          <span className="font-bold">Meet us at ServiceNow Knowledge26</span>
-          <span className="hidden md:inline"> · Las Vegas · May 5–7, 2026</span>
-          <span className="hidden sm:inline mx-2 opacity-50">·</span>
-          <span className="block sm:inline underline underline-offset-2 decoration-neutral-900/30 hover:decoration-neutral-900">
-            Book a meeting with our CEO
-          </span>
+          <span className="font-bold">At ServiceNow World Forum Mumbai on 6 Oct?</span>
+          <span className="mx-1.5">Let's meet</span>
+          <span aria-hidden="true">&rarr;</span>
         </span>
         <ArrowRight className="w-4 h-4 flex-shrink-0 hidden sm:inline" />
       </Link>
