@@ -4,6 +4,8 @@ import { pageMetadata, breadcrumbSchema, JsonLd } from '@/lib/seo';
 const baseMeta = pageMetadata({
   path: '/claude',
   title: 'Claude Services | Anthropic Claude Partner | Sgital',
+  keywords:
+    'Claude, Anthropic partner, Claude consulting, Claude Partner Network, Claude on ServiceNow, Claude agents, Claude Code, enterprise AI, Anthropic Claude, Claude readiness',
   description:
     'Sgital helps enterprises design, build and run Claude in production — from a 2–3 week Claude Readiness Sprint to enterprise rollout, custom agents, Claude on ServiceNow and managed AI operations. Member of the Claude Partner Network.',
 });

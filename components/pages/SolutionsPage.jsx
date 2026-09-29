@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
 import { Server, Settings, Database, BarChart3, Users, Building2, Headphones, MapPin, Shield, ShieldCheck, Layers, GraduationCap, ArrowRight, Cpu, Bot, Eye, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -70,24 +69,14 @@ const colorMap = {
   violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/30', text: 'text-violet-400', hover: 'hover:border-violet-500/50' }
 };
 
-const SolutionsPage = () => {
-  const searchParams = useSearchParams();
-  const [activeCategory, setActiveCategory] = useState('all');
+const SolutionsPage = ({ initialCategory = 'all' }) => {
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
 
-  // Handle URL parameters for category selection
+  // Keep in sync when navigating between categories (server passes the new value
+  // via searchParams, so the correct category is always in the server-rendered HTML).
   useEffect(() => {
-    const params = searchParams;
-    const categoryParam = params.get('category');
-    
-    if (categoryParam) {
-      const matchedCategory = categories.find(c => c.urlParam === categoryParam);
-      if (matchedCategory) {
-        setActiveCategory(matchedCategory.id);
-      }
-    } else {
-      setActiveCategory('all');
-    }
-  }, [searchParams?.toString()]);
+    setActiveCategory(initialCategory);
+  }, [initialCategory]);
 
   // Combine all services including AI Workflows
   const allServices = [...aiWorkflowServices, ...services];
