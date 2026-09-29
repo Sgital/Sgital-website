@@ -109,7 +109,7 @@ const GoAIPage = () => {
               
               <div className="space-y-4">
                 {[
-                  'Proven methodology with 2,000+ AI workflows delivered',
+                  'Proven methodology behind 2,000+ AI workflows delivered',
                   'Measurable ROI at every phase',
                   'Built on ServiceNow NowAssist capabilities',
                   'Governance and compliance built-in',
@@ -124,7 +124,7 @@ const GoAIPage = () => {
             </div>
 
             <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Expected Outcomes</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Target Outcomes</h3>
               <div className="grid grid-cols-2 gap-6">
                 {[
                   { value: '40%', label: 'Reduction in resolution time' },
@@ -138,6 +138,9 @@ const GoAIPage = () => {
                   </div>
                 ))}
               </div>
+              <p className="text-xs text-neutral-500 mt-6 text-center leading-relaxed">
+                Targets based on typical GoAI engagements; actual results vary by scope.
+              </p>
             </div>
           </div>
         </div>
@@ -232,6 +235,23 @@ const GoAIPage = () => {
               </Button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Claude cross-link */}
+      <section className="bg-neutral-950 pb-16 -mt-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <p className="text-neutral-400">
+            Building AI beyond ServiceNow?{' '}
+            <Link
+              href="/claude"
+              data-testid="goai-claude-link"
+              className="text-amber-400 font-medium hover:text-amber-300 transition-colors inline-flex items-center gap-1"
+            >
+              See our Claude services
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </p>
         </div>
       </section>
     </>
