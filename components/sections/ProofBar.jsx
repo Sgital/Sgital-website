@@ -5,7 +5,7 @@ import { stats } from '@/lib/data/mock';
 
 /**
  * Animated count-up proof bar. Renders the 4 canonical hero numbers
- * (1,500+ / 80+ / 60+ / 3) with a scroll-triggered count-up animation.
+ * (9+ / 2,000+ / 60+ / 40+) with a scroll-triggered count-up animation.
  *
  * SSR-safe: initial render emits the FINAL value (not 0). This is
  * critical for SEO / social-preview crawlers that don't run JS.
@@ -19,7 +19,7 @@ const AnimatedNumber = ({ value, duration = 1400 }) => {
   const [display, setDisplay] = useState(String(value));
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Parse leading numeric portion (e.g. "1,500+" -> {num: 1500, suffix: "+"})
+  // Parse leading numeric portion (e.g. "2,000+" -> {num: 2000, suffix: "+"})
   const match = String(value).match(/^([\d,]+)(.*)$/);
   const target = match ? parseInt(match[1].replace(/,/g, ''), 10) : 0;
   const suffix = match ? match[2] : '';

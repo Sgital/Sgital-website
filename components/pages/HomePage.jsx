@@ -16,7 +16,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Proof Bar — 1,500+ / 80+ / 60+ / 3 */}
+      {/* Proof Bar — 9+ / 2,000+ / 60+ / 40+ */}
       <ProofBar />
 
       {/* Partner strap + certified-at-every-level one-liner */}

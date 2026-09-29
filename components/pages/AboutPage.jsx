@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Heart, MessageCircle, Lightbulb, Globe, Award, Users, ArrowRight, Quote, BookOpen, Calendar, ExternalLink, Star, CheckCircle, Shield, MapPin, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -12,6 +12,66 @@ import {
 import { blogPosts } from '@/lib/data/blogData';
 
 const iconMap = { Heart, MessageCircle, Lightbulb, Globe };
+
+// Coverage card — collapses the large EMEA list to a summary with an expandable "view all".
+const CoverageCard = ({ region }) => {
+  const [expanded, setExpanded] = useState(false);
+  const isEmea = /europe/i.test(region.name);
+
+  return (
+    <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all">
+      <div className="flex items-center gap-2 mb-4">
+        <Globe className="w-5 h-5 text-amber-400" />
+        <h4 className="text-white font-semibold">{region.name}</h4>
+      </div>
+      <div className="text-amber-400 text-sm font-medium mb-3">
+        {region.countries.length} {region.countries.length === 1 ? 'Country' : 'Countries'}
+      </div>
+
+      {isEmea && !expanded ? (
+        <div>
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span className="px-3 py-1 bg-neutral-950 border border-neutral-700 text-neutral-300 text-xs rounded-full">
+              United Kingdom
+            </span>
+            <span className="px-3 py-1 text-neutral-400 text-xs self-center">
+              and {region.countries.length - 1} other European countries
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="text-amber-400 text-xs font-medium hover:text-amber-300 transition-colors"
+          >
+            View all
+          </button>
+        </div>
+      ) : (
+        <div>
+          <div className="flex flex-wrap gap-2">
+            {region.countries.map((country, idx) => (
+              <span
+                key={idx}
+                className="px-3 py-1 bg-neutral-950 border border-neutral-700 text-neutral-300 text-xs rounded-full"
+              >
+                {country}
+              </span>
+            ))}
+          </div>
+          {isEmea && (
+            <button
+              type="button"
+              onClick={() => setExpanded(false)}
+              className="mt-3 text-amber-400 text-xs font-medium hover:text-amber-300 transition-colors"
+            >
+              Show less
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const AboutPage = () => {
   return (
@@ -32,7 +92,7 @@ const AboutPage = () => {
               </h1>
               <p className="text-lg text-neutral-400 leading-relaxed mb-8">
                 {companyInfo.description}. Founded in {companyInfo.founded} and headquartered in 
-                {companyInfo.headquarters}, we've grown to serve enterprises across {companyInfo.globalPresence.length} regions.
+                {companyInfo.headquarters}, we've grown to serve enterprises across {companyInfo.globalPresence.length} countries.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -430,35 +490,20 @@ const AboutPage = () => {
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
               {globalCoverage.consulting.regions.map((region, index) => (
-                <div
-                  key={index}
-                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-amber-400/30 transition-all"
-                >
-                  <div className="flex items-center gap-2 mb-4">
-                    <Globe className="w-5 h-5 text-amber-400" />
-                    <h4 className="text-white font-semibold">{region.name}</h4>
-                  </div>
-                  <div className="text-amber-400 text-sm font-medium mb-3">
-                    {region.countries.length} {region.countries.length === 1 ? 'Country' : 'Countries'}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {region.countries.slice(0, 8).map((country, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 bg-neutral-950 border border-neutral-700 text-neutral-300 text-xs rounded-full"
-                      >
-                        {country}
-                      </span>
-                    ))}
-                    {region.countries.length > 8 && (
-                      <span className="px-3 py-1 text-neutral-500 text-xs">
-                        +{region.countries.length - 8} more
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <CoverageCard key={index} region={region} />
               ))}
             </div>
+            <p className="text-center text-neutral-500 text-sm mt-6">
+              <a
+                href={contactInfo.partnerFinder}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-400 hover:text-amber-300 transition-colors inline-flex items-center gap-1"
+              >
+                Coverage validated on ServiceNow Partner Finder
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </p>
           </div>
 
           {/* Reseller Coverage */}
@@ -566,7 +611,7 @@ const AboutPage = () => {
             Ready to Partner with Us?
           </h2>
           <p className="text-lg text-neutral-400 mb-8 max-w-2xl mx-auto">
-            Join enterprises across 3 global regions who trust Sgital for their ServiceNow journey.
+            Join enterprises across six countries who trust Sgital for their ServiceNow journey.
           </p>
           <Button
             asChild

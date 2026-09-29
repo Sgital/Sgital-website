@@ -12,7 +12,7 @@ export const metadata = {
     template: '%s | Sgital',
   },
   description:
-    'Sgital is a ServiceNow Premier Partner delivering AI-powered enterprise workflows across Singapore, Australia, India and the UK. GoAI 2.0 framework available on the ServiceNow Store.',
+    'Sgital is a ServiceNow Premier Partner delivering AI-powered enterprise workflows across Singapore, India, Malaysia, Australia, New Zealand and the United Kingdom. GoAI 2.0 framework available on the ServiceNow Store.',
   keywords:
     'ServiceNow Premier Partner, enterprise AI workflows, ServiceNow Partner Singapore, ServiceNow Partner Australia, ServiceNow Partner India, NowAssist, GoAI 2.0, enterprise automation, digital transformation, ASEAN ServiceNow consulting',
   icons: { icon: '/favicon.png' },

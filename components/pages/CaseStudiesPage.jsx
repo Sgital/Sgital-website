@@ -84,10 +84,10 @@ const CaseStudiesPage = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '80+', label: 'Successful Projects' },
-              { value: '1500+', label: 'Workflows Delivered' },
+              { value: '2,000+', label: 'AI Workflows Delivered' },
               { value: '60+', label: 'Certified Consultants' },
-              { value: '3', label: 'Global Regions' }
+              { value: '40+', label: 'Enterprise Customers' },
+              { value: '9+', label: 'Years' }
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-amber-400 mb-2">{stat.value}</div>

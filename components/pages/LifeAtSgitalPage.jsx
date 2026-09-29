@@ -11,8 +11,8 @@ const API = '/api';
 const videos = [
   {
     id: 'C5kAG34kyo8',
-    title: 'SGITAL Completes 8 Years of ServiceNow Workflows Excellence',
-    description: 'Celebrating 8 years of transforming enterprise workflows with ServiceNow across Asia-Pacific.',
+    title: 'SGITAL Completes 9+ Years of ServiceNow Workflows Excellence',
+    description: 'Celebrating 9+ years of transforming enterprise workflows with ServiceNow across Asia-Pacific.',
     duration: '2:15',
     views: '23 views',
     date: '6 months ago',
@@ -172,7 +172,7 @@ const LifeAtSgitalPage = () => {
               </div>
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 text-center hover:border-amber-400/30 transition-colors">
                 <Sparkles className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-white mb-1">8+</div>
+                <div className="text-2xl font-bold text-white mb-1">9+</div>
                 <div className="text-neutral-400 text-sm">Years of Excellence</div>
               </div>
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 text-center hover:border-amber-400/30 transition-colors">
