@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getBlogBySlug, getRelatedPosts, blogPosts } from '@/lib/data/blogData';
+import { getBlogBySlug, getRelatedPosts, blogPosts, usesBrandedCover } from '@/lib/data/blogData';
+import BrandedCover from '@/components/sections/BrandedCover';
 
 const BlogDetailPage = () => {
   const { slug } = useParams();
@@ -50,17 +51,21 @@ const BlogDetailPage = () => {
             Back to Blog
           </button>
 
-          {post.image && (
-            <div className="relative h-64 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden mb-8">
-              <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent" />
-              <div className="absolute top-6 left-6">
-                <span className="px-4 py-2 bg-amber-400 text-neutral-950 text-sm font-semibold rounded-full">
-                  {post.category}
-                </span>
-              </div>
-            </div>
-          )}
+          <div className="relative h-64 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden mb-8">
+            {usesBrandedCover(post) ? (
+              <BrandedCover title={post.title} category={post.category} titleClassName="text-2xl md:text-4xl max-w-3xl" />
+            ) : (
+              <>
+                <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent" />
+                <div className="absolute top-6 left-6">
+                  <span className="px-4 py-2 bg-amber-400 text-neutral-950 text-sm font-semibold rounded-full">
+                    {post.category}
+                  </span>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </section>
 
@@ -196,7 +201,11 @@ const BlogDetailPage = () => {
                   className="bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all group"
                 >
                   <Link href={`/our-blog/${r.slug}`} className="block relative h-48 overflow-hidden">
-                    <img src={r.image} alt={r.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    {usesBrandedCover(r) ? (
+                      <BrandedCover title={r.title} category={r.category} titleClassName="text-base" />
+                    ) : (
+                      <img src={r.image} alt={r.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    )}
                   </Link>
                   <div className="p-6">
                     <div className="flex items-center gap-2 text-neutral-500 text-sm mb-3">

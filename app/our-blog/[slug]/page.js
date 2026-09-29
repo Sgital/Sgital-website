@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import BlogDetailPage from '@/components/pages/BlogDetailPage';
-import { blogPosts, getBlogBySlug } from '@/lib/data/blogData';
+import { blogPosts, getBlogBySlug, usesBrandedCover } from '@/lib/data/blogData';
 import { pageMetadata, articleSchema, breadcrumbSchema, JsonLd, SITE_URL, DEFAULT_OG_IMAGE } from '@/lib/seo';
 
 export async function generateStaticParams() {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
     path: `/our-blog/${post.slug}`,
     title: post.title,
     description: post.description || post.excerpt || post.title,
-    ogImage: post.image || DEFAULT_OG_IMAGE,
+    ogImage: usesBrandedCover(post) ? DEFAULT_OG_IMAGE : (post.image || DEFAULT_OG_IMAGE),
     ogType: 'article',
     extraOg: {
       type: 'article',

@@ -4,7 +4,55 @@ import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Calendar, Clock, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { blogPosts } from '@/lib/data/blogData';
+import { blogPosts, usesBrandedCover } from '@/lib/data/blogData';
+import BrandedCover from '@/components/sections/BrandedCover';
+
+// Shared blog card (uses a branded cover for 2019–2025 stock-image posts).
+const BlogCard = ({ post }) => {
+  const branded = usesBrandedCover(post);
+  return (
+    <article
+      data-testid={`our-blog-card-${post.slug}`}
+      className="bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all group flex flex-col"
+    >
+      <Link href={`/our-blog/${post.slug}`} className="block relative h-48 overflow-hidden">
+        {branded ? (
+          <BrandedCover title={post.title} category={post.category} titleClassName="text-base" />
+        ) : (
+          <>
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <span className="absolute top-4 left-4 px-3 py-1 bg-neutral-950/80 text-amber-400 text-xs font-medium rounded-full backdrop-blur-sm">
+              {post.category}
+            </span>
+          </>
+        )}
+      </Link>
+      <div className="p-6 flex-1 flex flex-col">
+        <div className="flex items-center gap-2 text-neutral-500 text-sm mb-3">
+          <Calendar className="w-4 h-4" />
+          <span>{post.date}</span>
+        </div>
+        <Link href={`/our-blog/${post.slug}`}>
+          <h3 className="text-lg font-semibold text-white mb-3 line-clamp-2 group-hover:text-amber-400 transition-colors">
+            {post.title}
+          </h3>
+        </Link>
+        <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-3">{post.description}</p>
+        <Link
+          href={`/our-blog/${post.slug}`}
+          className="mt-auto inline-flex items-center gap-2 text-amber-400 text-sm font-medium hover:text-amber-300 transition-colors"
+        >
+          Read More
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+    </article>
+  );
+};
 
 const OurBlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,13 +75,18 @@ const OurBlogPage = () => {
     });
   }, [searchTerm, selectedCategory]);
 
-  const featuredPost = filteredPosts[0];
-  const otherPosts = filteredPosts.slice(1);
+  // Newest first.
+  const sorted = useMemo(
+    () => [...filteredPosts].sort((a, b) => new Date(b.date) - new Date(a.date)),
+    [filteredPosts]
+  );
+
+  const isDefaultView = selectedCategory === 'all' && !searchTerm.trim();
+  const latest = isDefaultView ? sorted.slice(0, 3) : [];
+  const archive = isDefaultView ? sorted.slice(3) : sorted;
 
   return (
     <>
-      
-
       {/* Hero */}
       <section className="bg-neutral-950 pt-40 pb-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -91,91 +144,36 @@ const OurBlogPage = () => {
         </div>
       </section>
 
-      {featuredPost && (
-        <section className="bg-neutral-950 py-8">
+      {/* Latest (default view only) */}
+      {isDefaultView && latest.length > 0 && (
+        <section className="bg-neutral-950 pt-12 pb-4">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <Link href={`/our-blog/${featuredPost.slug}`} className="block group">
-              <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all grid lg:grid-cols-2">
-                <div className="relative h-64 lg:h-auto overflow-hidden">
-                  <img
-                    src={featuredPost.image}
-                    alt={featuredPost.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="px-3 py-1 bg-amber-400/10 text-amber-400 text-xs font-medium rounded-full">
-                      Featured
-                    </span>
-                    <div className="flex items-center gap-2 text-neutral-500 text-sm">
-                      <Calendar className="w-4 h-4" />
-                      <span>{featuredPost.date}</span>
-                    </div>
-                    {featuredPost.readTime && (
-                      <div className="flex items-center gap-2 text-neutral-500 text-sm">
-                        <Clock className="w-4 h-4" />
-                        <span>{featuredPost.readTime}</span>
-                      </div>
-                    )}
-                  </div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-amber-400 transition-colors">
-                    {featuredPost.title}
-                  </h2>
-                  <p className="text-neutral-400 leading-relaxed mb-6">{featuredPost.description}</p>
-                  <div className="inline-flex items-center gap-2 text-amber-400 font-medium group-hover:gap-3 transition-all">
-                    Read Article
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <div className="flex items-center gap-3 mb-8">
+              <h2 className="text-2xl font-bold text-white">Latest</h2>
+              <span className="h-px flex-1 bg-neutral-800" />
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {latest.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
         </section>
       )}
 
-      {otherPosts.length > 0 && (
-        <section className="bg-neutral-950 py-16">
+      {/* Archive / Results */}
+      {archive.length > 0 && (
+        <section className="bg-neutral-950 py-12">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-center gap-3 mb-8">
+              <h2 className="text-2xl font-bold text-white">
+                {isDefaultView ? 'Archive' : `${archive.length} ${archive.length === 1 ? 'Result' : 'Results'}`}
+              </h2>
+              <span className="h-px flex-1 bg-neutral-800" />
+            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherPosts.map((post) => (
-                <article
-                  key={post.id}
-                  data-testid={`our-blog-card-${post.slug}`}
-                  className="bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all group"
-                >
-                  <Link href={`/our-blog/${post.slug}`} className="block relative h-48 overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <span className="absolute top-4 left-4 px-3 py-1 bg-neutral-950/80 text-amber-400 text-xs font-medium rounded-full backdrop-blur-sm">
-                      {post.category}
-                    </span>
-                  </Link>
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 text-neutral-500 text-sm mb-3">
-                      <Calendar className="w-4 h-4" />
-                      <span>{post.date}</span>
-                    </div>
-                    <Link href={`/our-blog/${post.slug}`}>
-                      <h3 className="text-lg font-semibold text-white mb-3 line-clamp-2 group-hover:text-amber-400 transition-colors">
-                        {post.title}
-                      </h3>
-                    </Link>
-                    <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                      {post.description}
-                    </p>
-                    <Link
-                      href={`/our-blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-amber-400 text-sm font-medium hover:text-amber-300 transition-colors"
-                    >
-                      Read More
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </article>
+              {archive.map((post) => (
+                <BlogCard key={post.id} post={post} />
               ))}
             </div>
           </div>
