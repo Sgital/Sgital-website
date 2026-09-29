@@ -3,7 +3,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   path: '/',
-  title: 'Sgital | ServiceNow Premier Partner for Enterprise AI Workflows',
+  title: 'Sgital | ServiceNow & Claude Partner for Enterprise AI Workflows',
   keywords:
     'ServiceNow Premier Partner, enterprise AI workflows, Claude, Anthropic partner, Claude consulting, NowAssist, GoAI 2.0, ServiceNow Singapore, AI workflow automation, agentic AI',
   description:

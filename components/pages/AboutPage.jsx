@@ -472,7 +472,7 @@ const AboutPage = () => {
               Global <span className="text-amber-400">Presence</span>
             </h2>
             <p className="text-neutral-400 max-w-2xl mx-auto">
-              Delivering ServiceNow excellence across three continents with offices in Asia Pacific
+              Delivering enterprise AI across six countries, with coverage validated by ServiceNow
             </p>
           </div>
 
@@ -495,7 +495,7 @@ const AboutPage = () => {
                       HQ
                     </div>
                   )}
-                  <div className="text-white font-bold text-lg mb-2">{office.city}, {office.country}</div>
+                  <div className="text-white font-bold text-lg mb-2">{office.isHQ ? `${office.city} (HQ)` : `${office.city}, ${office.country}`}</div>
                   <p className="text-neutral-400 text-sm mb-4">{office.address}</p>
                   <a
                     href={office.mapUrl}

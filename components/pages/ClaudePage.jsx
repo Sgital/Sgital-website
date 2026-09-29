@@ -22,7 +22,7 @@ const whyPoints = [
     icon: Award,
     title: '9+ years of enterprise workflow delivery',
     description:
-      'Nearly a decade operationalizing AI and automation for large enterprises — we know how to take things from idea to production.',
+      'Nearly a decade operationalizing workflows and automation for large enterprises — we know how to take things from idea to production.',
   },
   {
     icon: Workflow,
@@ -216,8 +216,8 @@ const ClaudePage = () => {
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Credentials</h2>
             <p className="text-lg text-neutral-300 leading-relaxed">
-              Member of the <strong className="text-white">Claude Partner Network</strong>. Team certified through
-              the <strong className="text-white">Anthropic Partner Academy</strong>.
+              Member of the <strong className="text-white">Claude Partner Network</strong>. Certified through
+              the <strong className="text-white">Anthropic Partner Academy</strong>, with more of our team certifying now.
             </p>
           </div>
         </div>

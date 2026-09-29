@@ -10,17 +10,20 @@ const Footer = () => {
 
   const footerLinks = {
     solutions: [
-      { name: 'Technology Workflows', href: '/solutions' },
-      { name: 'Employee Workflows', href: '/solutions' },
-      { name: 'Customer Workflows', href: '/solutions' },
-      { name: 'Security & Risk', href: '/solutions' },
-      { name: 'Creator Workflows', href: '/solutions' },
+      { name: 'AI Workflows', href: '/solutions?category=ai' },
+      { name: 'Technology Workflows', href: '/solutions?category=technology' },
+      { name: 'Employee Workflows', href: '/solutions?category=employee' },
+      { name: 'Customer Workflows', href: '/solutions?category=customer' },
+      { name: 'Security & Risk', href: '/solutions?category=security' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
+      { name: 'Claude Services', href: '/claude' },
+      { name: 'GoAI 2.0', href: '/goai' },
       { name: 'Case Studies', href: '/case-studies' },
       { name: 'Industries', href: '/industries' },
-      { name: 'GoAI 2.0', href: '/goai' },
+      { name: 'Blog', href: '/our-blog' },
+      { name: 'Life at Sgital', href: '/life-at-sgital' },
       { name: 'Contact', href: '/contact' },
     ],
   };
@@ -139,7 +142,7 @@ const Footer = () => {
                     <div key={index} className="flex items-start gap-2 text-neutral-400 text-sm">
                       <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                       <div>
-                        <div className="text-white font-medium text-xs">{office.city}, {office.country}</div>
+                        <div className="text-white font-medium text-xs">{office.isHQ ? `${office.city} (HQ)` : `${office.city}, ${office.country}`}</div>
                         <div className="text-neutral-500 text-xs">{office.address}</div>
                       </div>
                     </div>
@@ -150,9 +153,9 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* ServiceNow Partnership Badges - Integrated */}
+        {/* Partnerships - Integrated */}
         <div className="py-6">
-          <p className="text-neutral-500 text-xs uppercase tracking-wider text-center mb-3">ServiceNow Partner</p>
+          <p className="text-neutral-500 text-xs uppercase tracking-wider text-center mb-3">Our Partnerships</p>
           <div className="flex flex-wrap items-center justify-center gap-4 opacity-60 hover:opacity-100 transition-opacity">
             {partnershipBadges.map((badge, index) => (
               <div
@@ -168,6 +171,14 @@ const Footer = () => {
               </div>
             ))}
           </div>
+          <p className="text-center mt-4">
+            <Link
+              href="/claude"
+              className="text-neutral-400 hover:text-amber-400 text-xs transition-colors"
+            >
+              Claude Partner Network Member
+            </Link>
+          </p>
         </div>
 
         {/* Bottom Bar */}
