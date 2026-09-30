@@ -217,7 +217,7 @@ const ClaudePage = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Credentials</h2>
             <p className="text-lg text-neutral-300 leading-relaxed">
               Member of the <strong className="text-white">Claude Partner Network</strong>. Certified through
-              the <strong className="text-white">Anthropic Partner Academy</strong>, with more of our team certifying now.
+              the <strong className="text-white">Anthropic Partner Academy</strong>.
             </p>
           </div>
         </div>
