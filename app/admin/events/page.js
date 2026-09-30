@@ -55,7 +55,7 @@ const AdminEventsPage = () => {
   };
 
   const exportCSV = () => {
-    const cols = ['first_name', 'last_name', 'email', 'company', 'job_title', 'country', 'maturity', 'servicenow_status', 'status', 'submitted_at'];
+    const cols = ['first_name', 'last_name', 'email', 'mobile', 'company', 'job_title', 'country', 'maturity', 'servicenow_status', 'status', 'submitted_at'];
     const header = cols.join(',');
     const escape = (v) => {
       const s = v == null ? '' : String(v);
@@ -110,19 +110,20 @@ const AdminEventsPage = () => {
           <table className="w-full text-sm">
             <thead className="bg-neutral-900 text-neutral-400">
               <tr>
-                {['Name', 'Email', 'Company', 'Title', 'Country', 'Maturity', 'ServiceNow', 'Status', 'Submitted', 'Actions'].map((h) => (
+                {['Name', 'Email', 'Mobile', 'Company', 'Title', 'Country', 'Maturity', 'ServiceNow', 'Status', 'Submitted', 'Actions'].map((h) => (
                   <th key={h} className="text-left px-4 py-3 font-medium whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {requests.length === 0 && (
-                <tr><td colSpan={10} className="px-4 py-8 text-center text-neutral-500">No requests yet.</td></tr>
+                <tr><td colSpan={11} className="px-4 py-8 text-center text-neutral-500">No requests yet.</td></tr>
               )}
               {requests.map((r) => (
                 <tr key={r.id} className="border-t border-neutral-800 text-neutral-300">
                   <td className="px-4 py-3 whitespace-nowrap text-white">{r.first_name} {r.last_name}</td>
                   <td className="px-4 py-3 whitespace-nowrap">{r.email}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">{r.mobile || '—'}</td>
                   <td className="px-4 py-3 whitespace-nowrap">{r.company}</td>
                   <td className="px-4 py-3 whitespace-nowrap">{r.job_title}</td>
                   <td className="px-4 py-3 whitespace-nowrap">{r.country}</td>

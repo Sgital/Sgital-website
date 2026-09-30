@@ -131,7 +131,7 @@ const labelCls = 'block text-sm text-neutral-300 mb-1.5';
 
 const RegistrationForm = () => {
   const [form, setForm] = useState({
-    first_name: '', last_name: '', email: '', company: '', job_title: '',
+    first_name: '', last_name: '', email: '', mobile: '', company: '', job_title: '',
     country: '', maturity: '', servicenow_status: '', consent: false,
   });
   const [errors, setErrors] = useState({});
@@ -146,6 +146,8 @@ const RegistrationForm = () => {
     if (!form.last_name.trim()) e.last_name = 'Required';
     if (!form.email.trim()) e.email = 'Required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email';
+    if (!form.mobile.trim()) e.mobile = 'Required';
+    else if (!/^[+()\d][\d\s()-]{6,}$/.test(form.mobile.trim())) e.mobile = 'Enter a valid mobile number';
     if (!form.company.trim()) e.company = 'Required';
     if (!form.job_title.trim()) e.job_title = 'Required';
     if (!form.country) e.country = 'Required';
@@ -220,6 +222,12 @@ const RegistrationForm = () => {
         <label className={labelCls}>Work email *</label>
         <input type="email" className={inputCls} value={form.email} onChange={(e) => set('email', e.target.value)} />
         {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+      </div>
+
+      <div className="mb-4">
+        <label className={labelCls}>Mobile number *</label>
+        <input type="tel" inputMode="tel" placeholder="+60 12 345 6789" className={inputCls} value={form.mobile} onChange={(e) => set('mobile', e.target.value)} />
+        {errors.mobile && <p className="text-red-400 text-xs mt-1">{errors.mobile}</p>}
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-4">

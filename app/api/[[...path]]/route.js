@@ -325,6 +325,7 @@ async function handleRoute(request, { params }) {
         first_name: (body.first_name || '').trim(),
         last_name: (body.last_name || '').trim(),
         email: (body.email || '').trim(),
+        mobile: (body.mobile || '').trim(),
         company: (body.company || '').trim(),
         job_title: (body.job_title || '').trim(),
         country: (body.country || '').trim(),
@@ -335,7 +336,7 @@ async function handleRoute(request, { params }) {
         status: 'Pending',
       };
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
-      if (!data.first_name || !data.last_name || !emailValid || !data.company || !data.job_title || !data.country || !data.consent) {
+      if (!data.first_name || !data.last_name || !emailValid || !data.mobile || !data.company || !data.job_title || !data.country || !data.consent) {
         return handleCORS(NextResponse.json({ success: false, error: 'Missing or invalid required fields' }, { status: 400 }));
       }
 
