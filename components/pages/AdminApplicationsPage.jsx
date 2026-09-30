@@ -17,13 +17,17 @@ const AdminApplicationsPage = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [selectedApp, setSelectedApp] = useState(null);
   const [selectedContact, setSelectedContact] = useState(null);
+  const [eventRequests, setEventRequests] = useState([]);
 
   const statusColors = {
     new: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
     reviewed: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
     shortlisted: 'bg-green-500/10 text-green-400 border-green-500/30',
     rejected: 'bg-red-500/10 text-red-400 border-red-500/30',
-    responded: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+    responded: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    Pending: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+    Confirmed: 'bg-green-500/10 text-green-400 border-green-500/30',
+    Declined: 'bg-red-500/10 text-red-400 border-red-500/30'
   };
 
   const handleLogin = async (e) => {
@@ -56,12 +60,15 @@ const AdminApplicationsPage = () => {
       const apiUrl = '';
       const auth = localStorage.getItem('adminAuth');
       
-      // Fetch both applications and contacts
-      const [appsResponse, contactsResponse] = await Promise.all([
+      // Fetch applications, contacts, and event requests
+      const [appsResponse, contactsResponse, eventsResponse] = await Promise.all([
         fetch(`${apiUrl}/api/applications/list`, {
           headers: { 'Authorization': `Basic ${auth}` }
         }),
         fetch(`${apiUrl}/api/contact/list`, {
+          headers: { 'Authorization': `Basic ${auth}` }
+        }),
+        fetch(`${apiUrl}/api/admin/event-requests`, {
           headers: { 'Authorization': `Basic ${auth}` }
         })
       ]);
@@ -74,6 +81,11 @@ const AdminApplicationsPage = () => {
       if (contactsResponse.ok) {
         const contactsData = await contactsResponse.json();
         setContacts(contactsData.contacts || []);
+      }
+
+      if (eventsResponse.ok) {
+        const eventsData = await eventsResponse.json();
+        setEventRequests(eventsData.requests || []);
       }
     } catch (err) {
       setError('Error loading data');
@@ -128,12 +140,54 @@ const AdminApplicationsPage = () => {
     }
   };
 
+  const updateEventStatus = async (id, newStatus) => {
+    try {
+      const apiUrl = '';
+      const auth = localStorage.getItem('adminAuth');
+      const response = await fetch(`${apiUrl}/api/admin/event-requests/update-status/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Basic ${auth}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (response.ok) {
+        setEventRequests((rs) => rs.map((r) => (r.id === id ? { ...r, status: newStatus } : r)));
+      }
+    } catch (err) {
+      console.error('Failed to update event status:', err);
+    }
+  };
+
   const exportToCSV = () => {
     if (activeTab === 'applications') {
       exportApplicationsCSV();
+    } else if (activeTab === 'events') {
+      exportEventsCSV();
     } else {
       exportContactsCSV();
     }
+  };
+
+  const exportEventsCSV = () => {
+    const headers = ['First Name', 'Last Name', 'Email', 'Mobile', 'Company', 'Job Title', 'Country', 'Maturity', 'ServiceNow', 'Status', 'Submitted'];
+    const esc = (v) => {
+      const s = v == null ? '' : String(v);
+      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const rows = eventRequests.map((r) => [
+      r.first_name, r.last_name, r.email, r.mobile, r.company, r.job_title,
+      r.country, r.maturity, r.servicenow_status, r.status,
+      r.submitted_at ? new Date(r.submitted_at).toLocaleString() : ''
+    ].map(esc));
+    const csv = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `event_requests_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
   };
 
   const exportApplicationsCSV = () => {
@@ -266,11 +320,12 @@ const AdminApplicationsPage = () => {
               <p className="text-neutral-400">
                 {activeTab === 'applications' && `${filteredApplications.length} application(s) found`}
                 {activeTab === 'contacts' && `${filteredContacts.length} contact(s) found`}
+                {activeTab === 'events' && `${eventRequests.length} event request(s) found`}
                 {activeTab === 'gallery' && `Manage Life at Sgital photos`}
               </p>
             </div>
             <div className="flex gap-3">
-              {(activeTab === 'applications' || activeTab === 'contacts') && (
+              {(activeTab === 'applications' || activeTab === 'contacts' || activeTab === 'events') && (
                 <>
                   <Button
                     onClick={fetchApplications}
@@ -317,6 +372,18 @@ const AdminApplicationsPage = () => {
             >
               <Mail className="w-4 h-4 inline mr-2" />
               Contact Messages ({contacts.length})
+            </button>
+            <button
+              data-testid="admin-tab-events"
+              onClick={() => setActiveTab('events')}
+              className={`px-5 py-3 rounded-lg font-semibold transition-colors ${
+                activeTab === 'events'
+                  ? 'bg-amber-400 text-neutral-950'
+                  : 'bg-neutral-900 text-neutral-400 hover:text-white'
+              }`}
+            >
+              <Calendar className="w-4 h-4 inline mr-2" />
+              Events ({eventRequests.length})
             </button>
             <button
               data-testid="admin-tab-gallery"
@@ -383,6 +450,70 @@ const AdminApplicationsPage = () => {
 
           {/* Gallery admin tab */}
           {activeTab === 'gallery' && <GalleryAdminTab />}
+
+          {/* Events admin tab */}
+          {activeTab === 'events' && (
+            loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <p className="text-neutral-400">Loading event requests...</p>
+              </div>
+            ) : eventRequests.length === 0 ? (
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-12 text-center">
+                <Calendar className="w-16 h-16 text-neutral-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">No Event Requests Found</h3>
+                <p className="text-neutral-400">Event invitation requests will appear here</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto bg-neutral-900 border border-neutral-800 rounded-xl">
+                <table className="w-full text-sm">
+                  <thead className="text-neutral-400 border-b border-neutral-800">
+                    <tr>
+                      {['Name', 'Email', 'Mobile', 'Company', 'Title', 'Country', 'Maturity', 'ServiceNow', 'Status', 'Submitted', 'Actions'].map((h) => (
+                        <th key={h} className="text-left px-4 py-3 font-medium whitespace-nowrap">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {eventRequests.map((r) => (
+                      <tr key={r.id} className="border-t border-neutral-800 text-neutral-300">
+                        <td className="px-4 py-3 whitespace-nowrap text-white">{r.first_name} {r.last_name}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.email}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.mobile || '—'}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.company}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.job_title}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.country}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.maturity || '—'}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{r.servicenow_status || '—'}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[r.status] || 'bg-neutral-700 text-neutral-300 border-neutral-600'}`}>{r.status}</span>
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-neutral-500">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '—'}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => updateEventStatus(r.id, 'Confirmed')}
+                              disabled={r.status === 'Confirmed'}
+                              className="px-3 py-1.5 rounded bg-green-500/10 text-green-400 border border-green-500/30 text-xs hover:bg-green-500/20 disabled:opacity-40 inline-flex items-center gap-1"
+                            >
+                              <CheckCircle className="w-3.5 h-3.5" /> Confirm
+                            </button>
+                            <button
+                              onClick={() => updateEventStatus(r.id, 'Declined')}
+                              disabled={r.status === 'Declined'}
+                              className="px-3 py-1.5 rounded bg-red-500/10 text-red-400 border border-red-500/30 text-xs hover:bg-red-500/20 disabled:opacity-40 inline-flex items-center gap-1"
+                            >
+                              <XCircle className="w-3.5 h-3.5" /> Decline
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
+          )}
 
           {/* Content based on active tab */}
           {(activeTab === 'applications' || activeTab === 'contacts') && (
