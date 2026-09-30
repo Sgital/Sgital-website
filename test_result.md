@@ -108,6 +108,21 @@ user_problem_statement: |
   AWS credentials provided by user (real production keys).
 
 backend:
+  - task: "Event invitation requests (POST /api/events/kl-risk-ai-governance/request) saves to MongoDB collection 'event_requests' with status 'Pending' + timestamp, sends SES notify email to info@; admin list (GET /api/admin/event-requests, Basic Auth) and status update (PATCH /api/admin/event-requests/update-status/{id} to Confirmed/Declined, Basic Auth)"
+    implemented: true
+    working: true
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "New endpoints added. POST accepts JSON body (first_name,last_name,email,company,job_title,country required; maturity, servicenow_status optional; consent must be true). Validates required fields + email format (400 on invalid). Inserts to event_requests with status 'Pending'. Sends SES notify to info@ (SES_CONTACT_RECIPIENT_EMAIL). GET /api/admin/event-requests returns 401 without Basic Auth, 200 with. PATCH update-status accepts {status} in JSON body, only allows Pending/Confirmed/Declined, 401 without auth, 404 for unknown id. Admin creds: webadmin/Sgital2026. Please test full flow."
+      - working: true
+        agent: "testing"
+        comment: "PASS - Comprehensive testing completed (13/13 tests passed, 100% success rate). POST /api/events/kl-risk-ai-governance/request: ✅ Happy path creates request with correct response (request_id, first_name, email echoed back). ✅ Validation working (missing required field, invalid email, consent:false all return 400). ✅ MongoDB persistence verified (status 'Pending', submitted_at timestamp, event_slug 'kl-risk-ai-governance', email_sent=true with SES message_id). GET /api/admin/event-requests: ✅ Returns 401 without auth. ✅ Returns 200 with auth, requests array present, no ObjectId leaking (id exposed as string). ✅ Status filter ?status=Pending working correctly. PATCH /api/admin/event-requests/update-status/{id}: ✅ Returns 401 without auth. ✅ Successfully updates status to 'Confirmed' and 'Declined' (verified in database). ✅ Returns 400 for invalid status value. ✅ Returns 404 for unknown ID. All endpoints working correctly with proper authentication, validation, and data persistence."
+
   - task: "Contact form submission (POST /api/contact/submit) saves to MongoDB and sends 2 SES emails (notify info@ + confirmation to submitter)"
     implemented: true
     working: true
@@ -195,7 +210,7 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
 
 test_plan:
   current_focus: []
@@ -404,3 +419,35 @@ agent_communication:
         gallery, contact list/submit, applications list
       
       NO ISSUES FOUND. The middleware rewrite is production-ready.
+
+
+  - agent: "testing"
+    message: |
+      ✅ EVENT INVITATION REQUEST ENDPOINTS TESTING COMPLETE - ALL 13 TESTS PASSED (100% SUCCESS RATE)
+      
+      Comprehensive testing of new event invitation request endpoints completed successfully.
+      
+      Test Results Summary:
+      1. ✅ POST /api/events/kl-risk-ai-governance/request - Happy path (200, correct response structure)
+      2. ✅ POST validation - Missing required field (400)
+      3. ✅ POST validation - Invalid email format (400)
+      4. ✅ POST validation - Consent false (400)
+      5. ✅ GET /api/admin/event-requests - Without auth (401)
+      6. ✅ GET /api/admin/event-requests - With auth (200, no ObjectId leaking)
+      7. ✅ GET /api/admin/event-requests?status=Pending - Status filter working
+      8. ✅ PATCH update-status - Without auth (401)
+      9. ✅ PATCH update-status - Status Confirmed (200, verified in DB)
+      10. ✅ PATCH update-status - Status Declined (200)
+      11. ✅ PATCH update-status - Invalid status (400)
+      12. ✅ PATCH update-status - Unknown ID (404)
+      13. ✅ MongoDB persistence verification - All fields present
+      
+      MongoDB Verification:
+      - Document persisted to event_requests collection
+      - status: "Pending" (initially), updated to "Confirmed" then "Declined"
+      - submitted_at: timestamp present
+      - event_slug: "kl-risk-ai-governance"
+      - email_sent: true
+      - email_message_id: present (SES email sent successfully)
+      
+      All event invitation request endpoints are fully functional. No critical issues found.

@@ -16,6 +16,7 @@ import {
   contactNotifyTemplate,
   applicantConfirmationTemplate,
   applicationNotifyTemplate,
+  eventRequestNotifyTemplate,
 } from '@/lib/server/emails';
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'webadmin';
@@ -311,6 +312,85 @@ async function handleRoute(request, { params }) {
         console.error('Gallery list error:', e);
         return handleCORS(NextResponse.json({ success: false, count: 0, photos: [], error: String(e.message || e) }));
       }
+    }
+
+    /* ===================== EVENT INVITATION REQUESTS ===================== */
+    if (route === '/events/kl-risk-ai-governance/request' && method === 'POST') {
+      let body = {};
+      try { body = await request.json(); } catch (e) { body = {}; }
+      const data = {
+        id: uuidv4(),
+        event_slug: 'kl-risk-ai-governance',
+        event_name: 'KL Risk & AI Governance Executive Lunch',
+        first_name: (body.first_name || '').trim(),
+        last_name: (body.last_name || '').trim(),
+        email: (body.email || '').trim(),
+        company: (body.company || '').trim(),
+        job_title: (body.job_title || '').trim(),
+        country: (body.country || '').trim(),
+        maturity: body.maturity || null,
+        servicenow_status: body.servicenow_status || null,
+        consent: !!body.consent,
+        submitted_at: new Date(),
+        status: 'Pending',
+      };
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+      if (!data.first_name || !data.last_name || !emailValid || !data.company || !data.job_title || !data.country || !data.consent) {
+        return handleCORS(NextResponse.json({ success: false, error: 'Missing or invalid required fields' }, { status: 400 }));
+      }
+
+      const result = await db.collection('event_requests').insertOne({ ...data });
+
+      let email_sent = false, email_message_id = null, email_error = null;
+      try {
+        const t = eventRequestNotifyTemplate(data);
+        email_message_id = await sendRawEmailViaSES({ to: t.to, subject: t.subject, htmlBody: t.html, textBody: t.text });
+        email_sent = true;
+      } catch (e) {
+        email_error = String(e.message || e);
+        console.error('SES event notify error:', e);
+      }
+      await db.collection('event_requests').updateOne(
+        { _id: result.insertedId },
+        { $set: { email_sent, email_message_id, email_error } }
+      );
+
+      return handleCORS(NextResponse.json({
+        success: true,
+        message: 'Request received',
+        request_id: data.id,
+        first_name: data.first_name,
+        email: data.email,
+      }));
+    }
+
+    if (route === '/admin/event-requests' && method === 'GET') {
+      const u = verifyBasicAuth(request);
+      if (!u) return unauthorized();
+      const url = new URL(request.url);
+      const status = url.searchParams.get('status');
+      const q = status ? { status } : {};
+      const items = await db.collection('event_requests').find(q).sort({ submitted_at: -1 }).limit(500).toArray();
+      return handleCORS(NextResponse.json({
+        success: true,
+        requests: items.map(({ _id, ...rest }) => ({ ...rest, _id: rest.id || String(_id) })),
+      }));
+    }
+
+    const updateEventMatch = route.match(/^\/admin\/event-requests\/update-status\/(.+)$/);
+    if (updateEventMatch && method === 'PATCH') {
+      const u = verifyBasicAuth(request);
+      if (!u) return unauthorized();
+      const id = updateEventMatch[1];
+      let body = {};
+      try { body = await request.json(); } catch (e) { body = {}; }
+      const status = body.status;
+      if (!['Pending', 'Confirmed', 'Declined'].includes(status)) {
+        return handleCORS(NextResponse.json({ success: false, error: 'Invalid status' }, { status: 400 }));
+      }
+      const r = await db.collection('event_requests').updateOne({ id }, { $set: { status, updated_at: new Date() } });
+      if (r.matchedCount === 0) return handleCORS(NextResponse.json({ success: false, error: 'Not found' }, { status: 404 }));
+      return handleCORS(NextResponse.json({ success: true }));
     }
 
     /* ===================== ADMIN AUTH ===================== */
