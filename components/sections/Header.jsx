@@ -78,6 +78,7 @@ const Header = () => {
       dropdownKey: 'about',
       dropdownItems: [
         { name: 'About Us', href: '/about' },
+        { name: 'Events', href: '/events/kl-risk-ai-governance' },
         { name: 'Life at Sgital', href: '/life-at-sgital' },
         { name: 'Our Blog', href: '/our-blog' },
       ]
