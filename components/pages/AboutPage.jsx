@@ -7,7 +7,7 @@ import Link from 'next/link';
 import {
   values, testimonials, stats, companyInfo, partnershipBadges, partnershipDetails,
   contactInfo, globalCoverage, officeLocations,
-  mainlineCertifications, suiteCertifications, certificationTotals, founder,
+  mainlineCertifications, suiteCertifications, certificationTotals, founder, advisors,
 } from '@/lib/data/mock';
 import { blogPosts } from '@/lib/data/blogData';
 
@@ -132,7 +132,7 @@ const AboutPage = () => {
               <span className="text-amber-400 text-sm font-medium">Leadership</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Meet Our <span className="text-amber-400">Founder</span>
+              Meet Our <span className="text-amber-400">Leadership</span>
             </h2>
           </div>
 
@@ -208,6 +208,69 @@ const AboutPage = () => {
               </div>
             </div>
           </div>
+
+          {/* Strategic Advisors */}
+          {advisors && advisors.length > 0 && (
+            <div className="max-w-6xl mx-auto mt-16 pt-16 border-t border-neutral-900">
+              {advisors.map((advisor, idx) => (
+                <div key={idx} className="grid lg:grid-cols-[300px_1fr] gap-10 lg:gap-16 items-start">
+                  {/* Photo column */}
+                  <div className="flex justify-center lg:justify-start">
+                    {advisor.photoUrl ? (
+                      <img
+                        src={advisor.photoUrl}
+                        alt={advisor.name}
+                        className="w-64 h-64 lg:w-72 lg:h-72 rounded-full object-cover object-top border-4 border-amber-400/30 shadow-2xl shadow-amber-400/10"
+                      />
+                    ) : (
+                      <div className="w-64 h-64 lg:w-72 lg:h-72 rounded-full flex items-center justify-center border-4 border-amber-400/30 bg-gradient-to-br from-neutral-800 to-neutral-900 shadow-2xl shadow-amber-400/10">
+                        <div className="text-6xl font-bold text-amber-400">
+                          {advisor.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Bio column */}
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{advisor.name}</h3>
+                    <div className="text-amber-400 font-medium mb-1">{advisor.title}</div>
+                    <div className="text-neutral-500 text-sm mb-6 flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      {advisor.location}
+                    </div>
+
+                    {advisor.quote && (
+                      <div className="relative bg-neutral-900/60 border-l-4 border-amber-400 rounded-r-xl px-6 py-5 mb-6">
+                        <Quote className="w-6 h-6 text-amber-400/40 mb-2" />
+                        <p className="text-neutral-200 italic leading-relaxed">"{advisor.quote}"</p>
+                      </div>
+                    )}
+
+                    <div className="space-y-4 text-neutral-400 leading-relaxed">
+                      {advisor.bio.map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </div>
+
+                    {advisor.linkedin && (
+                      <div className="flex flex-wrap gap-4 mt-8">
+                        <a
+                          href={advisor.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold rounded-lg transition-colors"
+                        >
+                          <Linkedin className="w-5 h-5" />
+                          Connect on LinkedIn
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
