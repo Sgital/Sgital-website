@@ -58,7 +58,7 @@ const KLSkyline = () => (
 );
 
 const FACTS = [
-  { icon: Calendar, label: 'Date', value: 'Wed 21 or Thu 22 Oct 2026 (TBC)' },
+  { icon: Calendar, label: 'Date', value: 'Tue 24 Nov 2026' },
   { icon: Clock, label: 'Time', value: '12:00 – 14:30 MYT' },
   { icon: Ticket, label: 'Format', value: 'Invitation-only lunch' },
   { icon: Users, label: 'Seats', value: '15' },
@@ -314,7 +314,7 @@ const EventKLPage = () => {
                 <img src={PREMIER_BADGE} alt="ServiceNow Premier Partner" className="h-12 w-auto" />
                 <span className="px-3 py-1 bg-amber-400/10 text-amber-400 text-xs font-semibold rounded-full">Premier ServiceNow Partner</span>
               </div>
-              <p className="text-amber-400 text-sm font-medium mb-3">Executive lunch · Kuala Lumpur · October 2026</p>
+              <p className="text-amber-400 text-sm font-medium mb-3">Executive lunch · Kuala Lumpur · November 2026</p>
               <p className="flex items-center gap-2 text-neutral-300 text-sm mb-5">
                 <Flower2 className="w-4 h-4 text-red-500" />
                 Selamat datang. Join us in KL.
