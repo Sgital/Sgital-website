@@ -9,7 +9,7 @@ import { X, ArrowRight, Sparkles } from 'lucide-react';
  * After the event, set BANNER_ENABLED to false to hide the announcement bar.
  * (One line — no other changes needed.)
  * ========================================================================= */
-const BANNER_ENABLED = true;
+const BANNER_ENABLED = false;
 
 const STORAGE_KEY = 'sgital_wf_mumbai_banner_dismissed_v1';
 
