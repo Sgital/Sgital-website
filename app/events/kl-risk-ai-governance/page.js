@@ -1,14 +1,13 @@
-import EventKLPage from '@/components/pages/EventKLPage';
-import { SITE_URL } from '@/lib/seo';
+import { notFound } from 'next/navigation';
+// NOTE: The KL AI Governance event is cancelled for now. The page is hidden
+// (returns 404) and removed from the menu. To bring it back, restore the
+// render below (return <EventKLPage />) and re-add the nav link in Header.jsx.
+// import EventKLPage from '@/components/pages/EventKLPage';
 
 export const metadata = {
-  title: { absolute: 'Autonomous Governance Executive Lunch | Kuala Lumpur | Sgital' },
-  description:
-    'An invitation-only executive lunch in Kuala Lumpur for CIOs, CROs and CISOs on autonomous risk and AI governance with ServiceNow, hosted by Sgital.',
   robots: { index: false, follow: false },
-  alternates: { canonical: `${SITE_URL}/events/kl-risk-ai-governance` },
 };
 
 export default function Page() {
-  return <EventKLPage />;
+  notFound();
 }
