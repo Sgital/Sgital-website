@@ -60,7 +60,6 @@ const Header = () => {
       dropdownKey: 'solutions',
       dropdownItems: [
         { name: 'All Solutions', href: '/solutions' },
-        { name: 'ServiceNow Managed Services (DWaaS)', href: '/servicenow-managed-services' },
         { name: 'AI Workflows', href: '/solutions?category=ai' },
         { name: 'Technology Workflows', href: '/solutions?category=technology' },
         { name: 'Employee Workflows', href: '/solutions?category=employee' },
@@ -69,6 +68,7 @@ const Header = () => {
       ]
     },
     { name: 'GoAI 2.0', href: '/goai' },
+    { name: 'DWaaS', href: '/servicenow-managed-services' },
     { name: 'Claude', href: '/claude' },
     { name: 'Industries', href: '/industries' },
     { name: 'Case Studies', href: '/case-studies' },
