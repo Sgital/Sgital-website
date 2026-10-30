@@ -194,6 +194,21 @@ backend:
         agent: "testing"
         comment: "PASS - All admin endpoints tested comprehensively. GET /api/admin/gallery/life-at-sgital returned 18 photos with detailed metadata (key, url, filename, size, last_modified). POST /api/admin/gallery/life-at-sgital/upload successfully uploaded test image to S3 with key 'images/life-at-sgital/test-upload-20260619-053348-20260619053348-5bdb16.png'. DELETE /api/admin/gallery/life-at-sgital?key={key} successfully deleted the test photo. DELETE with invalid key correctly returned 400 with 'Invalid key' error. All admin gallery operations working correctly with proper authentication."
 
+  - task: "DWaaS consultation request (POST /api/dwaas/consultation) saves to MongoDB collection 'dwaas_requests' with status 'New' + timestamp, sends SES notify email"
+    implemented: true
+    working: true
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "New endpoint added. POST accepts JSON body (name, email, company, country required; modules array optional; message optional). Validates required fields + email format (400 on invalid). Inserts to dwaas_requests with status 'New'. Sends SES notify email. Please test full flow."
+      - working: true
+        agent: "testing"
+        comment: "PASS - Comprehensive testing completed (6/6 tests passed, 100% success rate). POST /api/dwaas/consultation: ✅ Happy path creates request with correct response (success:true, request_id, name echoed back). ✅ Validation working (missing company, missing country, invalid email 'notanemail', missing name all return 400 with success:false). ✅ Optional modules field working (submit without modules returns 200, modules stored as empty array []). ✅ MongoDB persistence verified (status 'New', submitted_at timestamp, modules array stored correctly ['ITSM','CSM'] when provided or [] when omitted, email_sent=true with SES message_id). All test cases from review request passed successfully."
+
 frontend:
   - task: "16 Next.js App Router pages render with Sgital branding (Home, Solutions, GoAI, Industries, Case Studies, About, Contact, Our Blog, Blog Detail, Life at Sgital, Careers, Admin, Privacy, Terms, NotFound, blog redirect)"
     implemented: true
@@ -451,3 +466,28 @@ agent_communication:
       - email_message_id: present (SES email sent successfully)
       
       All event invitation request endpoints are fully functional. No critical issues found.
+
+
+  - agent: "testing"
+    message: |
+      ✅ DWAAS CONSULTATION ENDPOINT TESTING COMPLETE - ALL 6 TESTS PASSED (100% SUCCESS RATE)
+      
+      Comprehensive testing of new DWaaS consultation endpoint completed successfully.
+      
+      Test Results Summary:
+      1. ✅ POST /api/dwaas/consultation - Happy path (200, success:true, request_id, name echoed)
+      2. ✅ POST validation - Missing company (400, success:false)
+      3. ✅ POST validation - Missing country (400, success:false)
+      4. ✅ POST validation - Invalid email "notanemail" (400, success:false)
+      5. ✅ POST validation - Missing name (400, success:false)
+      6. ✅ POST optional modules - Omitted modules field (200, modules stored as empty array [])
+      
+      MongoDB Verification:
+      - Documents persisted to dwaas_requests collection
+      - status: "New"
+      - submitted_at: timestamp present
+      - modules: array stored correctly (["ITSM", "CSM"] when provided, [] when omitted)
+      - email_sent: true
+      - email_message_id: present (SES email sent successfully)
+      
+      All DWaaS consultation endpoint test cases are fully functional. No critical issues found.

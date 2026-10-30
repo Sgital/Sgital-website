@@ -17,6 +17,7 @@ import {
   applicantConfirmationTemplate,
   applicationNotifyTemplate,
   eventRequestNotifyTemplate,
+  dwaasNotifyTemplate,
 } from '@/lib/server/emails';
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'webadmin';
@@ -312,6 +313,39 @@ async function handleRoute(request, { params }) {
         console.error('Gallery list error:', e);
         return handleCORS(NextResponse.json({ success: false, count: 0, photos: [], error: String(e.message || e) }));
       }
+    }
+
+    /* ===================== DWAAS CONSULTATION REQUESTS ===================== */
+    if (route === '/dwaas/consultation' && method === 'POST') {
+      let body = {};
+      try { body = await request.json(); } catch (e) { body = {}; }
+      const data = {
+        id: uuidv4(),
+        name: (body.name || '').trim(),
+        email: (body.email || '').trim(),
+        company: (body.company || '').trim(),
+        country: (body.country || '').trim(),
+        modules: Array.isArray(body.modules) ? body.modules : [],
+        message: (body.message || '').trim(),
+        submitted_at: new Date(),
+        status: 'New',
+      };
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+      if (!data.name || !emailValid || !data.company || !data.country) {
+        return handleCORS(NextResponse.json({ success: false, error: 'Missing or invalid required fields' }, { status: 400 }));
+      }
+      const result = await db.collection('dwaas_requests').insertOne({ ...data });
+      let email_sent = false, email_message_id = null, email_error = null;
+      try {
+        const t = dwaasNotifyTemplate(data);
+        email_message_id = await sendRawEmailViaSES({ to: t.to, subject: t.subject, htmlBody: t.html, textBody: t.text });
+        email_sent = true;
+      } catch (e) {
+        email_error = String(e.message || e);
+        console.error('SES dwaas notify error:', e);
+      }
+      await db.collection('dwaas_requests').updateOne({ _id: result.insertedId }, { $set: { email_sent, email_message_id, email_error } });
+      return handleCORS(NextResponse.json({ success: true, message: 'Request received', request_id: data.id, name: data.name }));
     }
 
     /* ===================== EVENT INVITATION REQUESTS ===================== */

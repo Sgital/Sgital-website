@@ -139,6 +139,8 @@ const LEGACY_REDIRECTS = [
   { source: '/blog/:slug*', destination: '/our-blog/:slug*' },
   { source: '/feed', destination: '/our-blog' },
   { source: '/feed/', destination: '/our-blog' },
+  { source: '/dwaas', destination: '/servicenow-managed-services' },
+  { source: '/dwaas/', destination: '/servicenow-managed-services' },
 ].map((r) => ({ ...r, statusCode: 301 }));
 
 const nextConfig = {
