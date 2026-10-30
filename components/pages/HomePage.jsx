@@ -60,6 +60,9 @@ const HomePage = () => {
       {/* Solution Positioning */}
       <SolutionSection />
 
+      {/* DWaaS — ServiceNow Managed Services feature band */}
+      <DWaaSSection />
+
       {/* CTA Section */}
       <CTASection />
     </>
@@ -444,6 +447,95 @@ const SolutionSection = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// DWaaS Section — ServiceNow Managed Services feature band
+const DWaaSSection = () => {
+  const points = [
+    { icon: Workflow, title: 'A subscription team', text: 'Analysts, developers and architects who stay with you after go-live.' },
+    { icon: Layers, title: 'Flexible credits', text: 'One monthly bank of Workflow credits — use them where the platform needs them.' },
+    { icon: Shield, title: 'Run, fix and evolve', text: 'Incidents, upgrades, enhancements, integrations and health checks in one plan.' },
+  ];
+
+  const proof = ['Premier ServiceNow Partner', '9 years on the Now Platform', '2,000+ AI-powered workflows', 'CSAT 4.8'];
+
+  return (
+    <section className="bg-neutral-950 py-24 border-t border-neutral-900" data-testid="home-dwaas">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-3xl border border-amber-400/20 bg-gradient-to-br from-neutral-900 to-neutral-950 p-10 md:p-14">
+          {/* Background glow + grid */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:60px_60px] opacity-40" />
+          <div className="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/10 rounded-full blur-[120px]" />
+
+          <div className="relative grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Left: copy */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-6">
+                <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                <span className="text-amber-400 text-sm font-medium tracking-wide">ServiceNow Managed Services · DWaaS</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+                Go-live is <span className="text-amber-400">just the beginning</span>
+              </h2>
+              <p className="text-lg text-neutral-400 leading-relaxed mb-8 lg:max-w-xl">
+                Digital Workflows as a Service is Sgital's ServiceNow managed service — a subscription team
+                that resolves issues, delivers enhancements, runs upgrades and skills up your people, so your
+                platform keeps delivering value long after deployment.
+              </p>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                <Button
+                  asChild
+                  className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-8 py-6 text-base group"
+                >
+                  <Link href="/servicenow-managed-services" data-testid="home-dwaas-cta">
+                    Explore DWaaS
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-neutral-700 text-white hover:bg-neutral-800 px-8 py-6 text-base"
+                >
+                  <Link href="/servicenow-managed-services#plans">
+                    Find your plan
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Proof chips */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2 mt-8">
+                {proof.map((p, i) => (
+                  <span key={i} className="inline-flex items-center gap-2 text-neutral-400 text-xs md:text-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: points */}
+            <div className="space-y-4">
+              {points.map((pt, i) => (
+                <div
+                  key={i}
+                  className="bg-neutral-950/60 border border-neutral-800 rounded-2xl p-6 flex items-start gap-4 hover:border-amber-400/30 transition-colors"
+                >
+                  <div className="w-12 h-12 bg-amber-400/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <pt.icon className="w-6 h-6 text-amber-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">{pt.title}</h3>
+                    <p className="text-neutral-400 text-sm leading-relaxed">{pt.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
