@@ -116,7 +116,7 @@ const scrollTo = (id) => {
 };
 
 const ServiceNowManagedServicesPage = () => {
-  const [showCases, setShowCases] = useState(false);
+  const [showCases, setShowCases] = useState(true);
   const [openFaq, setOpenFaq] = useState(0);
   const [form, setForm] = useState({ name: '', email: '', company: '', country: '', modules: [], message: '' });
   const [errors, setErrors] = useState({});
