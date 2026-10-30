@@ -153,23 +153,33 @@ const ServiceNowManagedServicesPage = () => {
   return (
     <>
       {/* ===== Hero ===== */}
-      <section className="pt-32 pb-16" style={{ backgroundColor: YELLOW }}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
-          <p className="text-sm font-semibold tracking-wide text-black/70 mb-4">ServiceNow Managed Services · Digital Workflows as a Service</p>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-black leading-tight mb-6">Go-live is just the beginning.</h1>
-          <p className="text-lg md:text-xl text-black/80 max-w-3xl mx-auto mb-8">
+      <section className="relative bg-neutral-950 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:60px_60px]" />
+          <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] bg-amber-400/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 -left-40 w-[400px] h-[400px] bg-amber-400/5 rounded-full blur-[100px]" />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-6 lg:px-8 pt-40 pb-20 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full mb-8">
+            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+            <span className="text-amber-400 text-sm font-medium tracking-wide">ServiceNow Managed Services · Digital Workflows as a Service</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+            Go-live is <span className="text-amber-400">just the beginning.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-neutral-400 leading-relaxed max-w-3xl mx-auto mb-10">
             DWaaS is Sgital's ServiceNow managed service: a subscription team of analysts, developers and architects who stay with you after go-live. They resolve issues, deliver enhancements, run upgrades and skill up your people, so your platform keeps delivering value long after deployment.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button onClick={() => scrollTo('plans')} className="bg-black text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-neutral-800 transition-colors">Find your plan</button>
-            <button onClick={() => scrollTo('contact')} className="bg-white text-black font-semibold px-7 py-3.5 rounded-lg border-2 border-black hover:bg-black hover:text-white transition-colors">Talk to an expert</button>
+            <button onClick={() => scrollTo('plans')} className="bg-amber-400 hover:bg-amber-500 text-neutral-950 font-semibold px-8 py-3.5 rounded-lg transition-colors">Find your plan</button>
+            <button onClick={() => scrollTo('contact')} className="bg-white/5 text-white font-semibold px-8 py-3.5 rounded-lg border border-white/20 hover:bg-white/10 transition-colors">Talk to an expert</button>
           </div>
         </div>
         <img src={PREMIER_BADGE} alt="Sgital ServiceNow managed services team reviewing a platform roadmap — ServiceNow Premier Partner" className="sr-only" />
       </section>
 
       {/* Proof strip */}
-      <section className="bg-black py-6">
+      <section className="bg-neutral-900 border-y border-neutral-800 py-6">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
           <img src={PREMIER_BADGE} alt="ServiceNow Premier Partner badge" className="h-12 w-auto" />
           {proofPoints.map((p, i) => (
